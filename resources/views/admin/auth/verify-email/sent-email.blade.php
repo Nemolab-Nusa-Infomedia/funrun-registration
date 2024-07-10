@@ -72,7 +72,7 @@
             <p>Selamat Datang, <a href="mailto:rizqybs24@gmail.com">rizqybs24@gmail.com</a>!</p>
             <p>Terimakasih telah mendaftarkan email anda di FunRun Rotary Purwokerto.</p>
             <p>Verifikasi Email anda dengan click tombol dibawah:</p>
-            <a class="btn" href="">Confirm Email</a>
+            <a class="btn" href="{{ $url }}">Confirm Email</a>
         </main>
     </div>
 </body>

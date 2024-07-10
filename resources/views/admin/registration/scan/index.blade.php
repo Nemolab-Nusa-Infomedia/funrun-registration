@@ -24,7 +24,7 @@
                     qr_code: qrMessage
                 },
                 success: function(response) {
-                    const newUrl = '/hasilScan/' + response.user.id;
+                    const newUrl = '/hasil-scan/' + response.user.id;
                     window.location.href = newUrl;
                 },
                 error: function(response) {
@@ -44,7 +44,7 @@
     }
 
     var html5QrcodeScanner = new Html5QrcodeScanner(
-        "reader", { fps: 10, qrbox: 350 });
+        "reader", { fps: 10, qrbox: 250 });
     html5QrcodeScanner.render(onScanSuccess, onScanError);
 
 </script>

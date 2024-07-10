@@ -5,7 +5,7 @@
           <div class="copyright text-center text-sm text-muted text-lg-start">
             ©
             made with by
-            <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Hugo Studio Tim</a>
+            <a href="https://vibrant.web.id" class="font-weight-bold" target="_blank">Hugo Studio Tim</a>
             for a web FunRun Rotary Purwokerto.
           </div>
         </div>

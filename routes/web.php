@@ -8,6 +8,10 @@ use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
 
+Route::get('/login', function () {
+    return view('admin.registration.notification-registation-peserta.email.index');
+});
+
 
 // =============== Dashboard ===============
 

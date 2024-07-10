@@ -13,9 +13,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-12">
-
                     <h3 class="text-center fw-bold mt-5 mb-3">Pendaftaran Event FunRun Rotary <br> Purwokerto 2024</h3>
-
                     <div class="row col-12 col-md-12 mx-auto">
                         <div class="card p-3 mb-3 gradient-background kaca">
                             <div class="card-header" style="background: transparent; border: none; z-index: 2">
@@ -24,11 +22,13 @@
                             </div>
                             <div class="card-body" style="z-index: 2">
                                 <div class="row col-12 col-md-12">
-                                    <img src="{{ asset('assets/registration/img/register-success.png') }}" class="mx-auto" style="width: 400px" alt="">
-                                    <h3 class="fw-bold text-center">Pembayaran Kamu Berhasil!!</h3>
-                                    <div class="d-flex justify-content-center align-items-center gap-2">
-                                        <span>Terima kasih atas pembayaran Anda Kita tunggu di FunRun Rotary Purwokerto</span>
-                                        <a href="{{ route('profile') }}" class="btn btn-submit">Lihat Profile Kamu</a>
+                                    <img src="{{ asset('assets/registration/img/success.png') }}" class="mx-auto" style="width: 200px" alt="">
+                                    <h3 class="fw-bold text-center">Email Berhasil Dikirim!!</h3>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <span>Silahkan cek Email anda untuk memverifikasi Email</span>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center mt-2">
+                                        <a href="" class="btn btn-submit">Kirim Ulang Link</a>
                                     </div>
                                 </div>
                             </div>

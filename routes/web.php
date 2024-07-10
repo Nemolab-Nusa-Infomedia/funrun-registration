@@ -1,15 +1,18 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\RegionController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegistrationController;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
 Route::get('/login', function () {
-    return view('admin.registration.notification-registation-peserta.email.index');
+    return view('admin.auth.login')->name('login');
 });
 
 
@@ -33,7 +36,16 @@ Route::get('/akun-edit', [AkunController::class, 'editAkun'])->name('akun-edit')
 // =============== Registration ===============
 
 // ===== Form Pendaftaran =====
+Route::get('/', [RegistrationController::class, 'registrationEmail'])->name('registration-email');
+Route::post('/validation-email', [RegistrationController::class, 'emailValidation'])->name('email-validation');
 Route::get('/form', [RegistrationController::class, 'indexForm'])->name('form');
+Route::post('/create-account', [RegistrationController::class, 'register'])->name('register');
+Route::post('/paymentHandler', [RegistrationController::class, 'paymentHandler'])->name('paymentHandler');
+
+// ===== Get data region =====
+Route::get('/dapatkan/kabupaten/{provId}', [RegionController::class, 'getKabupaten']);
+Route::get('/dapatkan/kecamatan/{kecId}', [RegionController::class, 'getKecamatan']);
+Route::get('/dapatkan/desa/{desaId}', [RegionController::class, 'getDesa']);
 
 // ===== Notification Pembayaran =====
 Route::get('/pembayaran-berhasil', [RegistrationController::class, 'pembayaranBerhasil'])->name('pembayaran-berhasil');
@@ -41,4 +53,20 @@ Route::get('/pembayaran-gagal', [RegistrationController::class, 'pembayaranGagal
 
 // ===== Scan =====
 Route::get('/scan', [RegistrationController::class, 'scan'])->name('scan');
-Route::get('/hasil-scan', [RegistrationController::class, 'hasilScan'])->name('hasil-scan');
+Route::post('/verify-qr', [AdminController::class, 'verifyQrCode']);
+Route::get('/hasil-scan/{id}', [RegistrationController::class, 'hasilScan'])->name('hasil-scan');
+
+// ===== Email =====
+Route::get('/email/verify', function () {
+    return view('admin.auth.verify-email.notification-email');
+})->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/form');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');

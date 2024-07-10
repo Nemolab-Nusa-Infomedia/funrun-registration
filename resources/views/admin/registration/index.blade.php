@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Form FunRun</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('assets/registration/css/form/main.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('assets/registration/css/form/main.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
 </head>
@@ -25,7 +25,7 @@
                     </div>
                     <h3 class="text-center fw-bold mt-3 mb-3">Pendaftaran Event FunRun Rotary <br> Purwokerto 2024</h3>
                     <div class="row col-12 col-md-12 mx-auto">
-                        <form action="" method="post">
+                        <form action="{{ route('register') }}" method="post">
                             @csrf
                             <div class="card p-0 mb-3 gradient-background kaca">
                                 <div class="card-header" style="background: transparent; border: none; z-index: 2">
@@ -61,9 +61,9 @@
                                                 <label for="inputProv" class="form-label">Provinsi</label>
                                                 <select id="inputProv" class="form-select" name="domisili">
                                                     <option selected>Pilih provinsi</option>
-                                                    {{-- @foreach ($provinces as $provinsi)
+                                                    @foreach ($provinces as $provinsi)
                                                         <option value="{{ $provinsi->id }}">{{ $provinsi->name }}</option>
-                                                    @endforeach --}}
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -94,7 +94,7 @@
                                         <div class="col-12 col-md-6">
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Golongan Darah</label>
-                                                <select id="" class="form-select" name="">
+                                                <select id="" class="form-select" name="goldar">
                                                     <option selected>Pilih golongan darah</option>
                                                     <option value="A+">A+</option>
                                                     <option value="A-">A-</option>
@@ -110,7 +110,7 @@
                                         <div class="col-12 col-md-6">
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Riwayat Penyakit</label>
-                                                <input type="text" class="form-control" name="" placeholder="riwayat penyakit">
+                                                <input type="text" class="form-control" name="r_penyakit" placeholder="riwayat penyakit">
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6">
@@ -172,7 +172,7 @@
                                                 <label for="payment_type" class="form-label">Pilih Metode Pembayaran</label>
                                                 <select class="form-select" id="payment_type" name="payment_type" style="display: none;">
                                                     <option value="" selected>--- Pilih Pembayaran ---</option>
-                                                    <option value="Gopay" data-img-src="{{ asset('assets/registration/img/metode-pembayaran/gopay.png') }}">GoPay</option>
+                                                    <option value="gopay" data-img-src="{{ asset('assets/registration/img/metode-pembayaran/gopay.png') }}">GoPay</option>
                                                     <option value="shopeepay" data-img-src="{{ asset('assets/registration/img/metode-pembayaran/shopeepay.jpg') }}">ShopeePay</option>
                                                     <option value="other_qris" data-img-src="{{ asset('assets/registration/img/metode-pembayaran/qriss.jpg') }}">Qris (QRis, Dana, OVO, LinkAja)</option>
                                                     <option value="bank_merchant" data-img-src="{{ asset('assets/registration/img/metode-pembayaran/bank.png') }}">Bank Merchant</option>

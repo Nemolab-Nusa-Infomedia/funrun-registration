@@ -64,9 +64,9 @@
             <p>2. Peserta memperlihatkan email konfirmasi kepada panitia dengan menunjukan barcode yang di kirim ke email pendaftar</p>
             <p>3. Peserta FunRun dapat mengambil GoodieBag setelah berhasil melakukan verifikasi</p>
         </div>
-        <h2 style="text-align: center">Nomor Peserta : 0001</h2>
-        <div class="barcode">
-            <img src="{{ asset('assets/admin/img/vindra.jpeg') }}" width="250px" alt="Barcode">
+        <h2 style="text-align: center">Nomor Peserta : {{ $user->participant_number }}</h2>
+        <div class="barcode" style="display: block; margin-left: auto; margin-right: auto;">
+            <img src="{{ $message->embed('qrcodes/'.$user->id.'.png') }}" width="250px" alt="Barcode">
         </div>
         <div class="footer">
             <p>Tunjukkan Barcode ini saat registrasi ulang dan pengambilan GoodieBag</p>

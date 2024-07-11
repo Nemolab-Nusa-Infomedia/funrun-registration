@@ -11,8 +11,8 @@ use App\Http\Controllers\RegistrationController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
-Route::get('/login', function () {
-    return view('admin.auth.login')->name('login');
+Route::get('/loginregis', function () {
+    return view('admin.auth.login');
 });
 
 

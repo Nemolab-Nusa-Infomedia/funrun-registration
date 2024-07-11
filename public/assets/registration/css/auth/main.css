@@ -57,3 +57,49 @@
     transform: translateY(-50%);
     cursor: pointer;
 }
+
+/* login */
+.toggle-container {
+    display: flex;
+    position: relative;
+    border: 1px solid black;
+    border-radius: 50px;
+    overflow: hidden;
+    width: 300px;
+}
+
+.toggle-btn {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: color 0.3s;
+    z-index: 1;
+}
+
+.toggle-btn.active {
+    color: white;
+}
+
+.toggle-indicator {
+    position: absolute;
+    background-color: black;
+    height: 100%;
+    width: 50%;
+    top: 0;
+    left: 0;
+    transition: left 0.3s;
+    z-index: 0;
+}
+
+.toggle-container .toggle-btn:hover {
+    color: #fff;
+}
+
+.form-container {
+    display: none;
+}
+
+.form-container.active {
+    display: block;
+}

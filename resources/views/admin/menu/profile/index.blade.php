@@ -1,6 +1,9 @@
 @extends('components.layout')
 
 @section('content')
+@if($admin->type === 'admin')
+    ALOO
+@elseif(Auth::user()->type === 'participant')
 <div class="container">
     <div class="row">
         <div class="col-12 col-md-12 mx-auto">
@@ -72,7 +75,7 @@
         </div>
     </div>
 </div>
-
+@endif
 <script>
     function toggleDetails() {
         var detailTable = document.getElementById("detailTable");

@@ -12,9 +12,10 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
 Route::get('/login', function () {
-    return view('admin.auth.login')->name('login');
-});
-
+    return view('admin.auth.login');
+})->name('login');
+Route::post('/check', [RegistrationController::class, 'checking'])->name('check');
+Route::get('/logout', [RegistrationController::class, 'logout'])->name('logout');
 
 // =============== Dashboard ===============
 
@@ -23,6 +24,9 @@ Route::get('/dashboard', [DashboardController::class, 'indexDashboard'])->name('
 
 // ===== Profile =====
 Route::get('/profile', [ProfileController::class, 'indexProfile'])->name('profile');
+Route::get('/login-admin', [AdminController::class, 'adminLogin'])->name('admin-login');
+Route::post('/cek-admin', [AdminController::class, 'adminCek'])->name('cek-admin');
+
 
 // ===== Peserta =====
 Route::get('/peserta', [PesertaController::class, 'indexPeserta'])->name('peserta');

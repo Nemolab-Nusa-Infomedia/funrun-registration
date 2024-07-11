@@ -18,6 +18,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'name',
+        'type',
         'email',
         'password',
         'gender',
@@ -37,6 +38,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'community',
         'name_community',
         'kode_pay',
+        'goldar',
+        'r_penyakit',
+        'payment_type',
+        'by_admin',
     ];
 
     /**

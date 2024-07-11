@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->string('type')->default('participant');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
@@ -38,6 +39,7 @@ return new class extends Migration
             $table->string('kode_pay')->nullable();
             $table->enum('status', ['settlement','pending'])->default('pending');
             $table->timestamp('verification_admin', precision: 0)->nullable();
+            $table->string('by_admin')->nullable();
             $table->timestamps();
         });
 

@@ -19,7 +19,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class RegistrationController extends Controller
 {
     public function indexForm(){
-        $provinces = Province::all();
+        $provinces = Province::distinct()->get(['id', 'name']);
         return view('admin.registration.index', compact('provinces'));
     }
 
@@ -75,7 +75,9 @@ class RegistrationController extends Controller
         } else {
             $newNumber = '0001';
         }
-        $user->update([
+
+         if ($request->name_commnunity) {
+            $user->update([
             'name' => $request->name,
             'gender' => $request->gender,
             'domisili' => $request->domisili,
@@ -98,11 +100,36 @@ class RegistrationController extends Controller
             'r_penyakit' => $request->r_penyakit,
             'kode_pay' => $params['transaction_details']['order_id'],
         ]);
+        }
+        $user->update([
+            'name' => $request->name,
+            'gender' => $request->gender,
+            'domisili' => $request->domisili,
+            'kabupaten' => $request->kabupaten,
+            'kecamatan' => $request->kecamatan,
+            'phone' => $request->phone,
+            'size' => $request->size,
+            'tokens_account' => $tokenAcc,
+            'participant_number' => $newNumber,
+            'age' => $request->age,
+            'status' => 'pending',
+            'phone_urgent' => $request->phone_urgent,
+            'contant_urgent' => $request->contant_urgent,
+            'relation_urgent' => $request->relation_urgent,
+            'community' => $request->community,
+            'payment_type' => $request->payment_type,
+            'participant_number' => $newNumber,
+            'goldar' => $request->goldar,
+            'r_penyakit' => $request->r_penyakit,
+            'kode_pay' => $params['transaction_details']['order_id'],
+        ]);
+       
         $snapToken = Snap::getSnapToken($params);
         return view('admin.registration.payment', ['snapToken' => $snapToken]);
     }
 
     // Payment handler
+
     public function paymentHandler(Request $request){
         Config::$serverKey = env('MIDTRANS_SERVER_KEY');
         Config::$isProduction = false;
@@ -198,5 +225,17 @@ class RegistrationController extends Controller
         event(new Registered($user));
         Auth::login($user);
         return redirect()->route('verification.notice');
+    }
+
+    public function checking(Request $request){
+        if(Auth::attempt($request->only('email','password'))){
+            return redirect()->route('profile');
+        }
+        return back();
+    }
+
+    public function logout(){
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

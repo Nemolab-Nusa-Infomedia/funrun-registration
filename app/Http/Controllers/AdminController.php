@@ -6,6 +6,7 @@ use Log;
 use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -31,5 +32,16 @@ class AdminController extends Controller
         }
         
         return response()->json(['message' => 'User tidak ditemukan !'], 404);
+    }
+
+    public function adminLogin(){
+        return view('admin.auth.loginAdmin');
+    }
+
+    public function adminCek(Request $request){
+        if (Auth::guard('admin')->attempt($request->only('email', 'password'))) {
+            return redirect()->route('profile');
+        }
+        return back()->withErrors(['email' => 'Invalid credentials']);
     }
 }

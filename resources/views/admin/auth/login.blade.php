@@ -16,40 +16,109 @@
                 <div class="col-12 col-md-12">
                     <h3 class="text-center fw-bold mt-5 mb-5">Pendaftaran Event FunRun Rotary <br> Purwokerto 2024</h3>
                     <div class="row col-12 col-md-8 mx-auto">
-                        <form action="{{ route('check') }}" method="post">
-                            @csrf
-                            <div class="card p-0 mb-3 gradient-background kaca">
-                                <div class="card-header" style="background: transparent; border: none; z-index: 2">
-                                    <h3 class="text-dark text-center fw-bold mt-3 mb-3">Login</h3>
-                                    <span class="border-bottom border-dark border-3 rounded-2" style="width: 120px"></span>
-                                </div>
-                                <div class="card-body p-0" style="z-index: 2">
-                                    <div class="row col-12 col-md-12 mx-auto">
-                                        <div class="col-12 col-md-12">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">Email</label>
-                                                <input type="email" class="form-control" name="email" placeholder="masukan email anda">
+                        <div class="d-flex justify-content-center align-items-center mb-3">
+                            <div class="toggle-container">
+                                <div id="daftarBtn" class="toggle-btn active">Registration</div>
+                                <div id="masukBtn" class="toggle-btn">Sign In</div>
+                                <div class="toggle-indicator"></div>
+                            </div>
+                        </div>
+
+                        <!-- Form Registration -->
+                        <div id="registrationForm" class="form-container active">
+                            <form action="{{ route('email-validation') }}" method="post">
+                                @csrf
+                                <div class="card p-0 mb-3 gradient-background kaca">
+                                    <div class="card-header" style="background: transparent; border: none; z-index: 2">
+                                        <h3 class="text-dark text-center fw-bold mt-3 mb-3">Registration</h3>
+                                        <span class="border-bottom border-dark border-3 rounded-2" style="width: 120px"></span>
+                                    </div>
+                                    <div class="card-body p-0" style="z-index: 2">
+                                        <div class="row col-12 col-md-12 mx-auto">
+                                            <div class="col-12 col-md-12">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">Email</label>
+                                                    <input type="email" class="form-control" name="email" placeholder="masukan email anda">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-12 col-md-12">
-                                            <div class="mb-3 position-relative">
-                                                <label for="password" class="form-label">Password</label>
-                                                <input type="password" class="form-control" id="password" name="password" placeholder="masukan password">
-                                                <i class="eye-icon ri-eye-line" id="togglePassword" onclick="togglePassword()"></i>
+                                            <div class="col-12 col-md-12">
+                                                <div class="mb-3 position-relative">
+                                                    <label for="password" class="form-label">Password</label>
+                                                    <input type="password" class="form-control" id="password" name="password" placeholder="masukan password">
+                                                    <i class="eye-icon ri-eye-line" id="togglePassword" onclick="togglePassword()"></i>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="mb-3 text-center">
-                                            <button type="submit" class="btn btn-submit rounded-5 text-dark fw-bold border-1 border">Submit</button>
+                                            <div class="mb-3 text-center">
+                                                <button type="submit" class="btn btn-submit rounded-5 text-dark fw-bold border-1 border">Submit</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
+
+                        <!-- Form Login -->
+                        <div id="loginForm" class="form-container">
+                            <form action="" method="post">
+                                @csrf
+                                <div class="card p-0 mb-3 gradient-background kaca">
+                                    <div class="card-header" style="background: transparent; border: none; z-index: 2">
+                                        <h3 class="text-dark text-center fw-bold mt-3 mb-3">Sign In</h3>
+                                        <span class="border-bottom border-dark border-3 rounded-2" style="width: 120px"></span>
+                                    </div>
+                                    <div class="card-body p-0" style="z-index: 2">
+                                        <div class="row col-12 col-md-12 mx-auto">
+                                            <div class="col-12 col-md-12">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">Email</label>
+                                                    <input type="email" class="form-control" name="email" placeholder="masukan email anda">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-12">
+                                                <div class="mb-3 position-relative">
+                                                    <label for="password" class="form-label">Password</label>
+                                                    <input type="password" class="form-control" id="password" name="password" placeholder="masukan password">
+                                                    <i class="eye-icon ri-eye-line" id="togglePassword" onclick="togglePassword()"></i>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 text-center">
+                                                <button type="submit" class="btn btn-submit rounded-5 text-dark fw-bold border-1 border">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        const daftarBtn = document.getElementById('daftarBtn');
+        const masukBtn = document.getElementById('masukBtn');
+        const registrationForm = document.getElementById('registrationForm');
+        const loginForm = document.getElementById('loginForm');
+        const toggleIndicator = document.querySelector('.toggle-indicator');
+
+        daftarBtn.addEventListener('click', () => {
+            daftarBtn.classList.add('active');
+            masukBtn.classList.remove('active');
+            registrationForm.classList.add('active');
+            loginForm.classList.remove('active');
+            toggleIndicator.style.left = '0';
+        });
+
+        masukBtn.addEventListener('click', () => {
+            masukBtn.classList.add('active');
+            daftarBtn.classList.remove('active');
+            loginForm.classList.add('active');
+            registrationForm.classList.remove('active');
+            toggleIndicator.style.left = '50%';
+        });
+    </script>
 
     <script>
         function togglePassword() {

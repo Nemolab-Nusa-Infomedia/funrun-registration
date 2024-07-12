@@ -13,9 +13,9 @@
   <body>
     <div id="loading-container">
         <div class="loader">
-          <img src="{{ asset('assets/registration/img/loading/sepatu.png') }}" alt="Loading" class="shoe">
-          <img src="{{ asset('assets/registration/img/loading/sepatu.png') }}" alt="Loading" class="shoe">
-          <img src="{{ asset('assets/registration/img/loading/sepatu.png') }}" alt="Loading" class="shoe">
+          <img src="{{ asset('assets/registration/img/loading/sepatu1.png') }}" alt="Loading" class="shoe">
+          <img src="{{ asset('assets/registration/img/loading/sepatu2.png') }}" alt="Loading" class="shoe">
+          <img src="{{ asset('assets/registration/img/loading/sepatu3.png') }}" alt="Loading" class="shoe">
         </div>
     </div>
     <div class="container-fluid funrun-registration">

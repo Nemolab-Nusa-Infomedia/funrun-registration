@@ -8,8 +8,16 @@
     <link rel="stylesheet" href="{{ secure_asset('assets/registration/css/form/main.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ secure_asset('assets/loading/css/main.css') }}">
 </head>
   <body>
+    <div id="loading-container">
+        <div class="loader">
+          <img src="{{ asset('assets/registration/img/loading/sepatu1.png') }}" alt="Loading" class="shoe">
+          <img src="{{ asset('assets/registration/img/loading/sepatu2.png') }}" alt="Loading" class="shoe">
+          <img src="{{ asset('assets/registration/img/loading/sepatu3.png') }}" alt="Loading" class="shoe">
+        </div>
+    </div>
     <div class="container-fluid funrun-registration">
         <div class="container">
             <div class="row">
@@ -214,6 +222,7 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ secure_asset('assets/loading/js/main.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const select = document.getElementById('payment_type');

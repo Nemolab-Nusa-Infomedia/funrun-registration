@@ -35,9 +35,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js" integrity="sha512-r6rDA7W6ZeQhvl8S7yRVQUKVHdexq+GAlNkNNqVC7YyIV+NwqCTJe2hDWCiffTyRNOeGEzRRJ9ifvRm/HCzGYg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {{-- loading --}}
+    <link rel="stylesheet" href="{{ secure_asset('assets/loading/css/main.css') }}">
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
+    <div id="loading-container">
+        <div class="loader">
+          <img src="{{ asset('assets/registration/img/loading/sepatu.png') }}" alt="Loading" class="shoe">
+          <img src="{{ asset('assets/registration/img/loading/sepatu.png') }}" alt="Loading" class="shoe">
+          <img src="{{ asset('assets/registration/img/loading/sepatu.png') }}" alt="Loading" class="shoe">
+        </div>
+    </div>
   @include('components.sidebar')
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
@@ -57,6 +67,9 @@
   <script src="{{ asset('assets/admin/js/plugins/perfect-scrollbar.min.js') }}"></script>
   <script src="{{ asset('assets/admin/js/plugins/smooth-scrollbar.min.js') }}"></script>
   <script src="{{ asset('assets/admin/js/plugins/chartjs.min.js') }}"></script>
+
+  {{-- loading --}}
+  <script src="{{ secure_asset('assets/loading/js/main.js') }}"></script>
 
   <script>
     function subMenuCourses() {

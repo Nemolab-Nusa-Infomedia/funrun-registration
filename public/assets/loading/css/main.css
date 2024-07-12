@@ -1,0 +1,44 @@
+
+/* animate loading */
+#loading-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  .loader {
+    display: flex;
+    gap: 20px;
+  }
+
+  .shoe {
+    width: 50px;
+    height: 50px;
+    animation: changeSize 3s infinite;
+  }
+
+  .shoe:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  .shoe:nth-child(2) {
+    animation-delay: .5s;
+  }
+
+  .shoe:nth-child(3) {
+    animation-delay: 1s;
+  }
+
+  @keyframes changeSize {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.5);
+    }
+  }

@@ -6,10 +6,18 @@
     <title>Login FunRun Rotary</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ secure_asset('assets/registration/css/auth/main.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('assets/loading/css/main.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
 </head>
   <body>
+    <div id="loading-container">
+        <div class="loader">
+          <img src="{{ asset('assets/registration/img/loading/sepatu.png') }}" alt="Loading" class="shoe">
+          <img src="{{ asset('assets/registration/img/loading/sepatu.png') }}" alt="Loading" class="shoe">
+          <img src="{{ asset('assets/registration/img/loading/sepatu.png') }}" alt="Loading" class="shoe">
+        </div>
+    </div>
     <div class="container-fluid funrun-registration">
         <div class="container">
             <div class="row">
@@ -96,45 +104,8 @@
         </div>
     </div>
 
-    <script>
-        const daftarBtn = document.getElementById('daftarBtn');
-        const masukBtn = document.getElementById('masukBtn');
-        const registrationForm = document.getElementById('registrationForm');
-        const loginForm = document.getElementById('loginForm');
-        const toggleIndicator = document.querySelector('.toggle-indicator');
-
-        daftarBtn.addEventListener('click', () => {
-            daftarBtn.classList.add('active');
-            masukBtn.classList.remove('active');
-            registrationForm.classList.add('active');
-            loginForm.classList.remove('active');
-            toggleIndicator.style.left = '0';
-        });
-
-        masukBtn.addEventListener('click', () => {
-            masukBtn.classList.add('active');
-            daftarBtn.classList.remove('active');
-            loginForm.classList.add('active');
-            registrationForm.classList.remove('active');
-            toggleIndicator.style.left = '50%';
-        });
-    </script>
-
-    <script>
-        function togglePassword() {
-            const passwordField = document.getElementById('password');
-            const eyeIcon = document.getElementById('togglePassword');
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                eyeIcon.classList.remove('ri-eye-line');
-                eyeIcon.classList.add('ri-eye-off-line');
-            } else {
-                passwordField.type = 'password';
-                eyeIcon.classList.remove('ri-eye-off-line');
-                eyeIcon.classList.add('ri-eye-line');
-            }
-        }
-    </script>
+    <script src="{{ secure_asset('assets/registration/js/auth/main.js') }}"></script>
+    <script src="{{ secure_asset('assets/loading/js/main.js') }}"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

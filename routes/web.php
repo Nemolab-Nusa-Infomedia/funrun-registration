@@ -10,7 +10,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
-
 // ===== Auth Web ===== //
 Route::get('/', function () {
     return view('admin.auth.login');

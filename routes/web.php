@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegistrationController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
+
 // ===== Auth Web ===== //
 Route::get('/', function () {
     return view('admin.auth.login');
@@ -23,7 +24,7 @@ Route::post('/cek-admin', [AdminController::class, 'adminCek'])->name('cek-admin
 
 
 // ===== Akses Superadmin ===== //
-Route::middleware(['superAdminAccess'])->group(function () { 
+Route::middleware(['superAdminAccess'])->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'indexDashboard'])->name('dashboard');
     // Akun
@@ -35,7 +36,7 @@ Route::middleware(['superAdminAccess'])->group(function () {
 
 
 // ===== Akses Admin ===== //
-Route::middleware(['adminAccess'])->group(function () { 
+Route::middleware(['adminAccess'])->group(function () {
     // Scan
     Route::get('/scan', [RegistrationController::class, 'scan'])->name('scan');
     Route::post('/verify-qr', [AdminController::class, 'verifyQrCode']);
@@ -56,11 +57,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/paymentHandler', [RegistrationController::class, 'paymentHandler'])->name('paymentHandler');
 
     // Get Data Region
-    
+
     // Notification Pembayaran
     Route::get('/pembayaran-berhasil', [RegistrationController::class, 'pembayaranBerhasil'])->name('pembayaran-berhasil');
     Route::get('/pembayaran-gagal', [RegistrationController::class, 'pembayaranGagal'])->name('pembayaran-gagal');
-    
+
 });
 
 Route::get('/dapatkan/kabupaten/{provId}', [RegionController::class, 'getKabupaten']);

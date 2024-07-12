@@ -14,13 +14,12 @@ class PesertaController extends Controller
         return $upperW;
     }
     public function indexPeserta(){
-        $users = User::all();
+        $users = User::with('kabupaten');
         foreach ($users as $key) {
-            $kabId = $key->kabupaten;
-            $kab = Regency::find($kabId);
-            var_dump($kab->name);
-            // $namekab = $this->kapitalAwal($kab->name);
+            $kab = $key->kabupaten->name;
+            dd($kab);
+            $namekab = $this->kapitalAwal($kab->name);
         }
-        return view('admin.menu.peserta.index', compact('users','namekab'));
+        return view('admin.menu.peserta.index', compact('users'));
     }
 }

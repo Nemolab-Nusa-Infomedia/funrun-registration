@@ -55,7 +55,7 @@
                             </tr>
                             <tr>
                                 <td>Domisili</td>
-                                <td>: {{ $namekab }}</td>
+                                <td>: {{ $namekec.', '.$namekab }}</td>
                             </tr>
                             <tr>
                                 <td>Size Jersey</td>
@@ -78,8 +78,12 @@
                                 <td>: {{ Auth::user()->payment_type }}</td>
                             </tr>
                             <tr>
+                                @php
+                                    $amount = Auth::user()->total;
+                                    $formattedAmount = "Rp " . number_format($amount, 0, ',', '.');
+                                @endphp
                                 <td>Total Pembayaran</td>
-                                <td>: {{ Auth::user()->total }}</td>
+                                <td>: {{ $formattedAmount }}</td>
                             </tr>
                             <tr>
                                 <td>Status Pembayaran</td>

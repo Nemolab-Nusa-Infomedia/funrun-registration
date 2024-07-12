@@ -40,27 +40,30 @@
                 @foreach ($users as $items)
                 <tr>
                   <td>{{ $no++ }}</td>
-                  <td>{{ $items->participant_number }}</td>
-                  <td>{{ $items->name }}</td>
-                  <td>{{ $items->gender }}</td>
-                  <td>{{ $items->email }}</td>
-                  <td>{{ $namekab }}</td>
-                  <td>{{ $items->size }}</td>
-                  <td>{{ $items->goldar }}</td>
-                  <td>{{ $items->r_penyakit }}</td>
-                  <td>{{ $items->waktu_pembayaran }}</td>
-                  <td>{{ $items->email_verified_at }}</td>
-                  <td>{{ $items->payment_type }}</td>
-                  <td>{{ $items->total }}</td>
+                  <td>{{ $items['participant_number'] }}</td>
+                  <td>{{ $items['name'] }}</td>
+                  <td>{{ $items['gender'] }}</td>
+                  <td>{{ $items['email'] }}</td>
+                  <td>{{  
+                      $items['kecamatan']['name'].','.$items['kabupaten']['name']
+                      }}
+                  </td>
+                  <td>{{ $items['size'] }}</td>
+                  <td>{{ $items['goldar'] }}</td>
+                  <td>{{ $items['r_penyakit'] }}</td>
+                  <td>{{ $items['waktu_pembayaran'] }}</td>
+                  <td>{{ $items['email_verified_at'] }}</td>
+                  <td>{{ $items['payment_type'] }}</td>
+                  <td>{{ $items['total'] }}</td>
                   <td>
-                    @if($items->status == 'settlement')
+                    @if($items['status'] == 'settlement')
                       Lunas
                     @else
                       Pending
                      @endif 
                   </td>
-                  <td>{{ $items->verification_admin }}</td>
-                  <td>{{ $items->by_admin }}</td>
+                  <td>{{ $items['verification_admin'] }}</td>
+                  <td>{{ $items['by_admin'] }}</td>
                   @if(Auth::guard('admin')->check() && Auth::guard('admin')->user()->type == 'superadmin')
                   <td>
                     <a href="" class="btn btn-primary">Delete</a>

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Regency;
+use App\Models\District;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -73,5 +74,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function kabupaten()
     {
         return $this->belongsTo(Regency::class, 'kabupaten', 'id');
+    }
+    public function kecamatan()
+    {
+        return $this->belongsTo(District::class, 'kecamatan', 'id');
     }
 }

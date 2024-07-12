@@ -39,6 +39,8 @@ return new class extends Migration
             $table->string('kode_pay')->nullable();
             $table->enum('status', ['settlement','pending'])->default('pending');
             $table->timestamp('verification_admin', precision: 0)->nullable();
+            $table->timestamp('waktu_pembayaran')->nullable();
+            $table->string('total')->nullable();
             $table->string('by_admin')->nullable();
             $table->timestamps();
         });

@@ -139,7 +139,11 @@ class RegistrationController extends Controller
         if($hashed == $request->signature_key){
         if ($request->transaction_status == 'settlement' || $request->transaction_status == 'capture') {
                 $user = User::where('kode_pay', $request->order_id)->first();
-                $user->update(['status'=>'settlement']);
+                $user->update([
+                    'status'=> 'settlement',
+                    'total' => $request->gross_amount,
+                    'waktu_pembayaran' => $request->settlement_time
+                ]);
                 // Kirim email ke user
                 $qrCode = QrCode::format('png')->size(300)->generate($user->tokens_account);
                 $qrCodePath = public_path('qrcodes/' . $user->id . '.png');
@@ -210,9 +214,11 @@ class RegistrationController extends Controller
         $domilisi = Province::where('id');
         return view('admin.registration.scan.notificationScan', compact('user'));
     }
+    
     public function registrationEmail(){
         return view('admin.auth.register');
     }
+
     public function emailValidation(Request $request){
         $validator = $request->validate([
             'email' => 'required|email|unique:users',

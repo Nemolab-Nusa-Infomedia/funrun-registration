@@ -59,7 +59,7 @@
 
                         <!-- Form Login -->
                         <div id="loginForm" class="form-container">
-                            <form action="" method="post">
+                            <form action="{{ route('check') }}" method="post">
                                 @csrf
                                 <div class="card p-0 mb-3 gradient-background kaca">
                                     <div class="card-header" style="background: transparent; border: none; z-index: 2">

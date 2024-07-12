@@ -20,6 +20,7 @@ class AdminController extends Controller
         $date = Carbon::createFromFormat('Y-m-d H:i:s', '2024-07-02 12:00:00', 'Asia/Jakarta');
         if ($user->verification_admin == NULL) {
             $user->verification_admin = $nowInJakarta->toDateTimeString();
+            $user->by_admin = Auth::guard('admin')->user()->name;
             $user->save();
             return response()->json([
                 'message' => 'User is registered: ' . $user->name,
@@ -27,7 +28,7 @@ class AdminController extends Controller
             ]);
         } else {
             return response()->json([
-                'message' => "User sudah diverifikasi! \n Akun diverifikasi tanggal ". $user->verification_admin,
+                'message' => "User sudah diverifikasi! \n Akun diverifikasi tanggal ". $user->verification_admin . "\n Diverifikasi oleh ". $user->by_admin,
             ], 404);
         }
         
@@ -42,6 +43,12 @@ class AdminController extends Controller
         if (Auth::guard('admin')->attempt($request->only('email', 'password'))) {
             return redirect()->route('profile');
         }
-        return back()->withErrors(['email' => 'Invalid credentials']);
+        return back();
+    }
+
+    public function adminLogout()
+    {
+        Auth::guard('admin')->logout();
+        return redirect()->route('admin-login');
     }
 }

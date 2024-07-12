@@ -5,7 +5,9 @@
     <span class="fw-bold text-dark fs-4">Data Peserta</span>
 
     <div class="table-responsive mt-3">
+      @if(Auth::guard('admin')->check() && Auth::guard('admin')->user()->type == 'superadmin')
         <a href=""><button class="btn btn-info" type="button">Edit Peserta</button></a>
+      @endif
         <div class="table-responsive p-0">
             <table class="table align-items-center mb-0 text-center" id="users-table">
               <thead>
@@ -20,35 +22,52 @@
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Golongan Darah</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Riwayat Penyakit</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Waktu Pembayaran</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Waktu Verifikasi Email</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Via Pembayaran</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total Pembayaran</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status Pembayaran</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Waktu Verifikasi</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Diverisikasi Oleh</th>
+                  @if(Auth::guard('admin')->check() && Auth::guard('admin')->user()->type == 'superadmin')
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th>
+                  @endif
                 </tr>
               </thead>
               <tbody>
+                @php
+                  $no = 1;
+                @endphp
+                @foreach ($users as $items)
                 <tr>
-                  <td>1</td>
-                  <td>0001</td>
-                  <td>Vindra Arya Yulian</td>
-                  <td>Laki-laki</td>
-                  <td>vindrayulian@gmail.com</td>
-                  <td>Banyumas</td>
-                  <td>L</td>
-                  <td>B+</td>
-                  <td>-</td>
-                  <td>14.09, Senin 09 Juli 2024</td>
-                  <td>Gopay</td>
-                  <td>Rp.203.000</td>
-                  <td>Lunas</td>
-                  <td>Waktu Diverifikasi</td>
-                  <td>Diverifikasi Oleh</td>
+                  <td>{{ $no++ }}</td>
+                  <td>{{ $items->participant_number }}</td>
+                  <td>{{ $items->name }}</td>
+                  <td>{{ $items->gender }}</td>
+                  <td>{{ $items->email }}</td>
+                  <td>{{ $namekab }}</td>
+                  <td>{{ $items->size }}</td>
+                  <td>{{ $items->goldar }}</td>
+                  <td>{{ $items->r_penyakit }}</td>
+                  <td>{{ $items->waktu_pembayaran }}</td>
+                  <td>{{ $items->email_verified_at }}</td>
+                  <td>{{ $items->payment_type }}</td>
+                  <td>{{ $items->total }}</td>
+                  <td>
+                    @if($items->status == 'settlement')
+                      Lunas
+                    @else
+                      Pending
+                     @endif 
+                  </td>
+                  <td>{{ $items->verification_admin }}</td>
+                  <td>{{ $items->by_admin }}</td>
+                  @if(Auth::guard('admin')->check() && Auth::guard('admin')->user()->type == 'superadmin')
                   <td>
                     <a href="" class="btn btn-primary">Delete</a>
                   </td>
+                  @endif
                 </tr>
+                @endforeach
               </tbody>
         </table>
     </div>

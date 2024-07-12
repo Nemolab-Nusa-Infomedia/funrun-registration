@@ -23,7 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'gender',
         'domisili',
-        'distrik',
+        'kabupaten',
         'kecamatan',
         'phone',
         'size',
@@ -42,6 +42,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'r_penyakit',
         'payment_type',
         'by_admin',
+        'waktu_pembayaran',
+        'total',
     ];
 
     /**

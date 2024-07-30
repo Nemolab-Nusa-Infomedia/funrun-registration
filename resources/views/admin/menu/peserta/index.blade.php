@@ -44,9 +44,12 @@
                   <td>{{ $items['name'] }}</td>
                   <td>{{ $items['gender'] }}</td>
                   <td>{{ $items['email'] }}</td>
-                  <td>{{  
-                      $items['kecamatan']['name'].','.$items['kabupaten']['name']
-                      }}
+                  <td>
+                  @if($items['kecamatan'] && $items['kabupaten']  )
+                    {{$items['kecamatan']['name'].','.$items['kabupaten']['name']}}
+                  @else
+                    -
+                  @endif
                   </td>
                   <td>{{ $items['size'] }}</td>
                   <td>{{ $items['goldar'] }}</td>

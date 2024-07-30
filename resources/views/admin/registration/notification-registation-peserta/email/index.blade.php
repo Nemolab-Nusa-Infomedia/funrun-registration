@@ -46,7 +46,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Hello, Vindra Arya Yulian</h1>
+        <h1>{{ $user->name }}</h1>
         <p>
             Anda telah berhasil mendaftar pada FunRun Rotary 2024 dengan pembayaran menggunakan Gopay. Terima kasih atas pembayaran Anda. Ini adalah konfirmasi Anda untuk FunRun Rotary Purwokerto 2024.
         </p>
@@ -65,7 +65,7 @@
             <p>3. Peserta FunRun dapat mengambil GoodieBag setelah berhasil melakukan verifikasi</p>
         </div>
         <h2 style="text-align: center">Nomor Peserta : {{ $user->participant_number }}</h2>
-        <div class="barcode" style="display: block; margin-left: auto; margin-right: auto;">
+        <div class="barcode" style="display: block; justify-content: center">
             <img src="{{ $message->embed('qrcodes/'.$user->id.'.png') }}" width="250px" alt="Barcode">
         </div>
         <div class="footer">

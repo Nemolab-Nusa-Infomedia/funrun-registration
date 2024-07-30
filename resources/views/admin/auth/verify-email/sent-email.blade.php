@@ -69,7 +69,7 @@
             <h1>FunRun Rotary Purwokerto 2024</h1>
         </header>
         <main>
-            <p>Selamat Datang, <a href="mailto:rizqybs24@gmail.com">rizqybs24@gmail.com</a>!</p>
+            <p>Selamat Datang, <a href="mailto:{{ $email }}">{{ $email }}</a>!</p>
             <p>Terimakasih telah mendaftarkan email anda di FunRun Rotary Purwokerto.</p>
             <p>Verifikasi Email anda dengan click tombol dibawah:</p>
             <a class="btn" href="{{ $url }}">Confirm Email</a>

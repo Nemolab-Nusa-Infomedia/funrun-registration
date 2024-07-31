@@ -27,6 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'domisili',
         'kabupaten',
         'kecamatan',
+        'desa',
         'phone',
         'size',
         'tokens_account',

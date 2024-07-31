@@ -18,6 +18,10 @@
             height: 100vh;
         }
 
+        a{
+            text-decoration: none;
+        }
+
         .email-container {
             background-color: #ffffff;
             padding: 20px;

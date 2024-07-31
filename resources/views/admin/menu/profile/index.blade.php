@@ -32,8 +32,11 @@
                             <span style="font-size: 18px">{{ $namekab }}</span>
                         </div>
                     </div>
+
                     <button id="toggleButton" class="btn btn-secondary mt-3" onclick="toggleDetails()">Lihat Detail</button>
-                    
+                    <a href="" class="btn btn-warning mt-3">Selesaikan Pembayaran</a>
+                    <a href="{{ route('form') }}" class="btn btn-danger mt-3">Daftar Ulang</a>
+
                     <div id="detailTable" class="table-responsive collapse">
                         <img class="d-block mx-auto mb-3 mt-2" src="{{ secure_asset('qrcodes/'.Auth::user()->id.'.png') }}" width="200" alt="" srcset="">
                         <table class="table">
@@ -87,7 +90,7 @@
                             </tr>
                             <tr>
                                 <td>Status Pembayaran</td>
-                                <td>: 
+                                <td>:
                                     @if(Auth::user()->status == 'settlement')
                                     <span class="btn btn-success"> Lunas</span>
                                     @elseif(Auth::user()->status == 'pending')

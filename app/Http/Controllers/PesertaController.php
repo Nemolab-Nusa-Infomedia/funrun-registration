@@ -18,8 +18,8 @@ class PesertaController extends Controller
         foreach ($users as $key) {
             $kabId = $key->kabupaten;
             $kab = Regency::find($kabId);
-            var_dump($kab->name);
-            // $namekab = $this->kapitalAwal($kab->name);
+            // var_dump($kab->name);
+            $namekab = $this->kapitalAwal($kab->name);
         }
         return view('admin.menu.peserta.index', compact('users','namekab'));
     }

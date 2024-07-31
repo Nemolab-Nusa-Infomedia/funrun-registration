@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Form FunRun</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ secure_asset('assets/registration/css/form/main.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/registration/css/form/main.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ secure_asset('assets/loading/css/main.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/loading/css/main.css') }}">
 </head>
   <body>
     <div id="loading-container">
         <div class="loader">
-          <img src="{{ asset('assets/registration/img/loading/sepatu1.png') }}" alt="Loading" class="shoe">
-          <img src="{{ asset('assets/registration/img/loading/sepatu2.png') }}" alt="Loading" class="shoe">
-          <img src="{{ asset('assets/registration/img/loading/sepatu3.png') }}" alt="Loading" class="shoe">
+          <img src="{{ url('assets/registration/img/loading/sepatu1.png') }}" alt="Loading" class="shoe">
+          <img src="{{ url('assets/registration/img/loading/sepatu2.png') }}" alt="Loading" class="shoe">
+          <img src="{{ url('assets/registration/img/loading/sepatu3.png') }}" alt="Loading" class="shoe">
         </div>
     </div>
     <div class="container-fluid funrun-registration">
@@ -27,7 +27,7 @@
                             <a href="" class="btn"><i class="ri-arrow-left-circle-fill" style="font-size: 3.5rem"></i></a>
                         </div>
                         <div class="mt-2">
-                            {{-- <img src="{{ asset('asset/img/Logo Nemolab.png') }}" width="80px" alt=""> --}}
+                            {{-- <img src="{{ url('asset/img/Logo Nemolab.png') }}" width="80px" alt=""> --}}
                             <span class="fw-bold">Logo FunRun</span>
                         </div>
                     </div>
@@ -180,11 +180,11 @@
                                                 <label for="payment_type" class="form-label">Pilih Metode Pembayaran</label>
                                                 <select class="form-select" id="payment_type" name="payment_type" style="display: none;">
                                                     <option value="" selected>--- Pilih Pembayaran ---</option>
-                                                    <option value="gopay" data-img-src="{{ asset('assets/registration/img/metode-pembayaran/gopay.png') }}">GoPay</option>
-                                                    <option value="shopeepay" data-img-src="{{ asset('assets/registration/img/metode-pembayaran/shopeepay.jpg') }}">ShopeePay</option>
-                                                    <option value="other_qris" data-img-src="{{ asset('assets/registration/img/metode-pembayaran/qriss.jpg') }}">Qris (QRis, Dana, OVO, LinkAja)</option>
-                                                    <option value="bank_merchant" data-img-src="{{ asset('assets/registration/img/metode-pembayaran/bank.png') }}">Bank Merchant</option>
-                                                    <option value="credit_card" data-img-src="{{ asset('assets/registration/img/metode-pembayaran/kartu kredit.png') }}">Kartu Kredit</option>
+                                                    <option value="gopay" data-img-src="{{ url('assets/registration/img/metode-pembayaran/gopay.png') }}">GoPay</option>
+                                                    <option value="shopeepay" data-img-src="{{ url('assets/registration/img/metode-pembayaran/shopeepay.jpg') }}">ShopeePay</option>
+                                                    <option value="other_qris" data-img-src="{{ url('assets/registration/img/metode-pembayaran/qriss.jpg') }}">Qris (QRis, Dana, OVO, LinkAja)</option>
+                                                    <option value="bank_merchant" data-img-src="{{ url('assets/registration/img/metode-pembayaran/bank.png') }}">Bank Merchant</option>
+                                                    <option value="credit_card" data-img-src="{{ url('assets/registration/img/metode-pembayaran/kartu kredit.png') }}">Kartu Kredit</option>
                                                 </select>
                                                 <div class="custom-select-container" id="custom-select-container"></div>
                                             </div>
@@ -222,7 +222,7 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ secure_asset('assets/loading/js/main.js') }}"></script>
+    <script src="{{ url('assets/loading/js/main.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const select = document.getElementById('payment_type');

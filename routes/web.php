@@ -47,11 +47,11 @@ Route::middleware(['adminAccess'])->group(function () {
 Route::get('/profile', [ProfileController::class, 'indexProfile'])->name('profile');
 
 // ===== Peserta =====
+Route::get('/form', [RegistrationController::class, 'indexForm'])->name('form');
 
 Route::middleware(['auth'])->group(function () {
     // Logout Peserta
     Route::get('/logout', [RegistrationController::class, 'logout'])->name('logout');
-    Route::get('/form', [RegistrationController::class, 'indexForm'])->name('form');
     Route::post('/create-account', [RegistrationController::class, 'register'])->name('register');
     Route::post('/paymentHandler', [RegistrationController::class, 'paymentHandler'])->name('paymentHandler');
 

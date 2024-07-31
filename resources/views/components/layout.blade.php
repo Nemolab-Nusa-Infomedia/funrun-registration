@@ -43,9 +43,9 @@
 <body class="g-sidenav-show  bg-gray-200">
     <div id="loading-container">
         <div class="loader">
-          <img src="{{ asset('assets/registration/img/loading/sepatu1.png') }}" alt="Loading" class="shoe">
-          <img src="{{ asset('assets/registration/img/loading/sepatu2.png') }}" alt="Loading" class="shoe">
-          <img src="{{ asset('assets/registration/img/loading/sepatu3.png') }}" alt="Loading" class="shoe">
+          <img src="{{ secure_asset('assets/registration/img/loading/sepatu1.png') }}" alt="Loading" class="shoe">
+          <img src="{{ secure_asset('assets/registration/img/loading/sepatu2.png') }}" alt="Loading" class="shoe">
+          <img src="{{ secure_asset('assets/registration/img/loading/sepatu3.png') }}" alt="Loading" class="shoe">
         </div>
     </div>
   @include('components.sidebar')

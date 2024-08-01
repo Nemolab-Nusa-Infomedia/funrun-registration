@@ -20,6 +20,13 @@ Route::post('/check', [RegistrationController::class, 'checking'])->name('check'
 Route::get('/login-admin', [AdminController::class, 'adminLogin'])->name('admin-login');
 Route::get('/logout-admin', [AdminController::class, 'adminLogout'])->name('admin-logout');
 Route::post('/cek-admin', [AdminController::class, 'adminCek'])->name('cek-admin');
+
+Route::get('/pembayaran-berhasil', [RegistrationController::class, 'pembayaranBerhasil'])->name('pembayaran-berhasil');
+Route::get('/pembayaran-gagal', [RegistrationController::class, 'pembayaranGagal'])->name('pembayaran-gagal');
+
+Route::get('/email/verify', function () {
+    return view('admin.auth.verify-email.notification-email');
+})->name('verification.notice');
 // ===== End Auth Web ===== //
 
 
@@ -59,8 +66,8 @@ Route::middleware(['auth'])->group(function () {
     // Get Data Region
 
     // Notification Pembayaran
-    Route::get('/pembayaran-berhasil', [RegistrationController::class, 'pembayaranBerhasil'])->name('pembayaran-berhasil');
-    Route::get('/pembayaran-gagal', [RegistrationController::class, 'pembayaranGagal'])->name('pembayaran-gagal');
+    // Route::get('/pembayaran-berhasil', [RegistrationController::class, 'pembayaranBerhasil'])->name('pembayaran-berhasil');
+    // Route::get('/pembayaran-gagal', [RegistrationController::class, 'pembayaranGagal'])->name('pembayaran-gagal');
     Route::get('/payment/retry', [RegistrationController::class, 'retryingPayment'])->name('payment.retrying');
 
 });
@@ -69,9 +76,9 @@ Route::get('/dapatkan/kecamatan/{kecId}', [RegionController::class, 'getKecamata
 Route::get('/dapatkan/desa/{desaId}', [RegionController::class, 'getDesa']);
 
 // ===== Email =====
-Route::get('/email/verify', function () {
-    return view('admin.auth.verify-email.notification-email');
-})->name('verification.notice');
+// Route::get('/email/verify', function () {
+//     return view('admin.auth.verify-email.notification-email');
+// })->name('verification.notice');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();

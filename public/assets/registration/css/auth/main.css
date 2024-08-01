@@ -1,106 +1,231 @@
-.funrun-registration{
-    background-image: url('../../img/bg.png');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100vh;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+::after,
+::before{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.gradient-background {
-    /* height: 100px; Sesuaikan tinggi elemen sesuai kebutuhan */
-    background: linear-gradient(to bottom, #eeff00, #fffbe0);
-    border-radius: 20px; /* Sesuaikan radius sudut */
-    padding: 20px;
-    backdrop-filter: blur(10px);
-    z-index: 1;
+/* pallet */
+:root{
+    --color-bg: #fbf7f7;
+    --color-c1: #FCA61F;
+    --color-c2: #F36527;
+    --color-c3: #0C70B5;
+    --color-c4: #15ABB9;
+    --color-c5: #FFFFFF;
+    --color-c6: #000000;
+    --color-c7: #F5F7F8;
+    --color-c8: #7D6B4D;
 }
 
-.gradient-background::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100px; /* Height of the gradient effect */
-    background: linear-gradient(to bottom, #eeff00, rgba(238, 255, 0, 0.1));
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    z-index: 1;
+html, body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    background-color: var(--color-bg);
 }
 
-.card-body label{
-    color: black;
-    font-weight: bold;
+.box{
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.1),   /* Layer pertama, shadow kecil */
+        0 8px 16px rgba(0, 0, 0, 0.1),  /* Layer kedua, shadow medium */
+        0 16px 32px rgba(0, 0, 0, 0.1), /* Layer ketiga, shadow besar */
+        0 32px 64px rgba(0, 0, 0, 0.05);/* Layer keempat, shadow ekstra besar */
+    background-color: #fff; /* Agar shadow terlihat jelas */
+    border-radius: 8px;     /* Opsional: Sudut yang membulat untuk tampilan lebih lembut */
 }
 
-.card-body input,
-.card-body select{
-    background: transparent;
-    border: 2px solid #727272;
+h2, h3 {
+    color: #4f4f4f;
 }
 
-.kaca{
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-    /* padding: 20px; */
+.btn-c1{
+    background-color: var(--color-c1) !important;
+    font-size: 12px;
+    border: none !important;
+    border-radius: 10px;
+}
+.btn-c2{
+    background-color: var(--color-c2) !important;
+    font-size: 12px;
+    border: none !important;
+    border-radius: 10px;
+}
+.btn-c3{
+    background-color: var(--color-c3) !important;
+    font-size: 12px;
+    border: none !important;
+    border-radius: 10px;
+}
+.btn-c4{
+    background-color: var(--color-c4) !important;
+    font-size: 12px;
+    border: none !important;
+    border-radius: 10px;
+}
+.btn-c5{
+    background-color: var(--color-c5) !important;
+    font-size: 12px;
+    border: none !important;
+    border-radius: 10px;
+}
+.btn-c6{
+    background-color: var(--color-c6) !important;
+    font-size: 12px;
+    border: none !important;
+    border-radius: 10px;
+}
+.btn-c7{
+    background-color: var(--color-c7) !important;
+    font-size: 12px;
+    border: none !important;
+    border-radius: 10px;
+}
+.btn-c8{
+    background-color: var(--color-c7) !important;
+    font-size: 12px;
+    border: none !important;
+    border-radius: 10px;
 }
 
-.btn-submit{
-    background-color: #E4FF3C;
-}
-
-.eye-icon {
-    position: absolute;
-    right: 10px;
-    top: 73%;
-    transform: translateY(-50%);
-    cursor: pointer;
-}
-
-/* login */
-.toggle-container {
-    display: flex;
-    position: relative;
-    border: 1px solid black;
-    border-radius: 50px;
-    overflow: hidden;
-    width: 300px;
-}
-
-.toggle-btn {
-    flex: 1;
-    text-align: center;
-    padding: 10px;
-    cursor: pointer;
-    transition: color 0.3s;
-    z-index: 1;
-}
-
-.toggle-btn.active {
-    color: white;
-}
-
-.toggle-indicator {
-    position: absolute;
-    background-color: black;
-    height: 100%;
+.btn-outline-c1{
+    border: 1.5px solid var(--color-c1) !important;
+    background: transparent !important;
+    font-size: 12px;
     width: 50%;
-    top: 0;
-    left: 0;
-    transition: left 0.3s;
-    z-index: 0;
+    border-radius: 10px;
+}
+.btn-outline-c1:hover{
+    background-color: var(--color-c1);
+    transition: .3s;
+    border-radius: 10px;
 }
 
-.toggle-container .toggle-btn:hover {
-    color: #fff;
+.btn-outline-c2{
+    border: 1.5px solid var(--color-c2) !important;
+    background: transparent !important;
+    font-size: 12px;
+    width: 50%;
+    border-radius: 10px;
+}
+.btn-outline-c2:hover{
+    background-color: var(--color-c2);
+    transition: .3s;
+    border-radius: 10px;
 }
 
-.form-container {
-    display: none;
+.btn-outline-c3{
+    border: 1.5px solid var(--color-c3) !important;
+    background: transparent !important;
+    font-size: 12px;
+    width: 50%;
+    border-radius: 10px;
+}
+.btn-outline-c3:hover{
+    background-color: var(--color-c3);
+    transition: .3s;
+    border-radius: 10px;
 }
 
-.form-container.active {
-    display: block;
+.btn-outline-c4{
+    border: 1.5px solid var(--color-c4) !important;
+    background: transparent !important;
+    font-size: 12px;
+    width: 50%;
+    border-radius: 10px;
+}
+.btn-outline-c4:hover{
+    background-color: var(--color-c4);
+    transition: .3s;
+    border-radius: 10px;
 }
 
+.btn-outline-c5{
+    border: 1.5px solid var(--color-c5) !important;
+    background: transparent !important;
+    font-size: 12px;
+    width: 50%;
+    border-radius: 10px;
+}
+.btn-outline-c5:hover{
+    background-color: var(--color-c5);
+    transition: .3s;
+    border-radius: 10px;
+}
+
+.btn-outline-c6{
+    border: 1.5px solid var(--color-c6) !important;
+    background: transparent !important;
+    font-size: 12px;
+    width: 50%;
+    border-radius: 10px;
+}
+.btn-outline-c6:hover{
+    background-color: var(--color-c6);
+    transition: .3s;
+    border-radius: 10px;
+}
+
+.btn-outline-c7{
+    border: 1.5px solid var(--color-c7) !important;
+    background: transparent !important;
+    font-size: 12px;
+    width: 50%;
+    border-radius: 10px;
+}
+.btn-outline-c7:hover{
+    background-color: var(--color-c7);
+    transition: .3s;
+    border-radius: 10px;
+}
+
+.btn-outline-c8{
+    border: 1.5px solid var(--color-c8) !important;
+    background: transparent !important;
+    font-size: 12px;
+    width: 50%;
+    border-radius: 10px;
+}
+.btn-outline-c8:hover{
+    background-color: var(--color-c8);
+    transition: .3s;
+    border-radius: 10px;
+}
+
+.text-c1{
+    color: var(--color-c1);
+}
+.text-c2{
+    color: var(--color-c2);
+}
+.text-c3{
+    color: var(--color-c3);
+}
+.text-c4{
+    color: var(--color-c4);
+}
+.text-c5{
+    color: var(--color-c5);
+}
+.text-c6{
+    color: var(--color-c6);
+}
+.text-c7{
+    color: var(--color-c7);
+}
+.text-c8{
+    color: var(--color-c8);
+}
+
+.notif-verifyEmail {
+    display: flex;
+    justify-content: center; /* Untuk perataan horizontal */
+    align-items: center;     /* Untuk perataan vertikal */
+    height: 100vh;           /* Mengisi tinggi viewport untuk vertikal center */
+}
+
+#resendButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

@@ -17,35 +17,18 @@
           <img src="{{ asset('assets/registration/img/loading/sepatu3.png') }}" alt="Loading" class="shoe">
         </div>
     </div>
-    <div class="container-fluid funrun-registration">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-12 mb-3">
-                    <h3 class="text-center fw-bold mt-5 mb-3">Pendaftaran Event FunRun Rotary <br> Purwokerto 2024</h3>
-                    <div class="row col-12 col-md-12 mx-auto">
-                        <div class="card p-3 mb-3 gradient-background kaca">
-                            <div class="card-header" style="background: transparent; border: none; z-index: 2">
-                                <h3 class="text-dark">Registration</h3>
-                                <span class="border-bottom border-dark border-3 rounded-2" style="width: 120px"></span>
-                            </div>
-                            <div class="card-body" style="z-index: 2">
-                                <div class="row col-12 col-md-12 mx-auto">
-                                    <img src="{{ asset('assets/registration/img/register-success.png') }}" class="mx-auto" style="width: 300px" alt="">
-                                    <h3 class="fw-bold text-center">Pembayaran Kamu Berhasil!!</h3>
-                                    <div class="col-12 col-md-12">
-                                        <div class="text-center mb-3">
-                                            <span>Terima kasih atas pembayaran Anda Kita tunggu di FunRun Rotary Purwokerto</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-12">
-                                        <div class="text-center mb-3">
-                                            <a href="{{ route('profile') }}" class="btn btn-submit">Lihat Profile Kamu</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+    <div class="container d-flex justify-content-center align-items-center notif-pembayaran">
+        <div class="box mt-3 p-3">
+            <div class="row mx-auto">
+                <h3 class="fw-bold text-c1 text-center mb-3">PEMBAYARAN ANDA BERHASIL</h3>
+
+                <img src="{{ asset('assets/registration/img/register-success.png') }}" class="mx-auto mb-3" style="width: 500px" alt="">
+
+                <p class="text-center">pembayaran anda <b class="text-c1">telah berhasil dan sukses</b>, untuk melihat nomor peserta dan riwayat transaksi klik tombol dibawah</p>
+
+                <div class="row mx-auto">
+                    <a href="{{ route('profile') }}" class="btn btn-c1 text-white fw-bold" style="font-size: 15px">Buka Profil anda</a>
                 </div>
             </div>
         </div>

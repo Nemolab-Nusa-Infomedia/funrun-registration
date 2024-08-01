@@ -6,22 +6,219 @@
     <title>Form FunRun</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('assets/registration/css/form/main.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/loading/css/main.css') }}">
+
+    <script src="https://kit.fontawesome.com/0a267e6f70.js" crossorigin="anonymous"></script>
 </head>
   <body>
-    {{-- <div id="loading-container">
+    <div id="loading-container">
         <div class="loader">
           <img src="{{ asset('assets/registration/img/loading/sepatu1.png') }}" alt="Loading" class="shoe">
           <img src="{{ asset('assets/registration/img/loading/sepatu2.png') }}" alt="Loading" class="shoe">
           <img src="{{ asset('assets/registration/img/loading/sepatu3.png') }}" alt="Loading" class="shoe">
         </div>
-    </div> --}}
+    </div>
 
     <div class="container-fluid">
-        <div class="form-registration box mt-3">
-            .d-flex
+        <div class="form-registration box mt-3 p-3">
+            <div class="d-flex justify-content center mt-3">
+                <div>
+                    <a href="{{ route('registration') }}" class="text-dark fs-1"><i class="fa-solid fa-reply"></i></a>
+                </div>
+                <div class="mx-auto">
+                    <div class="text-center">
+                        <h3>FORMULIR REGISTRASI</h3>
+                        <p>harap isi formulir dengan benar dan sesuai dengan data diri</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form">
+                <form action="{{ route('register') }}" method="post">
+                    @csrf
+                    <div class="row col-12 col-md-12 mx-auto">
+                        <span class="text-secondary fw-bold border-bottom border-dark mb-3">Data diri</span>
+                        <div class="col-12 col-md-4">
+                            <div class="mb-3">
+                                <label for="" class="form-label fw-bold">Nama Lengkap</label>
+                                <input type="text" class="form-control" name="name" placeholder="Nama lengkap" aria-label="">
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="mb-3">
+                                <label for="" class="form-label">Jenis Kelamin</label>
+                                <select id="inputState" class="form-select" name="gender">
+                                    <option selected>--- Pilih jenis kelamin ---</option>
+                                    <option value="Laki-laki">Laki-laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="mb-3">
+                                <label for="" class="form-label">Usia</label>
+                                <input type="text" class="form-control" name="age" placeholder="Usia">
+                            </div>
+                        </div>
+                        <div class="col-12" id="komunitasDiv">
+                            <div class="mb-3">
+                                <label for="komunitas" class="form-label">Komunitas / Individu</label>
+                                <select id="komunitas" name="community" class="form-control" onchange="toggleNamaKomunitas()">
+                                    <option selected>Pilih</option>
+                                    <option value="Komunitas">Komunitas</option>
+                                    <option value="Individu">Individu</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6" id="namaKomunitasContainer" style="display: none;">
+                            <div class="mb-3">
+                                <label for="namaKomunitas">Nama Komunitas</label>
+                                <input type="text" id="namaKomunitas" name="name_community" class="form-control mt-2" placeholder="nama komunitas">
+                            </div>
+                        </div>
+
+                        <span class="text-secondary fw-bold border-bottom border-dark mb-3">Domisili</span>
+                        <div class="col-12 col-md-3">
+                            <div class="mb-3">
+                                <label for="inputProv" class="form-label">Provinsi</label>
+                                <select id="inputProv" class="form-select" name="domisili">
+                                    <option selected>--- Pilih Provinsi ---</option>
+                                    @foreach ($provinces as $provinsi)
+                                        <option value="{{ $provinsi->id }}">{{ $provinsi->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="mb-3">
+                                <label for="inputKab" class="form-label">Kabupaten</label>
+                                <select id="inputKab" class="form-select" name="kabupaten">
+                                    <option selected>--- Pilih Kabupaten ---</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="mb-3">
+                                <label for="inputKecamatan" class="form-label">Kecamatan</label>
+                                <select id="inputKecamatan" class="form-select" name="kecamatan">
+                                    <option selected>--- Pilih Kecamatan ---</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="mb-3">
+                                <label for="inputDesa" class="form-label">Desa</label>
+                                <select id="inputDesa" class="form-select" name="desa">
+                                    <option selected>--- Pilih Desa ---</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <span class="text-secondary fw-bold border-bottom border-dark mb-3">Informasi Pribadi</span>
+                        <div class="col-12 col-md-3">
+                            <div class="mb-3">
+                                <label for="" class="form-label">Nomor Handphone</label>
+                                <input type="text" class="form-control" name="phone" placeholder="masukan nomor handphone">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="mb-3">
+                                <label for="" class="form-label">Size Jersey</label>
+                                <select id="inputState" class="form-select" name="size">
+                                    <option selected>Pilih size jersey</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
+                                    <option value="XXXL">XXXL</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="mb-3">
+                                <label for="" class="form-label">Golongan Darah</label>
+                                <select id="" class="form-select" name="goldar">
+                                    <option selected>Pilih golongan darah</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="AB-">AB-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="mb-3">
+                                <label for="" class="form-label">Riwayat Penyakit</label>
+                                <input type="text" class="form-control" name="r_penyakit" placeholder="riwayat penyakit">
+                            </div>
+                        </div>
+
+                        <span class="text-secondary fw-bold border-bottom border-dark mb-3">Kontak Darurat</span>
+                        <div class="col-12 col-md-4">
+                            <div class="mb-3">
+                                <label for="" class="form-label">Nama Kontak darurat</label>
+                                <input type="text" class="form-control" name="contant_urgent" placeholder="nama kontak darurat">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="mb-3">
+                                <label for="" class="form-label">Nomor Kontak Darurat</label>
+                                <input type="text" class="form-control" name="phone_urgent" placeholder="nomor kontak darurat">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="mb-3">
+                                <label for="" class="form-label">Hubungan Dengan Kontak Darurat</label>
+                                <input type="text" class="form-control" name="relation_urgent" placeholder="hubungan dengan kontak darurat">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-12">
+                            <div class="mb-3">
+                                <label for="payment_type" class="form-label">Pilih Metode Pembayaran</label>
+                                <select class="form-select" id="payment_type" name="payment_type" style="display: none;">
+                                    <option value="" selected>--- Pilih Pembayaran ---</option>
+                                    <option value="gopay" data-img-src="{{ asset('assets/registration/img/metode-pembayaran/gopay.png') }}">GoPay</option>
+                                    <option value="shopeepay" data-img-src="{{ asset('assets/registration/img/metode-pembayaran/shopeepay.jpg') }}">ShopeePay</option>
+                                    <option value="other_qris" data-img-src="{{ asset('assets/registration/img/metode-pembayaran/qriss.jpg') }}">Qris (QRis, Dana, OVO, LinkAja)</option>
+                                    <option value="bank_merchant" data-img-src="{{ asset('assets/registration/img/metode-pembayaran/bank.png') }}">Bank Merchant</option>
+                                    <option value="credit_card" data-img-src="{{ asset('assets/registration/img/metode-pembayaran/kartu kredit.png') }}">Kartu Kredit</option>
+                                </select>
+                                <div class="custom-select-container" id="custom-select-container"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 text-end">
+                            <a href="" class="btn btn-c6 rounded-5 text-white fw-bold border-1 border">Kembali</a>
+                            <a href="" class="btn btn-c1 rounded-5 text-white fw-bold border-1 border"  data-bs-toggle="modal" data-bs-target="#daftar">Daftar</a>
+                        </div>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="daftar" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Anda akan melalukan pembayaran</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <span>Apakah anda setuju untuk melakukan pembayaran ?</span>
+                                    <span>click tombol bayar untuk melanjutkan pendaftaran</span>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-dark rounded-5 text-dark fw-bold border-1 border" data-bs-dismiss="modal" aria-label="Close">Batal</button>
+                                    <button type="submit" class="btn btn-submit rounded-5 text-dark fw-bold border-1 border">Bayar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of Modal -->
+                </form>
+            </div>
         </div>
     </div>
 

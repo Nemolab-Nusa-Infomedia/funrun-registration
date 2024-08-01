@@ -24,6 +24,7 @@ html, body {
     font-family: 'Roboto', sans-serif;
     font-size: 12px;
     background-color: var(--color-bg);
+    padding: 5px 10px 0 10px;
 }
 
 .box{
@@ -223,15 +224,8 @@ h2, h3 {
 }
 
 @media (max-width: 768px) {
-    .bg-auth .bg-image {
-        width: 100% !important;
-    }
-
-    .login-form-container {
-        position: relative;
-        top: -10px;
-        border-radius: 0 0 15px 15px;
-        align-items: normal;
+    body{
+        padding: 5px 1px 0 1px;
     }
 }
 

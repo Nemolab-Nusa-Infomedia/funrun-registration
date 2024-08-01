@@ -68,7 +68,7 @@
                             </tr>
                             <tr>
                                 <td>Domisili</td>
-                                <td>: {{ $namekec.', '.$namekab }}</td>
+                                <td>: {{ Auth::user()->kecamatan. ', '. Auth::user()->kabupaten }}</td>
                             </tr>
                             <tr>
                                 <td>Size Jersey</td>

@@ -11,6 +11,7 @@ use App\Models\Transaksi;
 use Midtrans\Transaction;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -57,7 +58,6 @@ class RegistrationController extends Controller
         $adminFee = $this->getAdminFee($paymentType);
         $cekParticipant = User::orderBy('participant_number', 'desc')->first();
         $ticketPrice = 175000;
-
         if ($cekParticipant && $cekParticipant->participant_number > 2) {
             $ticketPrice = 200000;
         }
@@ -115,41 +115,55 @@ class RegistrationController extends Controller
 
     // Payment handler
     public function paymentHandler(Request $request){
-        Config::$serverKey = env('MIDTRANS_SERVER_KEY');
-        Config::$isProduction = false;
-        Config::$isSanitized = true;
-        Config::$is3ds = true;
-        $hashed = hash("sha512", $request->order_id.$request->status_code.$request->gross_amount.env('MIDTRANS_SERVER_KEY'));
-        if($hashed == $request->signature_key){
+    Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+    Config::$isProduction = false;
+    Config::$isSanitized = true;
+    Config::$is3ds = true;
+    $hashed = hash("sha512", $request->order_id.$request->status_code.$request->gross_amount.env('MIDTRANS_SERVER_KEY'));
+    
+    if($hashed == $request->signature_key){
         if ($request->transaction_status == 'settlement' || $request->transaction_status == 'capture') {
-                $cekParticipant = User::orderBy('participant_number', 'desc')->first();
+            
+            DB::transaction(function () use ($request) {
+                $cekParticipant = User::lockForUpdate()->orderBy('participant_number', 'desc')->first();
+                
                 if($cekParticipant){
                     $lastNumber = intval($cekParticipant->participant_number);
                     $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
                 } else {
                     $newNumber = '0001';
                 }
+
                 $user = User::where('kode_pay', $request->order_id)->first();
                 $user->update([
-                     'participant_number' => $newNumber,
+                    'participant_number' => $newNumber,
                     'status'=> 'settlement',
                     'total' => $request->gross_amount,
                     'waktu_pembayaran' => $request->settlement_time
                 ]);
+
                 // Kirim email ke user
                 $qrCode = QrCode::format('png')->size(300)->generate($user->tokens_account);
                 $qrCodePath = public_path('qrcodes/' . $user->id . '.png');
                 file_put_contents($qrCodePath, $qrCode);
+
                 // Send the email with the QR code attachment
                 Mail::send('admin.registration.notification-registation-peserta.email.index', ['user' => $user], function ($message) use ($user, $qrCodePath) {
                     $message->to($user->email);
                     $message->subject('Your Registration QR Code');
+                    $message->attach($qrCodePath, [
+                        'as' => 'qrcode.png',
+                        'mime' => 'image/png',
+                    ]);
+                });
             });
+            
         } else if ($request->transaction_status == 'cancel' || $request->transaction_status == 'deny' || $request->transaction_status == 'expire') {
             return "Pembayaran Gagal !";
         }
-        }
     }
+}
+
 
      private function getAdminFee($paymentType)
     {
@@ -273,7 +287,7 @@ class RegistrationController extends Controller
         $newTransaction = Transaksi::create([
             'user_id' => $user->id,
             'order_id' => $newOrderId,
-            'amount' => 153000.00,
+            'amount' => $transaction->amount,
             'status' => 'pending',
             'payment_type' => $transaction->payment_type,
             // Tambahkan data lain yang diperlukan
@@ -283,7 +297,7 @@ class RegistrationController extends Controller
         $params = array(
             'transaction_details' => array(
                 'order_id' => $newOrderId,
-                'gross_amount' => 153000.00, // Pastikan ini sesuai dengan kebutuhan Anda
+                'gross_amount' => $transaction->amount, // Pastikan ini sesuai dengan kebutuhan Anda
             ),
             'customer_details' => array(
                 'first_name' => $user->name,

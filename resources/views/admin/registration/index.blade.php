@@ -292,7 +292,7 @@
                         dataType: 'json',
                         success: function(data) {
                             $('#inputKab').empty();
-                            $('#inputKab').append('<option selected>Pilih kabupaten</option>');
+                            $('#inputKab').append('<option selected>Pilih Kabupaten</option>');
                             $.each(data, function(key, value) {
                                 $('#inputKab').append('<option value="' + value.id + '">' + value.name + '</option>');
                             });
@@ -300,7 +300,7 @@
                     });
                 } else {
                     $('#inputKab').empty();
-                    $('#inputKab').append('<option selected>Pilih kabupaten</option>');
+                    $('#inputKab').append('<option selected>Pilih Kabupaten</option>');
                 }
             });
         });
@@ -316,7 +316,7 @@
                         dataType: 'json',
                         success: function(data) {
                             $('#inputKecamatan').empty();
-                            $('#inputKecamatan').append('<option selected>Pilih kecamatan</option>');
+                            $('#inputKecamatan').append('<option selected>Pilih Kecamatan</option>');
                             $.each(data, function(key, value) {
                                 $('#inputKecamatan').append('<option value="' + value.id + '">' + value.name + '</option>');
                             });
@@ -324,7 +324,7 @@
                     });
                 } else {
                     $('#inputKecamatan').empty();
-                    $('#inputKecamatan').append('<option selected>Pilih kecamatan</option>');
+                    $('#inputKecamatan').append('<option selected>Pilih Kecamatan</option>');
                 }
             });
         });

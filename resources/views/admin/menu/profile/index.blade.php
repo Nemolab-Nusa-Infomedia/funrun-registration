@@ -39,6 +39,7 @@
                             <span style="font-size: 18px">{{ $namekab }}</span>
                         </div>
                     </div>
+
                     <button id="toggleButton" class="btn btn-secondary mt-3" onclick="toggleDetails()">Lihat Detail</button>
                     @if(Auth::user()->status == 'pending')
                         <div class="alert alert-warning">
@@ -99,7 +100,7 @@
                             </tr>
                             <tr>
                                 <td>Status Pembayaran</td>
-                                <td>: 
+                                <td>:
                                     @if(Auth::user()->status == 'settlement')
                                     <span class="btn btn-success"> Lunas</span>
                                     @elseif(Auth::user()->status == 'pending')

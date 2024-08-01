@@ -1,6 +1,5 @@
 <?php
 
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\AdminController;
@@ -21,7 +20,6 @@ Route::post('/check', [RegistrationController::class, 'checking'])->name('check'
 Route::get('/login-admin', [AdminController::class, 'adminLogin'])->name('admin-login');
 Route::get('/logout-admin', [AdminController::class, 'adminLogout'])->name('admin-logout');
 Route::post('/cek-admin', [AdminController::class, 'adminCek'])->name('cek-admin');
-Route::get('/form', [RegistrationController::class, 'indexForm'])->name('form');
 // ===== End Auth Web ===== //
 
 
@@ -51,8 +49,8 @@ Route::middleware(['adminAccess'])->group(function () {
 // ===== Peserta =====
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/form', [RegistrationController::class, 'indexForm'])->name('form');
     Route::get('/profile', [ProfileController::class, 'indexProfile'])->name('profile');
-    // Route::get('/form', [RegistrationController::class, 'indexForm'])->name('form');
     // Logout Peserta
     Route::get('/logout', [RegistrationController::class, 'logout'])->name('logout');
     Route::post('/create-account', [RegistrationController::class, 'register'])->name('register');
@@ -77,9 +75,6 @@ Route::get('/email/verify', function () {
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
-    $user = $request->user();
-    $user->email_verified_at = Carbon::now('Asia/Jakarta');
-    $user->save();
     return redirect('/profile');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 

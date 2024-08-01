@@ -12,7 +12,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 // ===== Auth Web ===== //
 Route::get('/', function () {
-    return view('admin.auth.login');
+    return view('admin.auth.registration');
 })->name('login');
 Route::post('/validation-email', [RegistrationController::class, 'emailValidation'])->name('email-validation');
 Route::post('/check', [RegistrationController::class, 'checking'])->name('check');

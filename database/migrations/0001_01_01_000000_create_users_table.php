@@ -40,7 +40,7 @@ return new class extends Migration
             $table->enum('status', ['settlement','pending','failed','expired'])->default('pending');
             $table->timestamp('verification_admin', precision: 0)->nullable();
             $table->timestamp('waktu_pembayaran')->nullable();
-            $table->string('total')->nullable();
+            $table->decimal('total', 12, 2)->nullable();
             $table->string('by_admin')->nullable();
             $table->timestamps();
         });

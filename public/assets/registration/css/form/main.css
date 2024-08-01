@@ -22,9 +22,8 @@
 html, body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
-    font-size: 12px;
+    font-size: 15px;
     background-color: var(--color-bg);
-    padding: 5px 10px 0 10px;
 }
 
 .box{
@@ -35,6 +34,10 @@ html, body {
         0 32px 64px rgba(0, 0, 0, 0.05);/* Layer keempat, shadow ekstra besar */
     background-color: #fff; /* Agar shadow terlihat jelas */
     border-radius: 8px;     /* Opsional: Sudut yang membulat untuk tampilan lebih lembut */
+}
+
+.form-registration{
+    padding: 5px 10px 0 10px;
 }
 
 h2, h3 {
@@ -221,12 +224,6 @@ h2, h3 {
 
 .bg-auth .bg-image {
     width: 98%;
-}
-
-@media (max-width: 768px) {
-    body{
-        padding: 5px 1px 0 1px;
-    }
 }
 
 

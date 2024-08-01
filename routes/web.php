@@ -20,6 +20,7 @@ Route::post('/check', [RegistrationController::class, 'checking'])->name('check'
 Route::get('/login-admin', [AdminController::class, 'adminLogin'])->name('admin-login');
 Route::get('/logout-admin', [AdminController::class, 'adminLogout'])->name('admin-logout');
 Route::post('/cek-admin', [AdminController::class, 'adminCek'])->name('cek-admin');
+    Route::get('/form', [RegistrationController::class, 'indexForm'])->name('form');
 // ===== End Auth Web ===== //
 
 
@@ -50,7 +51,7 @@ Route::middleware(['adminAccess'])->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'indexProfile'])->name('profile');
-    Route::get('/form', [RegistrationController::class, 'indexForm'])->name('form');
+    // Route::get('/form', [RegistrationController::class, 'indexForm'])->name('form');
     // Logout Peserta
     Route::get('/logout', [RegistrationController::class, 'logout'])->name('logout');
     Route::post('/create-account', [RegistrationController::class, 'register'])->name('register');

@@ -18,12 +18,11 @@
           <img src="{{ asset('assets/registration/img/loading/sepatu3.png') }}" alt="Loading" class="shoe">
         </div>
     </div>
-
-    <div class="container-fluid">
-        <div class="form-registration box mt-3 p-3">
+    <div class="container">
+        <div class="form-registration box p-3">
             <div class="d-flex justify-content center mt-3">
                 <div>
-                    <a href="{{ route('registration') }}" class="text-dark fs-1"><i class="fa-solid fa-reply"></i></a>
+                    <a href="{{ route('profile') }}" class="text-dark fs-1"><i class="fa-solid fa-reply"></i></a>
                 </div>
                 <div class="mx-auto">
                     <div class="text-center">
@@ -37,7 +36,7 @@
                 <form action="{{ route('register') }}" method="post">
                     @csrf
                     <div class="row col-12 col-md-12 mx-auto">
-                        <span class="text-secondary fw-bold border-bottom border-dark mb-3">Data diri</span>
+                        <span class="text-secondary fw-bold mb-3">Data diri</span>
                         <div class="col-12 col-md-4">
                             <div class="mb-3">
                                 <label for="" class="form-label fw-bold">Nama Lengkap</label>
@@ -77,7 +76,7 @@
                             </div>
                         </div>
 
-                        <span class="text-secondary fw-bold border-bottom border-dark mb-3">Domisili</span>
+                        <span class="text-secondary fw-bold mb-3">Domisili</span>
                         <div class="col-12 col-md-3">
                             <div class="mb-3">
                                 <label for="inputProv" class="form-label">Provinsi</label>
@@ -114,7 +113,7 @@
                             </div>
                         </div>
 
-                        <span class="text-secondary fw-bold border-bottom border-dark mb-3">Informasi Pribadi</span>
+                        <span class="text-secondary fw-bold mb-3">Informasi Pribadi</span>
                         <div class="col-12 col-md-3">
                             <div class="mb-3">
                                 <label for="" class="form-label">Nomor Handphone</label>
@@ -158,7 +157,7 @@
                             </div>
                         </div>
 
-                        <span class="text-secondary fw-bold border-bottom border-dark mb-3">Kontak Darurat</span>
+                        <span class="text-secondary fw-bold mb-3">Kontak Darurat</span>
                         <div class="col-12 col-md-4">
                             <div class="mb-3">
                                 <label for="" class="form-label">Nama Kontak darurat</label>
@@ -177,6 +176,8 @@
                                 <input type="text" class="form-control" name="relation_urgent" placeholder="hubungan dengan kontak darurat">
                             </div>
                         </div>
+
+                        <span class="text-secondary fw-bold mb-3 mt-3">Transaksi Pembayaran</span>
                         <div class="col-12 col-md-12">
                             <div class="mb-3">
                                 <label for="payment_type" class="form-label">Pilih Metode Pembayaran</label>
@@ -192,9 +193,9 @@
                             </div>
                         </div>
 
-                        <div class="mb-3 text-end">
-                            <a href="" class="btn btn-c6 rounded-5 text-white fw-bold border-1 border">Kembali</a>
-                            <a href="" class="btn btn-c1 rounded-5 text-white fw-bold border-1 border"  data-bs-toggle="modal" data-bs-target="#daftar">Daftar</a>
+                        <div class="mb-3 mt-3 text-end">
+                            <a href="{{ route('profile') }}" class="btn btn-c6 rounded-5 text-white fw-bold border-1 border">Kembali</a>
+                            <button type="button" class="btn btn-c1 rounded-5 text-white fw-bold border-1 border"  data-bs-toggle="modal" data-bs-target="#daftar">Daftar</button>
                         </div>
                     </div>
                     <!-- Modal -->
@@ -287,12 +288,12 @@
                 var provId = $(this).val();
                 if (provId) {
                     $.ajax({
-                        asset: '/dapatkan/kabupaten/' + provId,
+                        url: '/dapatkan/kabupaten/' + provId,
                         type: 'GET',
                         dataType: 'json',
                         success: function(data) {
                             $('#inputKab').empty();
-                            $('#inputKab').append('<option selected>Pilih Kabupaten</option>');
+                            $('#inputKab').append('<option selected>--- Pilih Kabupaten ---</option>');
                             $.each(data, function(key, value) {
                                 $('#inputKab').append('<option value="' + value.id + '">' + value.name + '</option>');
                             });
@@ -300,7 +301,7 @@
                     });
                 } else {
                     $('#inputKab').empty();
-                    $('#inputKab').append('<option selected>Pilih Kabupaten</option>');
+                    $('#inputKab').append('<option selected>--- Pilih Kabupaten ---</option>');
                 }
             });
         });
@@ -311,12 +312,12 @@
                 var kecId = $(this).val();
                 if (kecId) {
                     $.ajax({
-                        asset: '/dapatkan/kecamatan/' + kecId,
+                        url: '/dapatkan/kecamatan/' + kecId,
                         type: 'GET',
                         dataType: 'json',
                         success: function(data) {
                             $('#inputKecamatan').empty();
-                            $('#inputKecamatan').append('<option selected>Pilih Kecamatan</option>');
+                            $('#inputKecamatan').append('<option selected>--- Pilih Kecamatan ---</option>');
                             $.each(data, function(key, value) {
                                 $('#inputKecamatan').append('<option value="' + value.id + '">' + value.name + '</option>');
                             });
@@ -324,7 +325,7 @@
                     });
                 } else {
                     $('#inputKecamatan').empty();
-                    $('#inputKecamatan').append('<option selected>Pilih Kecamatan</option>');
+                    $('#inputKecamatan').append('<option selected>--- Pilih Kecamatan ---</option>');
                 }
             });
         });
@@ -335,12 +336,12 @@
                 var desaId = $(this).val();
                 if (desaId) {
                     $.ajax({
-                        asset: '/dapatkan/desa/' + desaId,
+                        url: '/dapatkan/desa/' + desaId,
                         type: 'GET',
                         dataType: 'json',
                         success: function(data) {
                             $('#inputDesa').empty();
-                            $('#inputDesa').append('<option selected>Pilih Desa</option>');
+                            $('#inputDesa').append('<option selected>--- Pilih Desa ---</option>');
                             $.each(data, function(key, value) {
                                 $('#inputDesa').append('<option value="' + value.id + '">' + value.name + '</option>');
                             });
@@ -348,7 +349,7 @@
                     });
                 } else {
                     $('#inputDesa').empty();
-                    $('#inputDesa').append('<option selected>Pilih Desa</option>');
+                    $('#inputDesa').append('<option selected>--- Pilih Desa ---</option>');
                 }
             });
         });

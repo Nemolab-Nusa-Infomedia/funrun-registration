@@ -25,7 +25,7 @@ class RegistrationController extends Controller
         return view('admin.registration.index', compact('provinces'));
     }
 
-    // Create users and get snap token for payment 
+    // Create users and get snap token for payment
     public function register(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => 'required',
@@ -115,7 +115,7 @@ class RegistrationController extends Controller
             'r_penyakit' => $request->r_penyakit,
             'kode_pay' => $params['transaction_details']['order_id'],
         ]);
-       
+
         $snapToken = Snap::getSnapToken($params);
         return view('admin.registration.payment', ['snapToken' => $snapToken, 'transactionId' => $transaction->id]);
     }
@@ -126,7 +126,7 @@ class RegistrationController extends Controller
         Config::$isProduction = false;
         Config::$isSanitized = true;
         Config::$is3ds = true;
-        $hashed = hash("sha512", $request->order_id.$request->status_code.$request->gross_amount.env('MIDTRANS_SERVER_KEY')); 
+        $hashed = hash("sha512", $request->order_id.$request->status_code.$request->gross_amount.env('MIDTRANS_SERVER_KEY'));
         if($hashed == $request->signature_key){
         if ($request->transaction_status == 'settlement' || $request->transaction_status == 'capture') {
                 $cekParticipant = User::orderBy('participant_number', 'desc')->first();
@@ -205,7 +205,7 @@ class RegistrationController extends Controller
         $transactionId = $request->query('transaction_id');
         return view('admin.registration.notification-registation-peserta.pembayaranGagal', ['transactionId' => $transactionId]);
     }
-    
+
     public function scan(){
         return view('admin.registration.scan.index');
     }
@@ -215,7 +215,7 @@ class RegistrationController extends Controller
         $domilisi = Province::where('id');
         return view('admin.registration.scan.notificationScan', compact('user'));
     }
-    
+
     public function registrationEmail(){
         return view('admin.auth.register');
     }
@@ -239,6 +239,10 @@ class RegistrationController extends Controller
         event(new Registered($user));
         Auth::login($user);
         return redirect()->route('verification.notice');
+    }
+
+    public function login(){
+        return view('admin.auth.login');
     }
 
     public function checking(Request $request){

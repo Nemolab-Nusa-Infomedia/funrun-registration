@@ -16,10 +16,10 @@
 
             <div class="col-12 col-md-5 login-form-container box">
                 <div class="login-form">
-                    <h2 class="text-center fw-bold" style="font-size: 25px;">REGISTRASI</h2>
-                    <p class="text-center">jadilah bagian dari kami dengan cara mendaftar dibawah</p>
+                    <h2 class="text-center fw-bold" style="font-size: 25px;">Login</h2>
+                    <p class="text-center">Selamat datang kembali sobat FunRun Rotary</p>
                     <!-- form user -->
-                    <form action="{{ route('email-validation') }}" method="POST" class="mt-5">
+                    <form action="{{ route('check') }}" method="POST" class="mt-5">
                         @csrf
                         <div class="form-group text-center mb-5 border-bottom border-light-subtle">
                             <label for="email" class="mb-2 fw-bold">Masukkan Email</label>
@@ -29,12 +29,15 @@
                             <label for="password" class="mb-2 fw-bold">Buat Kata Sandi</label>
                             <input type="password" class="form-control" name="password" placeholder="buat kata sandi" required>
                         </div>
+                        <div class="form-group text-start mb-4">
+                            <span><a href="">Lupa Password?</a></span>
+                        </div>
                         <div class="d-flex justify-content-between gap-2">
                             <a href="#" class="btn btn-outline-c6 py-2">Kembali</a>
-                            <button type="submit" class="btn btn-c1 text-white py-2">Daftar Akun</button>
+                            <button type="submit" class="btn btn-c1 text-white py-2">Masuk</button>
                         </div>
                         <div class="text-center mt-4">
-                            <span class="text-c1 fw-bold"><a href="{{ route('login') }}" class="text-c2">masuk disini</a> jika sudah memiiki akun</span>
+                            <span class="text-c1 fw-bold">belum memiliki akun? <a href="{{ route('registration') }}" class="text-c2">klik disini</a> </span>
                         </div>
                     </form>
                 </div>

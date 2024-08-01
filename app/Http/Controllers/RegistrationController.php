@@ -56,16 +56,9 @@ class RegistrationController extends Controller
         $paymentType = $request->input('payment_type');
         $adminFee = $this->getAdminFee($paymentType);
         $cekParticipant = User::orderBy('participant_number', 'desc')->first();
-            if($cekParticipant){
-                $lastNumber = intval($cekParticipant->participant_number);
-                $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
-            } else {
-                $newNumber = '0001';
-        }
-        $cekParticipant = User::orderBy('participant_number', 'desc')->first();
         $ticketPrice = 175000;
 
-        if ($cekParticipant && $cekParticipant->participant_number >= 2) {
+        if ($cekParticipant && $cekParticipant->participant_number > 2) {
             $ticketPrice = 200000;
         }
         $grossAmount = $ticketPrice + $adminFee;
@@ -130,11 +123,11 @@ class RegistrationController extends Controller
         if($hashed == $request->signature_key){
         if ($request->transaction_status == 'settlement' || $request->transaction_status == 'capture') {
                 $cekParticipant = User::orderBy('participant_number', 'desc')->first();
-                    if($cekParticipant){
-                        $lastNumber = intval($cekParticipant->participant_number);
-                        $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
-                    } else {
-                        $newNumber = '0001';
+                if($cekParticipant){
+                    $lastNumber = intval($cekParticipant->participant_number);
+                    $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
+                } else {
+                    $newNumber = '0001';
                 }
                 $user = User::where('kode_pay', $request->order_id)->first();
                 $user->update([

@@ -76,6 +76,9 @@ Route::get('/email/verify', function () {
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
+    $user = $request->user();
+    $user->email_verified_at = Carbon::now('Asia/Jakarta');
+    $user->save();
     return redirect('/profile');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 

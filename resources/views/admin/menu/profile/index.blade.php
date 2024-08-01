@@ -36,7 +36,7 @@
                         <h1 style="border-bottom: 2px solid black; width: auto; font-size: 4.3rem" class="mx-auto">#{{ Auth::user()->participant_number }}</h1>
                         <div class="mt-4 row mx-auto">
                             <span style="font-size: 18px">{{ Auth::user()->name }}</span>
-                            <span style="font-size: 18px">{{ $namekab }}</span>
+                            <span style="font-size: 18px">{{ Auth::user()->kabupaten }}</span>
                         </div>
                     </div>
 
@@ -68,7 +68,7 @@
                             </tr>
                             <tr>
                                 <td>Domisili</td>
-                                <td>: {{ $namekec.', '.$namekab }}</td>
+                                <td>: {{ Auth::user()->kecamatan. ', '. Auth::user()->kabupaten }}</td>
                             </tr>
                             <tr>
                                 <td>Size Jersey</td>

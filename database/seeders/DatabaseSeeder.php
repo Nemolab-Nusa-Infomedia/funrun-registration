@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([IndoRegionSeeder::class, IndoRegionProvinceSeeder::class, IndoRegionRegencySeeder::class,   IndoRegionDistrictSeeder::class, IndoRegionVillageSeeder::class]);
+        // $this->call([IndoRegionSeeder::class, IndoRegionProvinceSeeder::class, IndoRegionRegencySeeder::class,   IndoRegionDistrictSeeder::class, IndoRegionVillageSeeder::class]);
         
         DB::table('admins')->insert([
             [

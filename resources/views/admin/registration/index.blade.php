@@ -6,12 +6,12 @@
     <title>Form FunRun</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('assets/registration/css/form/main.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/loading/css/main.css') }}">
-
-    <script src="https://kit.fontawesome.com/0a267e6f70.js" crossorigin="anonymous"></script>
 </head>
   <body>
-    <div id="loading-container">
+     <div id="loading-container">
         <div class="loader">
           <img src="{{ asset('assets/registration/img/loading/sepatu1.png') }}" alt="Loading" class="shoe">
           <img src="{{ asset('assets/registration/img/loading/sepatu2.png') }}" alt="Loading" class="shoe">
@@ -79,40 +79,28 @@
                         <span class="text-secondary fw-bold mb-3">Domisili</span>
                         <div class="col-12 col-md-3">
                             <div class="mb-3">
-                                <label for="inputProv" class="form-label">Provinsi</label>
-                                <select id="inputProv" class="form-select" name="domisili">
-                                    <option selected>--- Pilih Provinsi ---</option>
-                                    @foreach ($provinces as $provinsi)
-                                        <option value="{{ $provinsi->id }}">{{ $provinsi->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3">
-                            <div class="mb-3">
-                                <label for="inputKab" class="form-label">Kabupaten</label>
-                                <select id="inputKab" class="form-select" name="kabupaten">
-                                    <option selected>--- Pilih Kabupaten ---</option>
-                                </select>
+                                <label for="inputDesa" class="form-label">Desa</label>
+                                <input type="text" class="form-control" name="desa" id="inputDesa">
                             </div>
                         </div>
                         <div class="col-12 col-md-3">
                             <div class="mb-3">
                                 <label for="inputKecamatan" class="form-label">Kecamatan</label>
-                                <select id="inputKecamatan" class="form-select" name="kecamatan">
-                                    <option selected>--- Pilih Kecamatan ---</option>
-                                </select>
+                                <input type="text" class="form-control" name="kecamatan" id="inputKecamatan">
                             </div>
                         </div>
                         <div class="col-12 col-md-3">
                             <div class="mb-3">
-                                <label for="inputDesa" class="form-label">Desa</label>
-                                <select id="inputDesa" class="form-select" name="desa">
-                                    <option selected>--- Pilih Desa ---</option>
-                                </select>
+                                <label for="inputKab" class="form-label">Kabupaten</label>
+                                <input type="text" class="form-control" name="kabupaten" id="inputKab">
                             </div>
                         </div>
-
+                        <div class="col-12 col-md-3">
+                            <div class="mb-3">
+                                <label for="inputProv" class="form-label">Provinsi</label>
+                                <input type="text" class="form-control" name="domisili" id="inputProv">
+                            </div>
+                        </div>
                         <span class="text-secondary fw-bold mb-3">Informasi Pribadi</span>
                         <div class="col-12 col-md-3">
                             <div class="mb-3">
@@ -222,8 +210,9 @@
             </div>
         </div>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="{{ asset('assets/loading/js/main.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -282,16 +271,18 @@
     </script>
 
     {{-- api wilayah --}}
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $('#inputProv').change(function() {
                 var provId = $(this).val();
+                console.log(provId);
                 if (provId) {
                     $.ajax({
                         url: '/dapatkan/kabupaten/' + provId,
                         type: 'GET',
                         dataType: 'json',
                         success: function(data) {
+                            console.log(data);
                             $('#inputKab').empty();
                             $('#inputKab').append('<option selected>--- Pilih Kabupaten ---</option>');
                             $.each(data, function(key, value) {
@@ -305,8 +296,8 @@
                 }
             });
         });
-    </script>
-    <script>
+    </script> 
+     <script>
         $(document).ready(function() {
             $('#inputKab').change(function() {
                 var kecId = $(this).val();
@@ -350,6 +341,41 @@
                 } else {
                     $('#inputDesa').empty();
                     $('#inputDesa').append('<option selected>--- Pilih Desa ---</option>');
+                }
+            });
+        });
+    </script>--}}
+    <script>
+        $(function() {
+            $("#inputDesa").autocomplete({
+                source: function(request, response) {
+                    $.ajax({
+                        url: "https://base-wilayah.lumbungdata.id/api/get-desa",
+                        dataType: "json",
+                        data: {
+                            term: request.term
+                        },
+                        success: function(data) {
+                            var formattedData = data.map(function(item) {
+                                return {
+                                    label: item.value+" - " + item.kecamatan,
+                                    value: item.value,
+                                    kecamatan: item.kecamatan,
+                                    kabupaten: item.kabupaten,
+                                    provinsi: item.provinsi
+                                };
+                            });
+                            response(formattedData);
+                        }
+                    });
+                },
+                minLength: 1,
+                select: function(event, ui) {
+                    $('#inputDesa').val(ui.item.value);
+                    $('#inputKecamatan').val(ui.item.kecamatan);
+                    $('#inputKab').val(ui.item.kabupaten);
+                    $('#inputProv').val(ui.item.provinsi);
+                    return false;
                 }
             });
         });

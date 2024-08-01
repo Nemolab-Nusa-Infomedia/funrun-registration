@@ -55,8 +55,8 @@ Route::middleware(['adminAccess'])->group(function () {
 
 // ===== Peserta =====
 
+Route::get('/form', [RegistrationController::class, 'indexForm'])->name('form');
 Route::middleware(['auth'])->group(function () {
-    Route::get('/form', [RegistrationController::class, 'indexForm'])->name('form');
     Route::get('/profile', [ProfileController::class, 'indexProfile'])->name('profile');
     // Logout Peserta
     Route::get('/logout', [RegistrationController::class, 'logout'])->name('logout');

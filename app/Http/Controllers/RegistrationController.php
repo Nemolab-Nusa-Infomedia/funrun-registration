@@ -7,6 +7,8 @@ use App\Models\User;
 use Midtrans\Config;
 use App\GenerateRandom;
 use App\Models\Province;
+use App\Models\Transaksi;
+use Midtrans\Transaction;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -53,12 +55,34 @@ class RegistrationController extends Controller
         Config::$is3ds = true;
         $paymentType = $request->input('payment_type');
         $adminFee = $this->getAdminFee($paymentType);
-        $ticketPrice = 150000;
+        $cekParticipant = User::orderBy('participant_number', 'desc')->first();
+            if($cekParticipant){
+                $lastNumber = intval($cekParticipant->participant_number);
+                $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
+            } else {
+                $newNumber = '0001';
+        }
+        $cekParticipant = User::orderBy('participant_number', 'desc')->first();
+        $ticketPrice = 175000;
+
+        if ($cekParticipant && $cekParticipant->participant_number >= 2) {
+            $ticketPrice = 200000;
+        }
         $grossAmount = $ticketPrice + $adminFee;
+
+        $orderId = Str::uuid();
+
+        $transaction = Transaksi::create([
+            'order_id' => $orderId,
+            'user_id' => $id_user,
+            'amount' => $grossAmount,
+            'status' => 'pending',
+            'payment_type' => $paymentType,
+        ]);
 
         $params = array(
             'transaction_details' => array(
-                'order_id' => Str::uuid(),
+                'order_id' => $orderId,
                 'gross_amount' => $grossAmount,
             ),
             'customer_details' => array(
@@ -69,40 +93,6 @@ class RegistrationController extends Controller
         );
          $numberRand = new GenerateRandom();
         $tokenAcc = $numberRand->generateRandomString(10);
-        $cekParticipant = User::orderBy('participant_number', 'desc')->first();
-        if($cekParticipant){
-            $lastNumber = intval($cekParticipant->participant_number);
-            $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
-        } else {
-            $newNumber = '0001';
-        }
-
-         if ($request->name_commnunity) {
-            $user->update([
-            'name' => $request->name,
-            'gender' => $request->gender,
-            'domisili' => $request->domisili,
-            'kabupaten' => $request->kabupaten,
-            'kecamatan' => $request->kecamatan,
-            'desa' => $request->desa,
-            'phone' => $request->phone,
-            'size' => $request->size,
-            'tokens_account' => $tokenAcc,
-            'participant_number' => $newNumber,
-            'age' => $request->age,
-            'status' => 'pending',
-            'phone_urgent' => $request->phone_urgent,
-            'contant_urgent' => $request->contant_urgent,
-            'relation_urgent' => $request->relation_urgent,
-            'community' => $request->community,
-            'name_community' => $request->name_community,
-            'payment_type' => $request->payment_type,
-            'participant_number' => $newNumber,
-            'goldar' => $request->goldar,
-            'r_penyakit' => $request->r_penyakit,
-            'kode_pay' => $params['transaction_details']['order_id'],
-        ]);
-        }
         $user->update([
             'name' => $request->name,
             'gender' => $request->gender,
@@ -113,26 +103,24 @@ class RegistrationController extends Controller
             'phone' => $request->phone,
             'size' => $request->size,
             'tokens_account' => $tokenAcc,
-            'participant_number' => $newNumber,
             'age' => $request->age,
             'status' => 'pending',
             'phone_urgent' => $request->phone_urgent,
             'contant_urgent' => $request->contant_urgent,
             'relation_urgent' => $request->relation_urgent,
             'community' => $request->community,
+            'name_community' => $request->name_community,
             'payment_type' => $request->payment_type,
-            'participant_number' => $newNumber,
             'goldar' => $request->goldar,
             'r_penyakit' => $request->r_penyakit,
             'kode_pay' => $params['transaction_details']['order_id'],
         ]);
        
         $snapToken = Snap::getSnapToken($params);
-        return view('admin.registration.payment', ['snapToken' => $snapToken]);
+        return view('admin.registration.payment', ['snapToken' => $snapToken, 'transactionId' => $transaction->id]);
     }
 
     // Payment handler
-
     public function paymentHandler(Request $request){
         Config::$serverKey = env('MIDTRANS_SERVER_KEY');
         Config::$isProduction = false;
@@ -141,8 +129,16 @@ class RegistrationController extends Controller
         $hashed = hash("sha512", $request->order_id.$request->status_code.$request->gross_amount.env('MIDTRANS_SERVER_KEY')); 
         if($hashed == $request->signature_key){
         if ($request->transaction_status == 'settlement' || $request->transaction_status == 'capture') {
+                $cekParticipant = User::orderBy('participant_number', 'desc')->first();
+                    if($cekParticipant){
+                        $lastNumber = intval($cekParticipant->participant_number);
+                        $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
+                    } else {
+                        $newNumber = '0001';
+                }
                 $user = User::where('kode_pay', $request->order_id)->first();
                 $user->update([
+                     'participant_number' => $newNumber,
                     'status'=> 'settlement',
                     'total' => $request->gross_amount,
                     'waktu_pembayaran' => $request->settlement_time
@@ -204,8 +200,10 @@ class RegistrationController extends Controller
         return view('admin.registration.notification-registation-peserta.pembayaranBerhasil');
     }
 
-    public function pembayaranGagal(){
-        return view('admin.registration.notification-registation-peserta.pembayaranGagal');
+    public function pembayaranGagal(Request $request)
+    {
+        $transactionId = $request->query('transaction_id');
+        return view('admin.registration.notification-registation-peserta.pembayaranGagal', ['transactionId' => $transactionId]);
     }
     
     public function scan(){
@@ -223,13 +221,20 @@ class RegistrationController extends Controller
     }
 
     public function emailValidation(Request $request){
-        $validator = $request->validate([
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8'
+        ],
+        [
+            'email.unique' => 'Email sudah terdaftar silahkan login saja'
         ]);
+
+        if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+        }
         $user = User::create([
-            'email' => $validator['email'],
-            'password' => Hash::make($validator['password'])
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password'))
         ]);
         event(new Registered($user));
         Auth::login($user);
@@ -246,5 +251,58 @@ class RegistrationController extends Controller
     public function logout(){
         Auth::logout();
         return redirect()->route('login');
+    }
+
+
+    // PEMBAYARAN GAGAL
+    public function retryingPayment(Request $request){
+        $user = Auth::user();
+        Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+        Config::$isProduction = false;
+        Config::$isSanitized = true;
+        Config::$is3ds = true;
+
+        // Ambil transaksi pending yang terakhir dan hapus jika diperlukan
+        $transaction = Transaksi::where('user_id', $user->id)->where('status', 'pending')->first();
+        $datauser = User::find($user->id);
+
+        if (!$transaction) {
+            return redirect()->route('profile')->with('error', 'Tidak ada transaksi yang pending.');
+        }
+
+        // Buat order_id baru untuk transaksi baru
+        $newOrderId = Str::uuid(); // Atau metode lain untuk menghasilkan ID unik
+        // Buat transaksi baru dengan order_id baru
+        $newTransaction = Transaksi::create([
+            'user_id' => $user->id,
+            'order_id' => $newOrderId,
+            'amount' => 153000.00,
+            'status' => 'pending',
+            'payment_type' => $transaction->payment_type,
+            // Tambahkan data lain yang diperlukan
+        ]);
+        // Hapus transaksi lama jika perlu
+        $transaction->delete();
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $newOrderId,
+                'gross_amount' => 153000.00, // Pastikan ini sesuai dengan kebutuhan Anda
+            ),
+            'customer_details' => array(
+                'first_name' => $user->name,
+                'email' => $user->email,
+            ),
+            'enabled_payments' => $this->getEnabledPayments($newTransaction->payment_type), // atau metode pembayaran lainnya
+        );
+
+        // Perbarui kode_pay dengan order_id terbaru
+        $datauser->update([
+            'kode_pay' => $newOrderId,
+        ]);
+
+        // Dapatkan Snap Token
+        $snapToken = Snap::getSnapToken($params);
+
+        return view('admin.registration.payment', ['snapToken' => $snapToken, 'transactionId' => $newTransaction->id]);
     }
 }

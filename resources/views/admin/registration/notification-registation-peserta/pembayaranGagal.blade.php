@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="col-12 col-md-12">
                                         <div class="text-center mb-3">
-                                            <a href="" class="btn btn-submit">Ulangi Pembayaran</a>
+                                            <a href="{{ route('payment.retry', $transactionId) }}" class="btn btn-submit">Ulangi Pembayaran</a>
                                         </div>
                                     </div>
                                 </div>

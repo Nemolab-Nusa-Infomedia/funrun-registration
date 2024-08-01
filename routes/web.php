@@ -44,12 +44,12 @@ Route::middleware(['adminAccess'])->group(function () {
 });
 // ===== End Akses Admin ===== //
 
-Route::get('/profile', [ProfileController::class, 'indexProfile'])->name('profile');
 
 // ===== Peserta =====
-Route::get('/form', [RegistrationController::class, 'indexForm'])->name('form');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'indexProfile'])->name('profile');
+    Route::get('/form', [RegistrationController::class, 'indexForm'])->name('form');
     // Logout Peserta
     Route::get('/logout', [RegistrationController::class, 'logout'])->name('logout');
     Route::post('/create-account', [RegistrationController::class, 'register'])->name('register');
@@ -60,9 +60,9 @@ Route::middleware(['auth'])->group(function () {
     // Notification Pembayaran
     Route::get('/pembayaran-berhasil', [RegistrationController::class, 'pembayaranBerhasil'])->name('pembayaran-berhasil');
     Route::get('/pembayaran-gagal', [RegistrationController::class, 'pembayaranGagal'])->name('pembayaran-gagal');
+    Route::get('/payment/retry', [RegistrationController::class, 'retryingPayment'])->name('payment.retrying');
 
 });
-
 Route::get('/dapatkan/kabupaten/{provId}', [RegionController::class, 'getKabupaten']);
 Route::get('/dapatkan/kecamatan/{kecId}', [RegionController::class, 'getKecamatan']);
 Route::get('/dapatkan/desa/{desaId}', [RegionController::class, 'getDesa']);
@@ -74,7 +74,7 @@ Route::get('/email/verify', function () {
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
-    return redirect('/form');
+    return redirect('/profile');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 Route::post('/email/verification-notification', function (Request $request) {

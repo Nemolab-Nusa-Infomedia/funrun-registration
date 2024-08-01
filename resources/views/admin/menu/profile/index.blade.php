@@ -25,6 +25,13 @@
             <div class="col-12 col-md-12 mx-auto">
                 <div class="card p-3">
                     <div class="row text-center">
+                    @if(is_null(Auth::user()->name))
+                        <div class="alert alert-info">
+                            <p>Kamu belum isi formulir, isi dulu yuk !</p>
+                            <a href="{{ route('form') }}" class="btn btn-primary">Lanjutkan Ke Halaman Formulir</a>
+                        </div>
+                    @endif
+                    @if(Auth::user()->name)
                         <h4 class="mb-3">No Peserta:</h4>
                         <h1 style="border-bottom: 2px solid black; width: auto; font-size: 4.3rem" class="mx-auto">#{{ Auth::user()->participant_number }}</h1>
                         <div class="mt-4 row mx-auto">
@@ -33,7 +40,12 @@
                         </div>
                     </div>
                     <button id="toggleButton" class="btn btn-secondary mt-3" onclick="toggleDetails()">Lihat Detail</button>
-                    
+                    @if(Auth::user()->status == 'pending')
+                        <div class="alert alert-warning">
+                            <p>Status pembayaran Anda saat ini adalah <strong>Pending</strong>.</p>
+                            <a href="{{ route('payment.retrying') }}" class="btn btn-primary">Lanjutkan Pembayaran</a>
+                        </div>
+                    @endif
                     <div id="detailTable" class="table-responsive collapse">
                         <img class="d-block mx-auto mb-3 mt-2" src="{{ secure_asset('qrcodes/'.Auth::user()->id.'.png') }}" width="200" alt="" srcset="">
                         <table class="table">
@@ -97,6 +109,7 @@
                             </tr>
                         </table>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

@@ -16,6 +16,9 @@ class ProfileController extends Controller
     }
     
     public function indexProfile(){
+        if(Auth::check() && is_null(Auth::user()->name)){
+            return view('admin.menu.profile.index');
+        }
         if(Auth::check() && Auth::user()){
             $kabId = Auth::user()->kabupaten;
             $kecId = Auth::user()->kecamatan;

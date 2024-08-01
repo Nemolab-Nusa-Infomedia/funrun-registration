@@ -46,14 +46,24 @@
                                             <div class="col-12 col-md-12">
                                                 <div class="mb-3">
                                                     <label for="" class="form-label">Email</label>
-                                                    <input type="email" class="form-control" name="email" placeholder="masukan email anda">
+                                                    <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="masukan email anda">
+                                                     @error('email')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-12">
                                                 <div class="mb-3 position-relative">
                                                     <label for="password" class="form-label">Password</label>
-                                                    <input type="password" class="form-control" id="password" name="password" placeholder="masukan password">
+                                                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" placeholder="masukan password">
                                                     <i class="eye-icon ri-eye-line" id="togglePassword" onclick="togglePassword()"></i>
+                                                    @error('password')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="mb-3 text-center">

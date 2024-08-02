@@ -6,7 +6,6 @@ use Midtrans\Snap;
 use App\Models\User;
 use Midtrans\Config;
 use App\GenerateRandom;
-use App\Models\Province;
 use App\Models\Transaksi;
 use Midtrans\Transaction;
 use Illuminate\Support\Str;
@@ -22,8 +21,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 class RegistrationController extends Controller
 {
     public function indexForm(){
-        $provinces = Province::distinct()->get(['id', 'name']);
-        return view('admin.registration.index', compact('provinces'));
+        return view('admin.registration.index');
     }
 
     // Create users and get snap token for payment

@@ -35,7 +35,7 @@ return [
     |
     */
 
-   /* 'mailers' => [
+    'mailers' => [
 
         'smtp' => [
             'transport' => 'smtp',
@@ -45,7 +45,7 @@ return [
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
-            'timeout' => null,
+            'timeout' => 120,
             'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url(env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
         ],
 
@@ -95,18 +95,7 @@ return [
             ],
         ],
 
-    ], */
-    'mailers' => [
-        'mailgun' => [
-            'transport' => 'mailgun',
-        ],
     ],
-
-    'mailgun' => [
-        'domain' => env('MAILGUN_DOMAIN'),
-        'secret' => env('MAILGUN_SECRET'),
-    ],
-
 
     /*
     |--------------------------------------------------------------------------

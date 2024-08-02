@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\RegionController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
@@ -64,9 +63,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/payment/retry', [RegistrationController::class, 'retryingPayment'])->name('payment.retrying');
 
 });
-Route::get('/dapatkan/kabupaten/{provId}', [RegionController::class, 'getKabupaten']);
-Route::get('/dapatkan/kecamatan/{kecId}', [RegionController::class, 'getKecamatan']);
-Route::get('/dapatkan/desa/{desaId}', [RegionController::class, 'getDesa']);
 
 // ===== Email =====
 Route::get('/email/verify', function () {

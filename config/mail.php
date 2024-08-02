@@ -35,7 +35,7 @@ return [
     |
     */
 
-    'mailers' => [
+   /* 'mailers' => [
 
         'smtp' => [
             'transport' => 'smtp',
@@ -95,7 +95,18 @@ return [
             ],
         ],
 
+    ], */
+    'mailers' => [
+        'mailgun' => [
+            'transport' => 'mailgun',
+        ],
     ],
+
+    'mailgun' => [
+        'domain' => env('MAILGUN_DOMAIN'),
+        'secret' => env('MAILGUN_SECRET'),
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

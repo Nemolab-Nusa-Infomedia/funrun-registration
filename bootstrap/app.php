@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AdminAccess;
+use App\Http\Middleware\DisableCache;
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\SuperAdminAccess;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -17,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'adminAccess' => AdminAccess::class,
             'superAdminAccess' => SuperAdminAccess::class,
+            'disableCache' => DisableCache::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

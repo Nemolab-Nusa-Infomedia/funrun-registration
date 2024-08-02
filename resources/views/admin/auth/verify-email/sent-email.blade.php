@@ -5,19 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Email Confirmation</title>
     <style>
+        /* Basic Reset */
+        body, table, td, a {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            line-height: 100%;
+        }
+        /* Responsive Styles */
         @media only screen and (max-width: 600px) {
             .email-container {
                 width: 100% !important;
                 padding: 10px !important;
             }
             .btn {
-                font-size: 14px !important;
                 padding: 8px 16px !important;
+                font-size: 14px !important;
             }
         }
     </style>
 </head>
-<body style="font-family: Arial, sans-serif; background-color: #f2f2f2; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; height: 100vh;">
+<body style="font-family: Arial, sans-serif; background-color: #f2f2f2; margin: 0; padding: 0;">
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f2f2f2; padding: 20px;">
         <tr>
             <td align="center">

@@ -226,6 +226,22 @@ h2, h3 {
     width: 98%;
 }
 
+@media(max-width: 768px){
+    .icon-back{
+        position: absolute;
+        top: 20px;
+        left: 7.3rem;
+    }
+}
+
+@media(max-width: 512px){
+    .icon-back{
+        position: absolute;
+        top: 20px;
+        left: 1.5rem;
+    }
+}
+
 
 /* costum select image */
 .custom-select-container {

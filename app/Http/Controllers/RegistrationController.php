@@ -56,19 +56,13 @@ class RegistrationController extends Controller
         $adminFee = $this->getAdminFee($paymentType);
         $cekParticipant = User::orderBy('participant_number', 'desc')->first();
         $ticketPrice = 175000;
-        
-
-        if ($cekParticipant && $cekParticipant->participant_number >= 2) {
+        if ($cekParticipant && $cekParticipant->participant_number > 2) {
             $ticketPrice = 200000;
         }
-        if($cekParticipant){
-            $lastNumber = intval($cekParticipant->participant_number);
-            $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
-        } else {
-            $newNumber = '0001';
-        }
         $grossAmount = $ticketPrice + $adminFee;
+
         $orderId = Str::uuid();
+
         $transaction = Transaksi::create([
             'order_id' => $orderId,
             'user_id' => $id_user,
@@ -76,6 +70,7 @@ class RegistrationController extends Controller
             'status' => 'pending',
             'payment_type' => $paymentType,
         ]);
+
         $params = array(
             'transaction_details' => array(
                 'order_id' => $orderId,
@@ -87,7 +82,7 @@ class RegistrationController extends Controller
             ),
             'enabled_payments' => $this->getEnabledPayments($paymentType),
         );
-        $numberRand = new GenerateRandom();
+         $numberRand = new GenerateRandom();
         $tokenAcc = $numberRand->generateRandomString(10);
         $user->update([
             'name' => $request->name,
@@ -109,9 +104,9 @@ class RegistrationController extends Controller
             'payment_type' => $request->payment_type,
             'goldar' => $request->goldar,
             'r_penyakit' => $request->r_penyakit,
-            'participant_number' => $newNumber,
             'kode_pay' => $params['transaction_details']['order_id'],
         ]);
+
         $snapToken = Snap::getSnapToken($params);
         return view('admin.registration.payment', ['snapToken' => $snapToken, 'transactionId' => $transaction->id]);
     }
@@ -124,29 +119,37 @@ class RegistrationController extends Controller
         Config::$is3ds = true;
         $hashed = hash("sha512", $request->order_id.$request->status_code.$request->gross_amount.env('MIDTRANS_SERVER_KEY'));
         if($hashed == $request->signature_key){
-        if ($request->transaction_status == 'settlement' || $request->transaction_status == 'capture') {
-                $user = User::where('kode_pay', $request->order_id)->first();
-                $user->update([
-                    'status'=> 'settlement',
-                    'total' => $request->gross_amount,
-                    'waktu_pembayaran' => $request->settlement_time
-                ]);
-                // Kirim email ke user
-                $qrCode = QrCode::format('png')->size(300)->generate($user->tokens_account);
-                $qrCodePath = public_path('qrcodes/' . $user->id . '.png');
-                file_put_contents($qrCodePath, $qrCode);
-                // Send the email with the QR code attachment
-                Mail::send('admin.registration.notification-registation-peserta.email.index', ['user' => $user], function ($message) use ($user, $qrCodePath) {
-                    $message->to($user->email);
-                    $message->subject('Your Registration QR Code');
-            });
-        } else if ($request->transaction_status == 'cancel' || $request->transaction_status == 'deny' || $request->transaction_status == 'expire') {
-            return "Pembayaran Gagal !";
-        }
+            if ($request->transaction_status == 'settlement' || $request->transaction_status == 'capture') {
+                DB::transaction(function () use ($request) {
+                    $cekParticipant = User::orderBy('participant_number', 'desc')->lockForUpdate()->first();
+                    if ($cekParticipant) {
+                        $lastNumber = intval($cekParticipant->participant_number);
+                        $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
+                    } else {
+                        $newNumber = '0001';
+                    }
+                    $user = User::where('kode_pay', $request->order_id)->first();
+                    $user->update([
+                        'participant_number' => $newNumber,
+                        'status' => 'settlement',
+                        'total' => $request->gross_amount,
+                        'waktu_pembayaran' => $request->settlement_time
+                    ]);
+                    // Kirim email ke user
+                    $qrCode = QrCode::format('png')->size(300)->generate($user->tokens_account);
+                    $qrCodePath = public_path('qrcodes/' . $user->id . '.png');
+                    file_put_contents($qrCodePath, $qrCode);
+                    // Send the email with the QR code attachment
+                    Mail::send('admin.registration.notification-registation-peserta.email.index', ['user' => $user], function ($message) use ($user, $qrCodePath) {
+                        $message->to($user->email);
+                        $message->subject('Your Registration QR Code');
+                    });
+                });
+            } else if ($request->transaction_status == 'cancel' || $request->transaction_status == 'deny' || $request->transaction_status == 'expire') {
+                return "Pembayaran Gagal !";
+            }
         }
     }
-
-
      private function getAdminFee($paymentType){
         switch ($paymentType) {
             case 'gopay':

@@ -115,18 +115,14 @@ class RegistrationController extends Controller
 
     // Payment handler
     public function paymentHandler(Request $request){
-    Config::$serverKey = env('MIDTRANS_SERVER_KEY');
-    Config::$isProduction = false;
-    Config::$isSanitized = true;
-    Config::$is3ds = true;
-    $hashed = hash("sha512", $request->order_id.$request->status_code.$request->gross_amount.env('MIDTRANS_SERVER_KEY'));
-    
-    if($hashed == $request->signature_key){
+        Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+        Config::$isProduction = false;
+        Config::$isSanitized = true;
+        Config::$is3ds = true;
+        $hashed = hash("sha512", $request->order_id.$request->status_code.$request->gross_amount.env('MIDTRANS_SERVER_KEY'));
+        if($hashed == $request->signature_key){
         if ($request->transaction_status == 'settlement' || $request->transaction_status == 'capture') {
-            
-            DB::transaction(function () use ($request) {
-                $cekParticipant = User::lockForUpdate()->orderBy('participant_number', 'desc')->first();
-                
+                $cekParticipant = User::orderBy('participant_number', 'desc')->first();
                 if($cekParticipant){
                     $lastNumber = intval($cekParticipant->participant_number);
                     $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
@@ -141,28 +137,20 @@ class RegistrationController extends Controller
                     'total' => $request->gross_amount,
                     'waktu_pembayaran' => $request->settlement_time
                 ]);
-
                 // Kirim email ke user
                 $qrCode = QrCode::format('png')->size(300)->generate($user->tokens_account);
                 $qrCodePath = public_path('qrcodes/' . $user->id . '.png');
                 file_put_contents($qrCodePath, $qrCode);
-
                 // Send the email with the QR code attachment
                 Mail::send('admin.registration.notification-registation-peserta.email.index', ['user' => $user], function ($message) use ($user, $qrCodePath) {
                     $message->to($user->email);
                     $message->subject('Your Registration QR Code');
-                    $message->attach($qrCodePath, [
-                        'as' => 'qrcode.png',
-                        'mime' => 'image/png',
-                    ]);
-                });
             });
-            
         } else if ($request->transaction_status == 'cancel' || $request->transaction_status == 'deny' || $request->transaction_status == 'expire') {
             return "Pembayaran Gagal !";
         }
+        }
     }
-}
 
 
      private function getAdminFee($paymentType)

@@ -37,6 +37,7 @@
             justify-content: center;
             align-items: center;
             margin: 20px 0;
+            right: 50%
         }
         .footer {
             margin-top: 20px;
@@ -48,24 +49,24 @@
     <div class="container">
         <h1>{{ $user->name }}</h1>
         <p>
-            Anda telah berhasil mendaftar pada FunRun Rotary 2024 dengan pembayaran menggunakan Gopay. Terima kasih atas pembayaran Anda. Ini adalah konfirmasi Anda untuk FunRun Rotary Purwokerto 2024.
+            Anda telah berhasil mendaftar pada FunRun Rotary 2024 dengan pembayaran menggunakan {{ $user->payment_type }}. Terima kasih atas pembayaran Anda. Ini adalah konfirmasi Anda untuk FunRun Rotary Purwokerto 2024.
         </p>
         <p class="highlight">
-            Tunjukkan email ini pada saat registrasi ulang di event FunRun dan siapkan kartu Identitas (KTP/SIM/Paspor/KITAS) untuk pengambilan GoodieBag Anda
+            Tunjukkan email ini pada saat registrasi ulang di event FunRun dan siapkan kartu Identitas (KTP/KIA/PASSPOR) untuk pengambilan GoodieBag Anda
         </p>
         <div class="instructions">
-            <p><strong>Pengambilan GoodieBag:</strong> 1 hari sebelum acara</p>
-            <p><strong>Hari Acara:</strong> 25 Agustus 2024</p>
+            <p><strong>Pengambilan GoodieBag:</strong> 5 Oktober 2024</p>
+            <p><strong>Hari Acara:</strong> 6 Oktober 20244</p>
             <p><strong>Tempat:</strong> Alun-alun Purwokerto</p>
         </div>
         <div class="instructions">
             <h2>Registrasi Ulang acara</h2>
-            <p>1. Peserta FunRun melakukan registrasi ulang pada 1 hari sebelum acara</p>
+            <p>1. Peserta FunRun melakukan registrasi ulang pada 1 hari sebelum acara atau 5 Oktober 2024</p>
             <p>2. Peserta memperlihatkan email konfirmasi kepada panitia dengan menunjukan barcode yang di kirim ke email pendaftar</p>
             <p>3. Peserta FunRun dapat mengambil GoodieBag setelah berhasil melakukan verifikasi</p>
         </div>
         <h2 style="text-align: center">Nomor Peserta : {{ $user->participant_number }}</h2>
-        <div class="barcode" style="display: block; justify-content: center">
+        <div class="barcode">
             <img src="{{ $message->embed('qrcodes/'.$user->id.'.png') }}" width="250px" alt="Barcode">
         </div>
         <div class="footer">

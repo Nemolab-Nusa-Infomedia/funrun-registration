@@ -31,7 +31,7 @@ class AdminController extends Controller
                 'message' => "User sudah diverifikasi! \n Akun diverifikasi tanggal ". $user->verification_admin . "\n Diverifikasi oleh ". $user->by_admin,
             ], 404);
         }
-        
+
         return response()->json(['message' => 'User tidak ditemukan !'], 404);
     }
 
@@ -44,6 +44,10 @@ class AdminController extends Controller
             return redirect()->route('profile');
         }
         return back();
+    }
+
+    public function resetPassword(){
+        return view('admin.auth.resetPassword');
     }
 
     public function adminLogout()

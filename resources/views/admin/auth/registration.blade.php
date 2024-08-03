@@ -31,11 +31,15 @@
                     <!-- form user -->
                     <form action="{{ route('email-validation') }}" method="POST" class="mt-5">
                         @csrf
-                        <div class="form-group text-center mb-5 border-bottom border-light-subtle">
+                        <div class="form-group text-center mb-3 border-bottom border-light-subtle">
                             <label for="email" class="mb-2 fw-bold">Masukkan Email</label>
                             <input type="email" class="form-control" name="email" placeholder="masukkan email anda" required>
                         </div>
-                        <div class="form-group text-center mb-2 border-bottom border-light-subtle position-relative">
+                        <div class="form-group text-center mb-3 border-bottom border-light-subtle">
+                            <label for="nohp" class="mb-2 fw-bold">Masukkan Nomor Handphone</label>
+                            <input type="text" class="form-control" name="phone" placeholder="masukkan nomor handphone anda" required>
+                        </div>
+                        <div class="form-group text-center mb-4 border-bottom border-light-subtle position-relative">
                             <label for="password" class="mb-2 fw-bold">Buat Kata Sandi</label>
                             <div class="input-group">
                                 <input type="password" id="password" class="form-control" name="password" placeholder="buat kata sandi" required>
@@ -43,7 +47,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-between gap-2">
-                            <a href="#" class="btn btn-outline-c6 py-2">Kembali</a>
+                            <a href="https://funrun.rotarypurwokerto.id/" class="btn btn-outline-c6 py-2">Kembali</a>
                             <button type="submit" class="btn btn-c1 text-white py-2">Daftar Akun</button>
                         </div>
                         <div class="text-center mt-4">

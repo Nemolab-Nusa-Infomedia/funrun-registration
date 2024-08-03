@@ -27,23 +27,26 @@
             <div class="col-12 col-md-5 login-form-container box">
                 <div class="login-form">
                     <h2 class="text-center fw-bold" style="font-size: 25px;">Reset Password</h2>
-                    <p class="text-center">Selamat datang kembali sobat FunRun Rotary</p>
                     <p class="text-center">Masukan kata sandi baru anda</p>
                     <!-- form user -->
                     <form action="" method="POST" class="mt-5" id="resetPasswordForm">
                         @csrf
-                        <div class="form-group text-center mb-4 border-bottom border-light-subtle">
-                            <label for="password" class="mb-2 fw-bold">Masukan Email Akun Anda</label>
+                        <div class="form-group text-center mb-3 border-bottom border-light-subtle">
+                            <label for="email" class="mb-2 fw-bold">Masukan Email Akun Anda</label>
                             <input type="email" class="form-control" name="email" placeholder="masukan kata sandi baru" required>
                         </div>
-                        <div class="form-group text-center mb-4 border-bottom border-light-subtle">
+                        <div class="form-group text-center mb-3 border-bottom border-light-subtle">
+                            <label for="nohp" class="mb-2 fw-bold">Masukan Nomor Handphone Anda</label>
+                            <input type="text" class="form-control" name="phone" placeholder="masukan nomor handphone" required>
+                        </div>
+                        <div class="form-group text-center mb-3 border-bottom border-light-subtle">
                             <label for="password" class="mb-2 fw-bold">Masukan Kata Sandi Baru</label>
                             <div class="input-group position-relative">
                                 <input type="password" id="password" class="form-control" name="password" placeholder="masukan kata sandi baru" required>
                                 <i class="fas fa-eye" id="togglePassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 18px; z-index: 99;"></i>
                             </div>
                         </div>
-                        <div class="form-group text-center mb-2 border-bottom border-light-subtle">
+                        <div class="form-group text-center mb-4 border-bottom border-light-subtle">
                             <label for="konfirmasiPassword" class="mb-2 fw-bold">Konfirmasi Kata Sandi Baru</label>
                             <div class="input-group position-relative">
                                 <input type="password" id="konfirmasiPassword" class="form-control" name="konfirmasiPassword" placeholder="konfirmasi kata sandi baru" required>
@@ -52,7 +55,7 @@
                             <small id="error-message" class="form-text text-danger d-none">Kata sandi tidak sama</small>
                         </div>
                         <div class="d-flex justify-content-between gap-2 mt-3">
-                            <a href="#" class="btn btn-outline-c6 py-2">Kembali</a>
+                            <a href="{{ route('login') }}" class="btn btn-outline-c6 py-2">Kembali</a>
                             <button type="submit" class="btn btn-c1 text-white py-2">Reset Sandi</button>
                         </div>
                     </form>

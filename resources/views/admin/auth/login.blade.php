@@ -41,10 +41,10 @@
                             <i class="fas fa-eye" id="togglePassword" style="position: absolute; right: 10px; top: 70%; transform: translateY(-50%); cursor: pointer; font-size: 18px; z-index: 99;"></i>
                         </div>
                         <div class="form-group text-start mb-4">
-                            <span><a href="#">Lupa Password?</a></span>
+                            <span><a href="{{ route('reset-password') }}">Lupa Password?</a></span>
                         </div>
                         <div class="d-flex justify-content-between gap-2">
-                            <a href="#" class="btn btn-outline-c6 py-2">Kembali</a>
+                            <a href="{{ route('registration') }}" class="btn btn-outline-c6 py-2">Kembali</a>
                             <button type="submit" class="btn btn-c1 text-white py-2">Masuk</button>
                         </div>
                         <div class="text-center mt-4">

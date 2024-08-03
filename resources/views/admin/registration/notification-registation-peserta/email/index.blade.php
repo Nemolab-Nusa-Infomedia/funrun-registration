@@ -66,7 +66,7 @@
         </div>
         <h2 style="text-align: center">Nomor Peserta : {{ $user->participant_number }}</h2>
         <div class="barcode" style="display: block; justify-content: center">
-            <img src="{{ $message->embed('qrcodes/'.$user->id.'.png') }}" width="250px" alt="Barcode">
+            <img src="{{ $message->embed('qrcodes/'.$user->kodeunik.'.png') }}" width="250px" alt="Barcode">
         </div>
         <div class="footer">
             <p>Tunjukkan Barcode ini saat registrasi ulang dan pengambilan GoodieBag</p>

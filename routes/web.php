@@ -68,12 +68,10 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/email/verify', function () {
     return view('admin.auth.verify-email.notification-email');
 })->name('verification.notice');
-
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
-    return redirect('/profile');
+    return redirect('login');
 })->middleware(['auth', 'signed'])->name('verification.verify');
-
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
     return back()->with('message', 'Verification link sent!');

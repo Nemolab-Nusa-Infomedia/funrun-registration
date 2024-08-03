@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class PesertaController extends Controller
 {
     public function indexPeserta(){
-        $users = User::with(['kabupaten','kecamatan'])->get()->toArray();
+        $users = User::all();
         return view('admin.menu.peserta.index', compact('users'));
     }
 }

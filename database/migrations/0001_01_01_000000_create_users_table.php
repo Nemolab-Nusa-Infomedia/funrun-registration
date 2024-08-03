@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('domisili')->nullable();
             $table->string('kabupaten')->nullable();
             $table->string('kecamatan')->nullable();
+            $table->string('kodeunik')->nullable();
             $table->string('desa')->nullable();
             $table->string('phone')->nullable();
             $table->string('size')->nullable();

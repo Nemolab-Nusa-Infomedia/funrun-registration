@@ -62,7 +62,6 @@ class RegistrationController extends Controller
         $grossAmount = $ticketPrice + $adminFee;
 
         $orderId = Str::uuid();
-
         $transaction = Transaksi::create([
             'order_id' => $orderId,
             'user_id' => $id_user,
@@ -91,6 +90,7 @@ class RegistrationController extends Controller
             'kabupaten' => $request->kabupaten,
             'kecamatan' => $request->kecamatan,
             'desa' => $request->desa,
+            'kodeunik' => Str::random(4),
             'phone' => $request->phone,
             'size' => $request->size,
             'tokens_account' => $tokenAcc,
@@ -137,7 +137,7 @@ class RegistrationController extends Controller
                     ]);
                     // Kirim email ke user
                     $qrCode = QrCode::format('png')->size(300)->generate($user->tokens_account);
-                    $qrCodePath = public_path('qrcodes/' . $user->id . '.png');
+                    $qrCodePath = public_path('qrcodes/' . $user->kodeunik . '.png');
                     file_put_contents($qrCodePath, $qrCode);
                     // Send the email with the QR code attachment
                     Mail::send('admin.registration.notification-registation-peserta.email.index', ['user' => $user], function ($message) use ($user, $qrCodePath) {
@@ -229,7 +229,7 @@ class RegistrationController extends Controller
         ]);
         event(new Registered($user));
         Auth::login($user);
-        return redirect()->route('verification.notice');
+        return view('admin.auth.verify-email.notification-email', ['email' => $user['email']]);
     }
 
     public function login(){

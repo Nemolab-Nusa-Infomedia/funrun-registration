@@ -25,7 +25,7 @@
 
                 <img src="{{ asset('assets/registration/img/email-verify.png') }}" class="mx-auto mb-3" style="width: 500px" alt="">
 
-                <p class="text-center">formulir pendaftaran anda berhasil dikirim, segera <b>konfirmasi pembayaran</b> anda dengan <b>cek email</b> melalui link yang telah dikirimkan ke email <span class="text-c1">user@gmail.com</span></p>
+                <p class="text-center">formulir pendaftaran anda berhasil dikirim, segera <b>konfirmasi pembayaran</b> anda dengan <b>cek email</b> melalui link yang telah dikirimkan ke email <span class="text-c1">{{ $email }}</span></p>
 
                 <div class="row mx-auto">
                     <a id="resendLink" href="#" class="btn btn-c1 text-white fw-bold" style="font-size: 15px">Kirim Ulang Link</a>

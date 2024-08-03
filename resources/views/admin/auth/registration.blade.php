@@ -33,12 +33,18 @@
                         @csrf
                         <div class="form-group text-center mb-5 border-bottom border-light-subtle">
                             <label for="email" class="mb-2 fw-bold">Masukkan Email</label>
-                            <input type="email" class="form-control" name="email" placeholder="masukkan email anda" required>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="masukkan email anda" value="{{ old('email') }}" required>
+                             @error('email')
+                                <span class="invalid-feedback">{{ $message }}</span>
+                             @enderror
                         </div>
                         <div class="form-group text-center mb-2 border-bottom border-light-subtle position-relative">
                             <label for="password" class="mb-2 fw-bold">Buat Kata Sandi</label>
                             <div class="input-group">
-                                <input type="password" id="password" class="form-control" name="password" placeholder="buat kata sandi" required>
+                                <input type="password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="buat kata sandi" required>
+                                @error('password')
+                                   <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                                 <i class="fas fa-eye" id="togglePassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 18px; z-index: 99;"></i>
                             </div>
                         </div>

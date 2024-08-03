@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\AdminController;
@@ -48,7 +49,7 @@ Route::middleware(['adminAccess'])->group(function () {
 
 // ===== Peserta =====
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['authall'])->group(function () {
     Route::get('/form', [RegistrationController::class, 'indexForm'])->name('form');
     Route::get('/profile', [ProfileController::class, 'indexProfile'])->name('profile');
     // Logout Peserta
@@ -71,6 +72,10 @@ Route::get('/email/verify', function () {
 })->name('verification.notice');
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
+    $user = $request->user();
+    $nowInJakarta = Carbon::now('Asia/Jakarta');
+    $user->email_verified_at = $nowInJakarta->toDateTimeString();
+    $user->save();
     return redirect('login');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 Route::post('/email/verification-notification', function (Request $request) {

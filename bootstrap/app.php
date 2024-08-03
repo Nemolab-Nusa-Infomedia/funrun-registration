@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\AdminAccess;
+use App\Http\Middleware\AuthCheckAll;
 use App\Http\Middleware\DisableCache;
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\SuperAdminAccess;
@@ -17,6 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'adminAccess' => AdminAccess::class,
+            'authall' => AuthCheckAll::class,
             'superAdminAccess' => SuperAdminAccess::class,
             'disableCache' => DisableCache::class,
         ]);

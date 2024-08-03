@@ -216,7 +216,8 @@ class RegistrationController extends Controller
             'password' => 'required|min:8'
         ],
         [
-            'email.unique' => 'Email sudah terdaftar silahkan login saja'
+            'email.unique' => 'Email sudah terdaftar silahkan login saja',
+            'password.min' => 'Password harus minimal 8 karakter'
         ]);
 
         if ($validator->fails()) {

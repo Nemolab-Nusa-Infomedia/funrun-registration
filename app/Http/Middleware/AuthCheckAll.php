@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminAccess
+class AuthCheckAll
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class AdminAccess
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::guard('admin')->check() && (Auth::guard('admin')->user()->type == 'admin' || Auth::guard('admin')->user()->type == 'superadmin')) {
+        if (Auth::guard('admin')->check() || Auth::check()) {
             return $next($request);
         }
         return back();

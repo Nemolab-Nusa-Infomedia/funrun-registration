@@ -258,6 +258,10 @@ class RegistrationController extends Controller
         return back();
     }
 
+    public function resetPassword(){
+        return view('admin.auth.resetPassword');
+    }
+
     public function logout(){
         Auth::logout();
         return redirect()->route('login');

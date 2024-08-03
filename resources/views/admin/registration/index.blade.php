@@ -101,13 +101,7 @@
                             </div>
                         </div>
                         <span class="text-secondary fw-bold mb-3">Informasi Pribadi</span>
-                        <div class="col-12 col-md-3">
-                            <div class="mb-3">
-                                <label for="" class="form-label">Nomor Handphone</label>
-                                <input type="text" class="form-control" name="phone" placeholder="masukan nomor handphone">
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-3">
+                        <div class="col-12 col-md-4">
                             <div class="mb-3">
                                 <label for="" class="form-label">Size Jersey</label>
                                 <select id="inputState" class="form-select" name="size">
@@ -121,7 +115,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-12 col-md-3">
+                        <div class="col-12 col-md-4">
                             <div class="mb-3">
                                 <label for="" class="form-label">Golongan Darah</label>
                                 <select id="" class="form-select" name="goldar">
@@ -137,7 +131,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-12 col-md-3">
+                        <div class="col-12 col-md-4">
                             <div class="mb-3">
                                 <label for="" class="form-label">Riwayat Penyakit</label>
                                 <input type="text" class="form-control" name="r_penyakit" placeholder="riwayat penyakit">

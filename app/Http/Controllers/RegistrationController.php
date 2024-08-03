@@ -203,7 +203,6 @@ class RegistrationController extends Controller
 
     public function hasilScan($id){
         $user = User::find($id);
-        $domilisi = Province::where('id');
         return view('admin.registration.scan.notificationScan', compact('user'));
     }
 

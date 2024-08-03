@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('assets/registration/css/form/main.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/loading/css/main.css') }}">
-
     <script src="https://kit.fontawesome.com/0a267e6f70.js" crossorigin="anonymous"></script>
 </head>
   <body>
@@ -264,81 +263,6 @@
         });
     </script>
 
-    {{-- api wilayah --}}
-    {{-- <script>
-        $(document).ready(function() {
-            $('#inputProv').change(function() {
-                var provId = $(this).val();
-                console.log(provId);
-                if (provId) {
-                    $.ajax({
-                        url: '/dapatkan/kabupaten/' + provId,
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function(data) {
-                            console.log(data);
-                            $('#inputKab').empty();
-                            $('#inputKab').append('<option selected>--- Pilih Kabupaten ---</option>');
-                            $.each(data, function(key, value) {
-                                $('#inputKab').append('<option value="' + value.id + '">' + value.name + '</option>');
-                            });
-                        }
-                    });
-                } else {
-                    $('#inputKab').empty();
-                    $('#inputKab').append('<option selected>--- Pilih Kabupaten ---</option>');
-                }
-            });
-        });
-    </script>
-     <script>
-        $(document).ready(function() {
-            $('#inputKab').change(function() {
-                var kecId = $(this).val();
-                if (kecId) {
-                    $.ajax({
-                        url: '/dapatkan/kecamatan/' + kecId,
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function(data) {
-                            $('#inputKecamatan').empty();
-                            $('#inputKecamatan').append('<option selected>--- Pilih Kecamatan ---</option>');
-                            $.each(data, function(key, value) {
-                                $('#inputKecamatan').append('<option value="' + value.id + '">' + value.name + '</option>');
-                            });
-                        }
-                    });
-                } else {
-                    $('#inputKecamatan').empty();
-                    $('#inputKecamatan').append('<option selected>--- Pilih Kecamatan ---</option>');
-                }
-            });
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('#inputKecamatan').change(function() {
-                var desaId = $(this).val();
-                if (desaId) {
-                    $.ajax({
-                        url: '/dapatkan/desa/' + desaId,
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function(data) {
-                            $('#inputDesa').empty();
-                            $('#inputDesa').append('<option selected>--- Pilih Desa ---</option>');
-                            $.each(data, function(key, value) {
-                                $('#inputDesa').append('<option value="' + value.id + '">' + value.name + '</option>');
-                            });
-                        }
-                    });
-                } else {
-                    $('#inputDesa').empty();
-                    $('#inputDesa').append('<option selected>--- Pilih Desa ---</option>');
-                }
-            });
-        });
-    </script>--}}
     <script>
         $(function() {
             $("#inputDesa").autocomplete({

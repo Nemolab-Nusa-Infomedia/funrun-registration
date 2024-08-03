@@ -48,7 +48,7 @@
                         </div>
                     @endif
                     <div id="detailTable" class="table-responsive collapse">
-                        <img class="d-block mx-auto mb-3 mt-2" src="{{ secure_asset('qrcodes/'.Auth::user()->id.'.png') }}" width="200" alt="" srcset="">
+                        <img class="d-block mx-auto mb-3 mt-2" src="{{ asset('qrcodes/'.Auth::user()->kodeunik.'.png') }}" width="200" alt="" srcset="">
                         <table class="table">
                             <tr>
                                 <td>No Peserta</td>

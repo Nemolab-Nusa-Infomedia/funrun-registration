@@ -12,9 +12,6 @@ class AdminController extends Controller
 {
     public function verifyQrCode(Request $request)
     {
-        // Log request data
-        Log::info('QR Code Data: ' . $request->qr_code);
-
         $user = User::where('tokens_account', $request->qr_code)->first();
         $nowInJakarta = Carbon::now('Asia/Jakarta');
         $date = Carbon::createFromFormat('Y-m-d H:i:s', '2024-07-02 12:00:00', 'Asia/Jakarta');

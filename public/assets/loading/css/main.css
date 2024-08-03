@@ -42,3 +42,10 @@
       transform: scale(1.5);
     }
   }
+
+   .status-lunas {
+        background-color: #d4edda !important; /* Hijau */
+    }
+    .status-pending {
+        background-color: #fff3cd !important; /* Kuning */
+    }

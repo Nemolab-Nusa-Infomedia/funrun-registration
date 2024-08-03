@@ -34,14 +34,27 @@ class RegistrationController extends Controller
             'kecamatan' => 'required',
             'desa' => 'required',
             'size' => 'required',
-            'phone' => 'required',
             'age' => 'required',
             'phone_urgent' => 'required',
             'contant_urgent' => 'required',
-            'community' => 'required',
             'goldar' => 'required',
             'r_penyakit' => 'required',
-        ]);
+        ],
+        [
+            'name.required' => 'Nama tidak boleh kosong',
+            'gender.required' => 'Jenis kelamin tidak boleh kosong',
+            'domisili.required' => 'Provinsi tidak boleh kosong',
+            'kabupaten.required' => 'Kabupaten tidak boleh kosong',
+            'kecamatan.required' => 'Kecamatan tidak boleh kosong',
+            'desa.required' => 'Desa tidak boleh kosong',
+            'size.required' => 'Ukuran jersey tidak boleh kosong',
+            'age.required' => 'Umur tidak boleh kosong',
+            'phone_urgent.required' => 'Nomor kontak darurat tidak boleh kosong',
+            'contant_urgent.required' => 'Nama kontak darurat tidak boleh kosong',
+            'goldar.required' => 'GOlongan darah tidak boleh kosong',
+            'r_penyakit.required' => 'Riwayat penyakit tidak boleh kosong',
+        ]
+        );
 
         if ($validator->fails()) {
         return redirect()->back()->withErrors($validator)->withInput();
@@ -91,7 +104,6 @@ class RegistrationController extends Controller
             'kecamatan' => $request->kecamatan,
             'desa' => $request->desa,
             'kodeunik' => Str::random(4),
-            'phone' => $request->phone,
             'size' => $request->size,
             'tokens_account' => $tokenAcc,
             'age' => $request->age,
@@ -213,10 +225,12 @@ class RegistrationController extends Controller
     public function emailValidation(Request $request){
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:users',
+            'phone' => 'required|unique:users,phone',
             'password' => 'required|min:8'
         ],
         [
             'email.unique' => 'Email sudah terdaftar silahkan login saja',
+            'phone.unique' => 'Nomor telepon sudah terdaftar',
             'password.min' => 'Password harus minimal 8 karakter'
         ]);
 
@@ -225,6 +239,7 @@ class RegistrationController extends Controller
         }
         $user = User::create([
             'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
             'password' => Hash::make($request->input('password'))
         ]);
         event(new Registered($user));

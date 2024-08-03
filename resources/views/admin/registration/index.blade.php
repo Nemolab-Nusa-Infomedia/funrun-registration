@@ -39,23 +39,32 @@
                         <div class="col-12 col-md-4">
                             <div class="mb-3">
                                 <label for="" class="form-label fw-bold">Nama Lengkap</label>
-                                <input type="text" class="form-control" name="name" placeholder="Nama lengkap" aria-label="">
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Nama lengkap" aria-label="">
+                                @error('name')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-6 col-md-4">
                             <div class="mb-3">
                                 <label for="" class="form-label">Jenis Kelamin</label>
-                                <select id="inputState" class="form-select" name="gender">
+                                <select id="inputState" class="form-select @error('gender') is-invalid @enderror" name="gender">
                                     <option selected>--- Pilih jenis kelamin ---</option>
                                     <option value="Laki-laki">Laki-laki</option>
                                     <option value="Perempuan">Perempuan</option>
                                 </select>
+                                @error('gender')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-6 col-md-4">
                             <div class="mb-3">
                                 <label for="" class="form-label">Usia</label>
-                                <input type="text" class="form-control" name="age" placeholder="Usia">
+                                <input type="text" class="form-control @error('age') is-invalid @enderror" name="age" placeholder="Usia">
+                                @error('age')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12" id="komunitasDiv">
@@ -79,32 +88,44 @@
                         <div class="col-12 col-md-3">
                             <div class="mb-3">
                                 <label for="inputDesa" class="form-label">Desa</label>
-                                <input type="text" class="form-control" name="desa" id="inputDesa">
+                                <input type="text" class="form-control @error('desa') is-invalid @enderror" name="desa" id="inputDesa">
+                                @error('desa')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12 col-md-3">
                             <div class="mb-3">
                                 <label for="inputKecamatan" class="form-label">Kecamatan</label>
-                                <input type="text" class="form-control" name="kecamatan" id="inputKecamatan">
+                                <input type="text" class="form-control @error('kecamatan') is-invalid @enderror" name="kecamatan" id="inputKecamatan">
+                                @error('kecamatan')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12 col-md-3">
                             <div class="mb-3">
                                 <label for="inputKab" class="form-label">Kabupaten</label>
-                                <input type="text" class="form-control" name="kabupaten" id="inputKab">
+                                <input type="text" class="form-control @error('kabupaten') is-invalid @enderror" name="kabupaten" id="inputKab">
+                                @error('kabupaten')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12 col-md-3">
                             <div class="mb-3">
                                 <label for="inputProv" class="form-label">Provinsi</label>
-                                <input type="text" class="form-control" name="domisili" id="inputProv">
+                                <input type="text" class="form-control @error('domisili') is-invalid @enderror" name="domisili" id="inputProv">
+                                @error('domisili')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <span class="text-secondary fw-bold mb-3">Informasi Pribadi</span>
                         <div class="col-12 col-md-4">
                             <div class="mb-3">
                                 <label for="" class="form-label">Size Jersey</label>
-                                <select id="inputState" class="form-select" name="size">
+                                <select id="inputState" class="form-select @error('size') is-invalid @enderror" name="size">
                                     <option selected>Pilih size jersey</option>
                                     <option value="S">S</option>
                                     <option value="M">M</option>
@@ -113,12 +134,15 @@
                                     <option value="XXL">XXL</option>
                                     <option value="XXXL">XXXL</option>
                                 </select>
+                                @error('size')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="mb-3">
                                 <label for="" class="form-label">Golongan Darah</label>
-                                <select id="" class="form-select" name="goldar">
+                                <select id="" class="form-select @error('goldar') is-invalid @enderror" name="goldar">
                                     <option selected>Pilih golongan darah</option>
                                     <option value="A+">A+</option>
                                     <option value="A-">A-</option>
@@ -129,12 +153,18 @@
                                     <option value="O+">O+</option>
                                     <option value="O-">O-</option>
                                 </select>
+                                @error('r_penyakit')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="mb-3">
                                 <label for="" class="form-label">Riwayat Penyakit</label>
-                                <input type="text" class="form-control" name="r_penyakit" placeholder="riwayat penyakit">
+                                <input type="text" class="form-control @error('r_penyakit') is-invalid @enderror" name="r_penyakit" placeholder="riwayat penyakit">
+                                @error('r_penyakit')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
 
@@ -142,13 +172,19 @@
                         <div class="col-12 col-md-4">
                             <div class="mb-3">
                                 <label for="" class="form-label">Nama Kontak darurat</label>
-                                <input type="text" class="form-control" name="contant_urgent" placeholder="nama kontak darurat">
+                                <input type="text" class="form-control @error('contact_urgent') is-invalid @enderror" name="contant_urgent" placeholder="nama kontak darurat">
+                                @error('contact_urgent')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="mb-3">
                                 <label for="" class="form-label">Nomor Kontak Darurat</label>
-                                <input type="text" class="form-control" name="phone_urgent" placeholder="nomor kontak darurat">
+                                <input type="text" class="form-control @error('phone_urgent') is-invalid @enderror" name="phone_urgent" placeholder="nomor kontak darurat">
+                                @error('phone_urgent')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-12 col-md-4">

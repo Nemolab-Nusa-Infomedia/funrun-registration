@@ -19,7 +19,6 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'adminAccess' => AdminAccess::class,
             'authall' => AuthCheckAll::class,
-            'superAdminAccess' => SuperAdminAccess::class,
             'disableCache' => DisableCache::class,
         ]);
     })

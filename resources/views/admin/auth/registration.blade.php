@@ -40,7 +40,10 @@
                         </div>
                         <div class="form-group text-center mb-3 border-bottom border-light-subtle">
                             <label for="nohp" class="mb-2 fw-bold">Masukkan Nomor Handphone</label>
-                            <input type="text" class="form-control" name="phone" placeholder="masukkan nomor handphone anda" required>
+                            <input type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" placeholder="masukkan nomor handphone anda" required>
+                            @error('phone]')
+                                   <span class="invalid-feedback">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div class="form-group text-center mb-4 border-bottom border-light-subtle position-relative">
                             <label for="password" class="mb-2 fw-bold">Buat Kata Sandi</label>

@@ -21,20 +21,11 @@ Route::get('/login-admin', [AdminController::class, 'adminLogin'])->name('admin-
 Route::get('/logout-admin', [AdminController::class, 'adminLogout'])->name('admin-logout');
 Route::post('/cek-admin', [AdminController::class, 'adminCek'])->name('cek-admin');
 Route::get('/reset-password', [AdminController::class, 'resetPassword'])->name('reset-password');
+Route::post('/reset-password', [AdminController::class, 'checkephone'])->name('check-ephone');
+Route::get('/reset-password-nd', [AdminController::class, 'resetPasswordnd'])->name('reset-password-nd');
+Route::post('/reset-password-nd', [AdminController::class, 'updatePasswordnd'])->name('update-password');
 // ===== End Auth Web ===== //
-
-
-// ===== Akses Superadmin ===== //
-Route::middleware(['superAdminAccess'])->group(function () {
-    // Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'indexDashboard'])->name('dashboard');
-    // Akun
-    Route::get('/akun', [AkunController::class, 'indexAkun'])->name('akun');
-    Route::get('/akun-tambah', [AkunController::class, 'tambahAkun'])->name('akun-tambah');
-    Route::get('/akun-edit', [AkunController::class, 'editAkun'])->name('akun-edit');
-});
-// ===== End Akses Superadmin ===== //
-
+Route::get('/get-user', [AdminController::class, 'getusers'])->name('getusers');
 
 // ===== Akses Admin ===== //
 Route::middleware(['adminAccess'])->group(function () {

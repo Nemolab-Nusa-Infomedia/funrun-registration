@@ -43,10 +43,6 @@ class AdminController extends Controller
         return back();
     }
 
-    public function resetPassword(){
-        return view('admin.auth.resetPassword');
-    }
-
     public function adminLogout()
     {
         Auth::guard('admin')->logout();

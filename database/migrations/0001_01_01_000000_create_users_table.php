@@ -43,6 +43,7 @@ return new class extends Migration
             $table->timestamp('waktu_pembayaran')->nullable();
             $table->decimal('total', 12, 2)->nullable();
             $table->string('by_admin')->nullable();
+            $table->boolean('is_hangus')->default(false);
             $table->timestamps();
         });
 

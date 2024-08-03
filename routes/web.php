@@ -4,6 +4,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UndianController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
@@ -75,3 +76,8 @@ Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+
+Route::get('/undian-doorprize', [UndianController::class, 'Undi']);
+Route::post('/undian-doorprize', [UndianController::class, 'PemenangUndian'])->name('mulai-undi');
+Route::post('/undian-doorprize-hangus', [UndianController::class, 'HangusUndian'])->name('hangus-undi');

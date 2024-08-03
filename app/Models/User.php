@@ -48,6 +48,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'waktu_pembayaran',
         'total',
         'kodeunik',
+        'kodeunik',
+        'is_hangus'
     ];
 
     /**

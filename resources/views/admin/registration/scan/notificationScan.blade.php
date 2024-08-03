@@ -81,9 +81,9 @@
                         <tr>
                             <th>Status Pembayaran</th>
                             <td>:
-                                @if(Auth::user()->status == 'settlement')
+                                @if($user->status == 'settlement')
                                     <span class="btn btn-success"> Lunas</span>
-                                @elseif(Auth::user()->status == 'pending')
+                                @elseif($user->status == 'pending')
                                     <span class="btn btn-warning"> Pending</span>
                                 @endif
                             </td>

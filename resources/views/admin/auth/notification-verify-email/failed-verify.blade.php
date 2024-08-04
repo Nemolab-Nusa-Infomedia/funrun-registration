@@ -21,11 +21,11 @@
     <div class="container d-flex justify-content-center align-items-center notif-verifyEmail">
         <div class="box mt-3 p-3">
             <div class="row mx-auto">
-                <h3 class="fw-bold text-c1 text-center mb-3">KONFIRMASI EMAIL PENDAFTARAN</h3>
+                <h3 class="fw-bold text-c1 text-center mb-3">VERIFIKASI ANDA BELUM BERHASIL</h3>
 
-                <img src="{{ asset('assets/registration/img/email-notification.png') }}" class="mx-auto mb-3" style="width: 500px" alt="">
+                <img src="{{ asset('assets/registration/img/email-verify-failed.png') }}" class="mx-auto mb-3" style="width: 500px" alt="">
 
-                <p class="text-center">email verifikasi anda telah dikirimkan ke email anda, silahka klik tautan pada email <span class="text-c1">{{ $email }}</span> untuk melakukan verisfikasi email.</p>
+                <p class="text-center">email anda belum berhasil terverifikasi, silahkaN klik tombol dibawah untuk mengirimkan pesan verifikasi lagi</p>
 
                 <div class="row mx-auto">
                     <a id="resendLink" href="#" class="btn btn-c1 text-white fw-bold" style="font-size: 15px">Kirim Ulang Link</a>

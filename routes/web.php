@@ -61,6 +61,14 @@ Route::middleware(['authall'])->group(function () {
 });
 
 // ===== Email =====
+Route::get('/success-verify-email', function () {
+    return view('admin.auth.notification-verify-email.success-verify');
+})->name('success-verify-email');
+
+Route::get('/failed-verify-email', function () {
+    return view('admin.auth.notification-verify-email.failed-verify');
+})->name('failed-verify-email');
+
 Route::get('/email/verify', function () {
     return view('admin.auth.verify-email.notification-email');
 })->name('verification.notice');

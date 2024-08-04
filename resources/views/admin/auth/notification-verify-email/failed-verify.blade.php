@@ -25,7 +25,7 @@
 
                 <img src="{{ asset('assets/registration/img/email-verify-failed.png') }}" class="mx-auto mb-3" style="width: 500px" alt="">
 
-                <p class="text-center">email anda belum berhasil terverifikasi, silahkaN klik tombol dibawah untuk mengirimkan pesan verifikasi lagi</p>
+                <p class="text-center">email anda belum berhasil terverifikasi, silahkan klik tombol dibawah untuk mengirimkan pesan verifikasi lagi</p>
 
                 <div class="row mx-auto">
                     <a id="resendLink" href="#" class="btn btn-c1 text-white fw-bold" style="font-size: 15px">Kirim Ulang Link</a>

@@ -21,7 +21,7 @@
     <div class="container d-flex justify-content-center align-items-center notif-verifyEmail">
         <div class="box mt-3 p-3">
             <div class="row mx-auto">
-                <h3 class="fw-bold text-c1 text-center mb-3">EMAIL BERHASIL DI VERIVIKASI</h3>
+                <h3 class="fw-bold text-c1 text-center mb-3">EMAIL BERHASIL DI VERIFIKASI</h3>
 
                 <img src="{{ asset('assets/registration/img/email-verify.png') }}" class="mx-auto mb-3" style="width: 500px" alt="">
 

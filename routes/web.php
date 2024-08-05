@@ -78,8 +78,9 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     $nowInJakarta = Carbon::now('Asia/Jakarta');
     $user->email_verified_at = $nowInJakarta->toDateTimeString();
     $user->save();
-    return redirect('login');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+    return redirect()->route('success-verify-email');
+})->middleware(['auth', 'signed', 'checkVerifyLinkExpired'])->name('verification.verify');
+
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
     return back()->with('message', 'Verification link sent!');

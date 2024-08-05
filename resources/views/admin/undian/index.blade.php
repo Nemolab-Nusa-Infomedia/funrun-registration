@@ -8,9 +8,8 @@
     <link rel="stylesheet" href="{{ asset('assets/registration/css/undian/main.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
     <style>
-        .undian-image img {
-            width: 100%;
-            height: auto;
+        .undian-image {
+            position: relative;
         }
         .text-overlay {
             position: absolute;
@@ -19,6 +18,7 @@
             transform: translate(-50%, -50%);
             color: #fff;
             text-align: center;
+            display: none;
         }
         .nomor-pemenang {
             font-size: 2rem;
@@ -31,10 +31,10 @@
 </head>
 <body>
     <div class="container d-flex justify-content-center align-items-center rounded-5">
-        <div class="box mt-3 mb-3 position-relative">
+        <div class="box mt-3 mb-3">
             <div class="undian-image">
                 <img src="{{ asset('assets/registration/img/undian.png') }}" alt="">
-                <div class="text-overlay d-none" id="pemenang-undian">
+                <div class="text-overlay" id="pemenang-undian">
                     <span id="nomor-peserta" class="nomor-pemenang">JHJSDHJSDHJ</span>
                     <span id="nama-peserta" class="nama-pemenang">SDHJHHD</span>
                     <span id="alamat-peserta" class="alamat-pemenang"></span>
@@ -52,7 +52,7 @@
     <script>
         $(document).ready(function() {
             $('#undi').click(function() {
-                $('#pemenang-undian').addClass('d-none'); // Sembunyikan informasi pemenang
+                $('#pemenang-undian').hide(); // Sembunyikan informasi pemenang
 
                 // Simulasi efek pengacakan
                 var interval = setInterval(function() {
@@ -72,7 +72,7 @@
                             $('#nomor-peserta').text('#' + response.participant_number);
                             $('#nama-peserta').text(response.name);
                             $('#alamat-peserta').text(response.kecamatan + ', ' + response.kabupaten); // pastikan field address ada di database
-                            $('#pemenang-undian').removeClass('d-none');
+                            $('#pemenang-undian').show(); // Tampilkan informasi pemenang
                             $('#undi').addClass('d-none');
                         } else {
                             alert('Tidak ada peserta yang terdaftar.');
@@ -96,7 +96,7 @@
                     },
                     success: function(response) {
                         alert(response.message);
-                        $('#pemenang-undian').addClass('d-none');
+                        $('#pemenang-undian').hide();
                         $('#undi').removeClass('d-none');
                     },
                     error: function() {

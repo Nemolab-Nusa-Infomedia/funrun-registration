@@ -12,11 +12,18 @@ body{
     font-family: 'Poppins', sans-serif;
 }
 
-.sertificate span{
+.sertificate{
     position: absolute;
-    top: 72%;
-    left: 29.3%;
-    font-size: 65px;
-    font-weight: 700;
+    top: 78%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Pusatkan konten secara vertikal dan horizontal */
+    text-align: center;
+    color: var(--color-c6);
+    width: 100%;
+}
+
+.sertificate span{
+    font-size: 80px;
+    font-weight: 800;
     color: #263581;
 }

@@ -10,19 +10,21 @@
     <link rel="stylesheet" href="{{ asset('assets/loading/css/main.css') }}">
 </head>
   <body>
-    <div id="loading-container">
+    {{-- <div id="loading-container">
         <div class="loader">
           <img src="{{ asset('assets/registration/img/loading/sepatu1.png') }}" alt="Loading" class="shoe">
           <img src="{{ asset('assets/registration/img/loading/sepatu2.png') }}" alt="Loading" class="shoe">
           <img src="{{ asset('assets/registration/img/loading/sepatu3.png') }}" alt="Loading" class="shoe">
         </div>
-    </div>
+    </div> --}}
 
     <div class="container d-flex justify-content-center align-items-center rounded-5">
         <div class="box mt-3 mb-3">
             <div class="certificate-image">
                 <img src="{{ asset('assets/registration/img/sertificate/sertificate.png') }}" alt="">
-                <span class="position-absolute">Vindra Arya Yulian</span>
+                <div class="text-overlay">
+                    <span>Vindra Arya Yulian Vindra Arya Yulian</span>
+                </div>
             </div>
         </div>
     </div>

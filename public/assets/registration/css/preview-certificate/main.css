@@ -218,80 +218,68 @@ h2, h3 {
     color: var(--color-c8);
 }
 
-.preview-certificate {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.certificate-image img{
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+.certificate-image {
+    position: relative;
     width: 100%;
     height: 80vh;
 }
 
-.certificate-image span{
+.certificate-image img {
+    width: 100%;
+    height: 100%;
+}
+
+.text-overlay {
     position: absolute;
-    top: 40%;
-    left: 39.5%;
-    font-size: 40px;
-    font-weight: 700;
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Pusatkan konten secara vertikal dan horizontal */
+    text-align: center;
+    color: var(--color-c6);
+    width: 100%;
+}
+
+.text-overlay span{
+    font-size: 30px;
+    font-weight: 600;
     color: #263581;
 }
 
 @media(max-width:1337px){
-    .certificate-image span {
-        font-size: 40px;
-        top: 44%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    .text-overlay span {
+        font-size: 30px;
     }
 }
 
 @media(max-width:998px){
-    .certificate-image span {
-        font-size: 40px;
-        top: 44%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    .text-overlay span {
+        font-size: 25px;
     }
 }
 
 @media(max-width:768px){
-    .certificate-image img {
+    .certificate-image {
         height: 300px;
     }
 
-    .certificate-image span {
-        font-size: 20px;
-        top: 25%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    .text-overlay span {
+        font-size: 15px;
     }
 }
 
 @media(max-width:512px){
-    .certificate-image img {
+    .certificate-image {
         height: 200px;
     }
 
-    .certificate-image span {
-        font-size: 15px;
-        top: 17%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    .text-overlay span {
+        font-size: 10px;
     }
 }
 
 @media(max-width:325px){
-    .certificate-image span {
-        font-size: 15px;
-        top: 26.5%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    .text-overlay span {
+        font-size: 8px;
     }
 }
 

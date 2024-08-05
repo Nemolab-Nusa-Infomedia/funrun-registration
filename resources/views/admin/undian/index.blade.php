@@ -26,10 +26,10 @@
 <body>
     <div class="container d-flex justify-content-center align-items-center rounded-5">
         <div class="box mt-3 mb-3">
-            <div class="undian-image d-none" id="pemenang-undian">
+            <div class="undian-image " >
                 <img src="{{ asset('assets/registration/img/undian.png') }}" alt="">
                 <div id="loading" class="loading d-none">Mengacak nomor...</div>
-                <div class="text-overlay">
+                <div class="text-overlay d-none" id="pemenang-undian">
                     <span id="nomor-peserta" class="nomor-pemenang">JHJSDHJSDHJ</span>
                     <span id="nama-peserta" class="nama-pemenang">SDHJHHD</span>
                     <span id="alamat-peserta" class="alamat-pemenang"></span>

@@ -50,38 +50,43 @@
                 $('#loading').removeClass('d-none'); // Tampilkan elemen loading
                 $('#pemenang-undian').addClass('d-none'); // Sembunyikan informasi pemenang
 
-                // Simulasi efek pengacakan
+                var duration = 10000; // Durasi total pengacakan dalam milidetik
+                var intervalDuration = 100; // Durasi setiap update dalam milidetik
+                var endTime = new Date().getTime() + duration;
+
                 var interval = setInterval(function() {
-                    var randomNumber = Math.floor(Math.random() * 1000000); // Angka acak
-                    $('#nomor-peserta').text(randomNumber.toString().padStart(6, '0')); // Tampilkan angka dengan 6 digit
-                }, 50); // Update setiap 50ms
-
-                $.ajax({
-                    url: '{{ route('mulai-undi') }}',
-                    type: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
+                    if (new Date().getTime() >= endTime) {
                         clearInterval(interval); // Hentikan efek pengacakan
                         $('#loading').addClass('d-none'); // Sembunyikan elemen loading
 
-                        if (response) {
-                            $('#nomor-peserta').text('#' + response.participant_number);
-                            $('#nama-peserta').text(response.name);
-                            $('#alamat-peserta').text(response.kecamatan + ', ' + response.kabupaten); // pastikan field address ada di database
-                            $('#pemenang-undian').removeClass('d-none');
-                            $('#undi').addClass('d-none');
-                        } else {
-                            alert('Tidak ada peserta yang terdaftar.');
-                        }
-                    },
-                    error: function() {
-                        clearInterval(interval); // Hentikan efek pengacakan
-                        $('#loading').addClass('d-none'); // Sembunyikan elemen loading
-                        alert('Terjadi kesalahan saat melakukan undian.');
+                        // Melakukan request AJAX untuk mendapatkan pemenang
+                        $.ajax({
+                            url: '{{ route('mulai-undi') }}',
+                            type: 'POST',
+                            data: {
+                                _token: '{{ csrf_token() }}'
+                            },
+                            success: function(response) {
+                                if (response) {
+                                    $('#nomor-peserta').text('#' + response.participant_number);
+                                    $('#nama-peserta').text(response.name);
+                                    $('#alamat-peserta').text(response.kecamatan + ', ' + response.kabupaten); // pastikan field address ada di database
+                                    $('#pemenang-undian').removeClass('d-none');
+                                    $('#undi').addClass('d-none');
+                                } else {
+                                    alert('Tidak ada peserta yang terdaftar.');
+                                }
+                            },
+                            error: function() {
+                                $('#loading').addClass('d-none'); // Sembunyikan elemen loading
+                                alert('Terjadi kesalahan saat melakukan undian.');
+                            }
+                        });
+                    } else {
+                        var randomNumber = Math.floor(Math.random() * 1000000); // Angka acak
+                        $('#nomor-peserta').text(randomNumber.toString().padStart(6, '0')); // Tampilkan angka dengan 6 digit
                     }
-                });
+                }, intervalDuration);
             });
 
             $('#hangus').click(function() {

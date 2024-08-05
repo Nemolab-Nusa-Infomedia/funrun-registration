@@ -230,6 +230,19 @@ h2, h3 {
     object-fit: cover; /* Menghindari distorsi gambar */
 }
 
+.text-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Pusatkan konten secara vertikal dan horizontal */
+    text-align: center;
+    color: var(--color-c5);
+}
+
+.text-overlay span {
+    display: block;
+}
+
 .nomor-pemenang {
     font-size: 120px;
     font-weight: 500;

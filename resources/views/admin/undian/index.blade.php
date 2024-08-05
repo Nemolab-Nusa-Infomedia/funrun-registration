@@ -38,12 +38,12 @@
   <body>
     <div class="container d-flex justify-content-center align-items-center rounded-5">
         <div class="box mt-3 mb-3">
-            <div class="undian-image" id="pemenang-undian">
+            <div class="undian-image d-none" id="pemenang-undian">
                 <img src="{{ asset('assets/registration/img/undian.png') }}" alt="">
                 <div id="loading" class="loading d-none">Mengacak nomor...</div>
                 <div class="text-overlay">
-                    <span id="nomor-peserta" class="nomor-pemenang">123456</span>
-                    <span id="nama-peserta" class="nama-pemenang"></span>
+                    <span id="nomor-peserta" class="nomor-pemenang">JHJSDHJSDHJ</span>
+                    <span id="nama-peserta" class="nama-pemenang">SDHJHHD</span>
                     <span id="alamat-peserta" class="alamat-pemenang"></span>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                 }, 50); // Update setiap 50ms
 
                 $.ajax({
-                    url: '{{ secure_url('undian-doorprize') }}',
+                    url: '{{ route('mulai-undi') }}',
                     type: 'POST',
                     data: {
                         _token: '{{ csrf_token() }}'
@@ -98,7 +98,7 @@
             $('#hangus').click(function() {
                 var participantNumber = $('#nomor-peserta').text().replace('#', '');
                 $.ajax({
-                    url: '{{ secure_url('undian-doorprize-hangus') }}',
+                    url: '{{ route('hangus-undi') }}',
                     type: 'POST',
                     data: {
                         _token: '{{ csrf_token() }}',

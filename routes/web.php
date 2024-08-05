@@ -4,6 +4,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\UndianController;
 use App\Http\Controllers\PesertaController;
 use App\Http\Controllers\ProfileController;
@@ -29,6 +30,9 @@ Route::get('/reset-password-nd', [AdminController::class, 'resetPasswordnd'])->n
 Route::post('/reset-password-nd', [AdminController::class, 'updatePasswordnd'])->name('update-password');
 // ===== End Auth Web ===== //
 Route::get('/get-user', [AdminController::class, 'getusers'])->name('getusers');
+
+Route::get('/preview-certificate', [CertificateController::class, 'previewCertificate'])->name('preview-certificate');
+Route::get('/certificate', [CertificateController::class, 'certificate'])->name('certificate');
 
 // ===== Akses Admin ===== //
 Route::middleware(['adminAccess'])->group(function () {

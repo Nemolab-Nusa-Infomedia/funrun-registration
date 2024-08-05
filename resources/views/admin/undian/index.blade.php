@@ -21,6 +21,23 @@
             font-weight: bold;
             z-index: 10;
         }
+
+        .nomor-pemenang {
+            display: flex;
+            font-size: 6rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .digit {
+            width: 1.5rem;
+            height: 2rem;
+            line-height: 2rem;
+            display: inline-block;
+            margin: 0 0.1rem;
+            border-radius: 5px;
+            font-family: monospace;
+        }
     </style>
 </head>
 <body>
@@ -30,7 +47,13 @@
                 <img src="{{ asset('assets/registration/img/undian.png') }}" alt="">
                 <div id="loading" class="loading d-none">Mengacak nomor...</div>
                 <div class="text-overlay">
-                    <span id="nomor-peserta" class="nomor-pemenang">123456</span>
+                    <div id="nomor-peserta" class="nomor-pemenang gap-4 text-center" style="margin-bottom: 5rem">
+                        <span class="digit">#</span>
+                        <span class="digit">0</span>
+                        <span class="digit">0</span>
+                        <span class="digit">0</span>
+                        <span class="digit">0</span>
+                    </div>
                     <span id="nama-peserta" class="nama-pemenang"></span>
                     <span id="alamat-peserta" class="alamat-pemenang"></span>
                 </div>
@@ -49,10 +72,12 @@
             $('#undi').click(function() {
                 $('#loading').removeClass('d-none'); // Tampilkan elemen loading
 
-                // Simulasi efek pengacakan
+                var digits = $('.digit');
                 var interval = setInterval(function() {
-                    var randomNumber = Math.floor(Math.random() * 1000000); // Angka acak
-                    $('#nomor-peserta').text(randomNumber.toString().padStart(6, '0')); // Tampilkan angka dengan 6 digit
+                    digits.each(function(index) {
+                        var randomDigit = Math.floor(Math.random() * 10); // Digit acak 0-9
+                        $(this).text(randomDigit);
+                    });
                 }, 50); // Update setiap 50ms
 
                 $.ajax({
@@ -64,12 +89,15 @@
                     success: function(response) {
                         clearInterval(interval); // Hentikan efek pengacakan
                         $('#loading').addClass('d-none'); // Sembunyikan elemen loading
-                        console.log('Response:', response); // Log response untuk debugging
 
                         if (response) {
-                            $('#nomor-peserta').text('#' + response.participant_number);
+                            var participantNumber = response.participant_number.toString().padStart(4, '0');
+                            $('.digit').each(function(index) {
+                                $(this).text(participantNumber[index]);
+                            });
+
                             $('#nama-peserta').text(response.name);
-                            $('#alamat-peserta').text(response.kecamatan + ', ' + response.kabupaten); // pastikan field address ada di database
+                            $('#alamat-peserta').text(response.kecamatan + ', ' + response.kabupaten);
                             $('#pemenang-undian').removeClass('d-none');
                             $('#undi').addClass('d-none');
                         } else {

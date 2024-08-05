@@ -8,33 +8,28 @@
     <link rel="stylesheet" href="{{ asset('assets/registration/css/undian/main.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
     <style>
-        .undian-image {
-            position: relative;
-        }
-        .text-overlay {
+        .loading {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.7);
             color: #fff;
-            text-align: center;
-            display: none;
-        }
-        .nomor-pemenang {
-            font-size: 2rem;
+            border-radius: 5px;
+            font-size: 16px;
             font-weight: bold;
-        }
-        .nama-pemenang, .alamat-pemenang {
-            font-size: 1.2rem;
+            z-index: 10;
         }
     </style>
 </head>
 <body>
     <div class="container d-flex justify-content-center align-items-center rounded-5">
         <div class="box mt-3 mb-3">
-            <div class="undian-image">
+            <div class="undian-image " >
                 <img src="{{ asset('assets/registration/img/undian.png') }}" alt="">
-                <div class="text-overlay" id="pemenang-undian">
+                <div id="loading" class="loading d-none">Mengacak nomor...</div>
+                <div class="text-overlay d-none" id="pemenang-undian">
                     <span id="nomor-peserta" class="nomor-pemenang">JHJSDHJSDHJ</span>
                     <span id="nama-peserta" class="nama-pemenang">SDHJHHD</span>
                     <span id="alamat-peserta" class="alamat-pemenang"></span>
@@ -52,7 +47,8 @@
     <script>
         $(document).ready(function() {
             $('#undi').click(function() {
-                $('#pemenang-undian').hide(); // Sembunyikan informasi pemenang
+                $('#loading').removeClass('d-none'); // Tampilkan elemen loading
+                $('#pemenang-undian').addClass('d-none'); // Sembunyikan informasi pemenang
 
                 // Simulasi efek pengacakan
                 var interval = setInterval(function() {
@@ -68,11 +64,13 @@
                     },
                     success: function(response) {
                         clearInterval(interval); // Hentikan efek pengacakan
+                        $('#loading').addClass('d-none'); // Sembunyikan elemen loading
+
                         if (response) {
                             $('#nomor-peserta').text('#' + response.participant_number);
                             $('#nama-peserta').text(response.name);
                             $('#alamat-peserta').text(response.kecamatan + ', ' + response.kabupaten); // pastikan field address ada di database
-                            $('#pemenang-undian').show(); // Tampilkan informasi pemenang
+                            $('#pemenang-undian').removeClass('d-none');
                             $('#undi').addClass('d-none');
                         } else {
                             alert('Tidak ada peserta yang terdaftar.');
@@ -80,6 +78,7 @@
                     },
                     error: function() {
                         clearInterval(interval); // Hentikan efek pengacakan
+                        $('#loading').addClass('d-none'); // Sembunyikan elemen loading
                         alert('Terjadi kesalahan saat melakukan undian.');
                     }
                 });
@@ -96,7 +95,7 @@
                     },
                     success: function(response) {
                         alert(response.message);
-                        $('#pemenang-undian').hide();
+                        $('#pemenang-undian').addClass('d-none');
                         $('#undi').removeClass('d-none');
                     },
                     error: function() {

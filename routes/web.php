@@ -91,6 +91,6 @@ Route::post('/email/verification-notification', function (Request $request) {
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 
-Route::get('/undian-doorprize', [UndianController::class, 'Undi']);
+Route::get('/undian-doorprize', [UndianController::class, 'index'])->name('undian-doorprize');
 Route::post('/undian-doorprize', [UndianController::class, 'PemenangUndian'])->name('mulai-undi');
 Route::post('/undian-doorprize-hangus', [UndianController::class, 'HangusUndian'])->name('hangus-undi');

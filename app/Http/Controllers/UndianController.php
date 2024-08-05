@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 
 class UndianController extends Controller
 {
-    public function Undi(){
-        return view('welcome');
+    public function index(){
+        return view('admin.undian.index');
     }
+    
     public function PemenangUndian()
     {
         $participants = User::whereNotNull('participant_number')->where('is_hangus', false)->pluck('participant_number')->toArray();

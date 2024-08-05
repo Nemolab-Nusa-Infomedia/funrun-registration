@@ -8,27 +8,32 @@
     <link rel="stylesheet" href="{{ asset('assets/registration/css/undian/main.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
     <style>
-        .loading {
+        .undian-image img {
+            width: 100%;
+            height: auto;
+        }
+        .text-overlay {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            padding: 10px 20px;
-            background-color: rgba(0, 0, 0, 0.7);
             color: #fff;
-            border-radius: 5px;
-            font-size: 16px;
+            text-align: center;
+        }
+        .nomor-pemenang {
+            font-size: 2rem;
             font-weight: bold;
-            z-index: 10;
+        }
+        .nama-pemenang, .alamat-pemenang {
+            font-size: 1.2rem;
         }
     </style>
 </head>
 <body>
     <div class="container d-flex justify-content-center align-items-center rounded-5">
-        <div class="box mt-3 mb-3">
-            <div class="undian-image " >
+        <div class="box mt-3 mb-3 position-relative">
+            <div class="undian-image">
                 <img src="{{ asset('assets/registration/img/undian.png') }}" alt="">
-                <div id="loading" class="loading d-none">Mengacak nomor...</div>
                 <div class="text-overlay d-none" id="pemenang-undian">
                     <span id="nomor-peserta" class="nomor-pemenang">JHJSDHJSDHJ</span>
                     <span id="nama-peserta" class="nama-pemenang">SDHJHHD</span>
@@ -47,7 +52,6 @@
     <script>
         $(document).ready(function() {
             $('#undi').click(function() {
-                $('#loading').removeClass('d-none'); // Tampilkan elemen loading
                 $('#pemenang-undian').addClass('d-none'); // Sembunyikan informasi pemenang
 
                 // Simulasi efek pengacakan
@@ -64,8 +68,6 @@
                     },
                     success: function(response) {
                         clearInterval(interval); // Hentikan efek pengacakan
-                        $('#loading').addClass('d-none'); // Sembunyikan elemen loading
-
                         if (response) {
                             $('#nomor-peserta').text('#' + response.participant_number);
                             $('#nama-peserta').text(response.name);
@@ -78,7 +80,6 @@
                     },
                     error: function() {
                         clearInterval(interval); // Hentikan efek pengacakan
-                        $('#loading').addClass('d-none'); // Sembunyikan elemen loading
                         alert('Terjadi kesalahan saat melakukan undian.');
                     }
                 });

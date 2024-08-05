@@ -50,8 +50,8 @@
                 $('#loading').removeClass('d-none'); // Tampilkan elemen loading
                 $('#pemenang-undian').addClass('d-none'); // Sembunyikan informasi pemenang
 
-                var duration = 10000; // Durasi total pengacakan dalam milidetik
-                var intervalDuration = 100; // Durasi setiap update dalam milidetik
+                var duration = 5000; // Durasi total pengacakan dalam milidetik
+                var intervalDuration = 50; // Durasi setiap update dalam milidetik
                 var endTime = new Date().getTime() + duration;
 
                 var interval = setInterval(function() {

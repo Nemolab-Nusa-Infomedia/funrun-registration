@@ -33,6 +33,7 @@ Route::get('/get-user', [AdminController::class, 'getusers'])->name('getusers');
 
 Route::get('/preview-certificate', [CertificateController::class, 'previewCertificate'])->name('preview-certificate');
 Route::get('/certificate', [CertificateController::class, 'certificate'])->name('certificate');
+Route::get('/certificate/{name}', [CertificateController::class, 'generate'])->name('generate-certificate');
 
 // ===== Akses Admin ===== //
 Route::middleware(['adminAccess'])->group(function () {

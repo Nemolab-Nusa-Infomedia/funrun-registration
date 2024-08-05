@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Certificate</title>
 
-    <link rel="stylesheet" href="{{ asset('assets/registration/css/certificate/main.css') }}">
+    <link rel="stylesheet" href="{{ public_path('assets/registration/css/certificate/main.css') }}">
 </head>
 <body>
     <div class="sertificate">
-        <span>Vindra Arya Yulian</span>
+        <span>{{ $name }}</span>
     </div>
 </body>
 </html>

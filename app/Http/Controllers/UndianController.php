@@ -16,12 +16,18 @@ class UndianController extends Controller
         $winner = null;
 
         if (!empty($participants)) {
+            $participantCount = count($participants);
+            $shuffleIterations = ceil($participantCount / 100);
+            for ($i = 0; $i < $shuffleIterations; $i++) {
+                shuffle($participants);
+            }
             $winnerNumber = $participants[array_rand($participants)];
             $winner = User::where('participant_number', $winnerNumber)->first();
         }
 
         return response()->json($winner);
     }
+
     public function HangusUndian(Request $request){
         $user = User::where('participant_number', $request->participant_number)->first();
         if ($user) {

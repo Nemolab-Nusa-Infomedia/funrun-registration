@@ -25,7 +25,7 @@
 
                 <img src="{{ asset('assets/registration/img/register-success.png') }}" class="mx-auto mb-3" style="width: 500px" alt="">
 
-                <p class="text-center">pembayaran anda <b class="text-c1">telah berhasil dan sukses</b>, email Konfirmasi telah <b>dikirim ke email anda untuk melihat alur pengambilan Goodibag dan nomor peserta serta riwayat transaksi atau buka profile dengan klik tombol dibawah </b></p>
+                <p class="text-center">pembayaran anda <b class="text-c1">telah berhasil dan sukses</b>, email Konfirmasi telah <b>dikirim ke email anda untuk melihat alur pengambilan Goodiebag dan nomor peserta serta riwayat transaksi atau buka profile dengan klik tombol dibawah </b></p>
 
                 <div class="row mx-auto">
                     <a href="{{ route('profile') }}" class="btn btn-c1 text-white fw-bold" style="font-size: 15px">Buka Profil anda</a>

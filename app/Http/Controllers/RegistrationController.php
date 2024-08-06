@@ -39,6 +39,7 @@ class RegistrationController extends Controller
             'contant_urgent' => 'required',
             'goldar' => 'required',
             'r_penyakit' => 'required',
+            'payment_type' => 'required',
         ],
         [
             'name.required' => 'Nama tidak boleh kosong',
@@ -53,6 +54,7 @@ class RegistrationController extends Controller
             'contant_urgent.required' => 'Nama kontak darurat tidak boleh kosong',
             'goldar.required' => 'GOlongan darah tidak boleh kosong',
             'r_penyakit.required' => 'Riwayat penyakit tidak boleh kosong',
+            'payment_type' => 'Pilih opsi pembayaran terlebih dahulu'
         ]
         );
 
@@ -69,7 +71,7 @@ class RegistrationController extends Controller
         $adminFee = $this->getAdminFee($paymentType);
         $cekParticipant = User::orderBy('participant_number', 'desc')->first();
         $ticketPrice = 175000;
-        if ($cekParticipant && $cekParticipant->participant_number > 2) {
+        if ($cekParticipant && $cekParticipant->participant_number > 199) {
             $ticketPrice = 200000;
         }
         $grossAmount = $ticketPrice + $adminFee;

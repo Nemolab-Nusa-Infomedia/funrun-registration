@@ -198,7 +198,7 @@
                         <div class="col-12 col-md-12">
                             <div class="mb-3">
                                 <label for="payment_type" class="form-label">Pilih Metode Pembayaran</label>
-                                <select class="form-select" id="payment_type" name="payment_type" style="display: none;">
+                                <select class="form-select @error('payment_type') is-invalid @enderror" id="payment_type" name="payment_type" style="display: none;" required>
                                     <option value="" selected>--- Pilih Pembayaran ---</option>
                                     <option value="gopay" data-img-src="{{ asset('assets/registration/img/metode-pembayaran/gopay.png') }}">GoPay</option>
                                     <option value="shopeepay" data-img-src="{{ asset('assets/registration/img/metode-pembayaran/shopeepay.jpg') }}">ShopeePay</option>
@@ -206,6 +206,9 @@
                                     <option value="bank_merchant" data-img-src="{{ asset('assets/registration/img/metode-pembayaran/bank.png') }}">Bank Merchant</option>
                                     <option value="credit_card" data-img-src="{{ asset('assets/registration/img/metode-pembayaran/kartu kredit.png') }}">Kartu Kredit</option>
                                 </select>
+                                @error('payment_type')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
                                 <div class="custom-select-container" id="custom-select-container"></div>
                             </div>
                         </div>
@@ -225,7 +228,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <span>Apakah anda setuju untuk melakukan pembayaran ?</span>
-                                    <span>click tombol bayar untuk melanjutkan pendaftaran</span>
+                                    <span>klik tombol bayar untuk melanjutkan pendaftaran</span>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-outline-dark rounded-5 text-dark fw-bold border-1 border" data-bs-dismiss="modal" aria-label="Close">Batal</button>

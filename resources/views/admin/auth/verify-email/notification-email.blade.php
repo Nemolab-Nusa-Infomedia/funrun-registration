@@ -28,7 +28,10 @@
                 <p class="text-center">email verifikasi anda telah dikirimkan ke email anda, silahka klik tautan pada email <span class="text-c1">{{ $email }}</span> untuk melakukan verisfikasi email.</p>
 
                 <div class="row mx-auto">
-                    <a id="resendLink" href="{{ route('verification.send') }}" class="btn btn-c1 text-white fw-bold" style="font-size: 15px">Kirim Ulang Link</a>
+                    <form action="{{ route('verification.send') }}" method="post">
+                        @csrf
+                        <button id="resendLink" type="submit" class="btn btn-c1 text-white fw-bold" style="font-size: 15px">Kirim Ulang Link</button>
+                    </form>
                 </div>
             </div>
         </div>

@@ -31,10 +31,9 @@
                     <form action="{{ route('verification.send') }}" method="post">
                         @csrf
                         <div class="row">
-                            <a href="https://mail.google.com/">Buka Email Anda</a>
+                            <button type="submit" class="btn btn-c1 text-white fw-bold" style="font-size: 15px">Kirim Ulang Link</button>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>

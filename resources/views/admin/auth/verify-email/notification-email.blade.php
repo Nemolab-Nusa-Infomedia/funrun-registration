@@ -39,7 +39,6 @@
                             <button type="submit" class="btn btn-c1 text-white fw-bold" style="font-size: 15px">Kirim Ulang Link</button>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>

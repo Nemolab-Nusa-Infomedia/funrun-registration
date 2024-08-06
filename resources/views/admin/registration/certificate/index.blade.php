@@ -24,7 +24,7 @@
 
         .sertificate{
             position: absolute;
-            top: 48.5%;
+            top: 49%;
             left: 50%;
             transform: translate(-50%, -50%); /* Pusatkan konten secara vertikal dan horizontal */
             text-align: center;

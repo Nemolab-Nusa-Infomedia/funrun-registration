@@ -35,8 +35,9 @@
                 <div class="row mx-auto">
                     <form action="{{ route('verification.send') }}" method="post">
                         @csrf
-                        <button id="resendLink" type="submit" class="btn btn-c1 text-white fw-bold" style="font-size: 15px">Kirim Ulang Link</button>
+                        <button type="submit" class="btn btn-c1 text-white fw-bold" style="font-size: 15px">Kirim Ulang Link</button>
                     </form>
+
                 </div>
             </div>
         </div>

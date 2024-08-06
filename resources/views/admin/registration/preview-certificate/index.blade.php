@@ -9,18 +9,31 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{{ asset('assets/loading/css/main.css') }}">
     <style>
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            visibility: hidden;
+        }
+
+        .overlay.active {
+            visibility: visible;
+        }
+
         .loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             padding: 10px 20px;
             background-color: rgba(0, 0, 0, 0.7);
             color: #fff;
             border-radius: 5px;
-            font-size: 8px;
+            font-size: 16px;
             font-weight: bold;
-            z-index: 10;
         }
     </style>
 </head>
@@ -32,7 +45,9 @@
           <img src="{{ asset('assets/registration/img/loading/sepatu3.png') }}" alt="Loading" class="shoe">
         </div>
     </div>
-    <div id="loading" class="loading d-none">Sedang Memproses download mohon tunggu...</div>
+    <div id="overlay" class="overlay">
+        <div id="loading" class="loading">Sedang Memproses download mohon tunggu...</div>
+    </div>
     <div class="container d-flex justify-content-center align-items-center rounded-5">
         <div class="box mt-3 mb-3">
             <div class="certificate-image">
@@ -81,8 +96,8 @@
 
     <script>
         document.getElementById('btnSertifikat').addEventListener('click', function(e) {
-            // Tampilkan animasi loading
-            document.getElementById('loading').classList.remove('d-none');
+            // Tampilkan overlay dan animasi loading
+            document.getElementById('overlay').classList.add('active');
 
             // Cegah link untuk segera berpindah
             e.preventDefault();
@@ -108,14 +123,14 @@
                     a.click();
                     a.remove();
 
-                    // Sembunyikan animasi loading
-                    document.getElementById('loading').classList.add('d-none');
+                    // Sembunyikan overlay
+                    document.getElementById('overlay').classList.remove('active');
                 })
                 .catch(error => {
                     console.error('There was a problem with the fetch operation:', error);
 
-                    // Sembunyikan animasi loading jika terjadi error
-                    document.getElementById('loading').classList.add('d-none');
+                    // Sembunyikan overlay jika terjadi error
+                    document.getElementById('overlay').classList.remove('active');
                 });
         });
     </script>

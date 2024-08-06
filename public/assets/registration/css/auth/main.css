@@ -220,9 +220,9 @@ h2, h3 {
 
 .notif-verifyEmail {
     display: flex;
-    justify-content: center; /* Untuk perataan horizontal */
-    align-items: center;     /* Untuk perataan vertikal */
-    height: 100vh;           /* Mengisi tinggi viewport untuk vertikal center */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 #resendButton:disabled {

@@ -108,6 +108,12 @@
                                     @endif
                                 </td>
                             </tr>
+                            <tr>
+                                <td>Sertificate</td>
+                                <td>:
+                                    <a href="#" id="btnSertifikat" class="btn btn-info py-2">Lihat Sertificate</a>
+                                </td>
+                            </tr>
                         </table>
                     </div>
                     @endif
@@ -129,5 +135,33 @@
             toggleButton.textContent = "Tutup Detail";
         }
     }
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Waktu target dalam WIB (6 Oktober 2024 jam 07:00 pagi WIB)
+        const targetDateWIB = new Date('2024-10-06T07:00:00+07:00'); // +07:00 adalah offset untuk WIB
+
+        // Waktu saat ini dalam WIB
+        const now = new Date();
+        const localTimeOffset = now.getTimezoneOffset() * 60000; // Offset waktu lokal dalam ms
+        const WIBOffset = 7 * 60 * 60 * 1000; // Offset WIB dalam ms
+        const localNowWIB = new Date(now.getTime() + localTimeOffset + WIBOffset);
+
+        // Mendapatkan tombol sertifikat
+        const btnSertifikat = document.getElementById('btnSertifikat');
+
+        // Memeriksa apakah waktu saat ini sudah melewati waktu target
+        btnSertifikat.addEventListener('click', function(event) {
+            if (localNowWIB < targetDateWIB) {
+                event.preventDefault(); // Mencegah aksi klik
+                alert('Sertifikat belum bisa di Dibuka, Sertificate dapat di buka pada tanggal 6 Oktober 2024 jam 07:00 WIB.'); // Pesan peringatan
+            } else {
+                // Lakukan aksi yang diinginkan jika waktu sudah melewati target
+                // Misalnya, arahkan ke halaman sertifikat
+                window.location.href = 'URL_KE_SERTIFIKAT';
+            }
+        });
+    });
 </script>
 @endsection

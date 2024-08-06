@@ -31,9 +31,9 @@ Route::post('/reset-password-nd', [AdminController::class, 'updatePasswordnd'])-
 // ===== End Auth Web ===== //
 Route::get('/get-user', [AdminController::class, 'getusers'])->name('getusers');
 
-Route::get('/preview-certificate', [CertificateController::class, 'previewCertificate'])->name('preview-certificate');
+Route::get('/preview-certificate/{id}', [CertificateController::class, 'previewCertificate'])->name('preview-certificate');
 Route::get('/certificate', [CertificateController::class, 'certificate'])->name('certificate');
-Route::get('/certificate/{name}', [CertificateController::class, 'generate'])->name('generate-certificate');
+Route::get('/certificate/{id}', [CertificateController::class, 'generate'])->name('generate-certificate');
 
 // ===== Akses Admin ===== //
 Route::middleware(['adminAccess'])->group(function () {

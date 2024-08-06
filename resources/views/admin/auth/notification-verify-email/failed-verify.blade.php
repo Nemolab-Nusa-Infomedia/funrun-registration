@@ -28,7 +28,7 @@
                 <p class="text-center">email anda belum berhasil terverifikasi, silahkan klik tombol dibawah untuk mengirimkan pesan verifikasi lagi</p>
 
                 <div class="row mx-auto">
-                    <a id="resendLink" href="#" class="btn btn-c1 text-white fw-bold" style="font-size: 15px">Kirim Ulang Link</a>
+                    <a id="resendLink" href="{{ route('verification.send') }}" class="btn btn-c1 text-white fw-bold" style="font-size: 15px">Kirim Ulang Link</a>
                 </div>
             </div>
         </div>

@@ -79,6 +79,7 @@ Route::get('/failed-verify-email', function () {
 Route::get('/email/verify', function () {
     return view('admin.auth.verify-email.notification-email');
 })->name('verification.notice');
+
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
     $user = $request->user();

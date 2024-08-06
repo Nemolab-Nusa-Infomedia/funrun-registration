@@ -224,56 +224,40 @@ class RegistrationController extends Controller
         return view('admin.auth.register');
     }
 
-    public function emailValidation(Request $request) {
+    public function emailValidation(Request $request){
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:users',
             'phone' => 'required|unique:users,phone',
             'password' => 'required|min:8'
-        ], [
+        ],
+        [
             'email.unique' => 'Email sudah terdaftar silahkan login saja',
             'phone.unique' => 'Nomor telepon sudah terdaftar',
             'password.min' => 'Password harus minimal 8 karakter'
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+                return redirect()->back()->withErrors($validator)->withInput();
         }
-
         $user = User::create([
             'email' => $request->input('email'),
             'phone' => $request->input('phone'),
             'password' => Hash::make($request->input('password'))
         ]);
-
-        event(new Registered($user)); // Mengirim email verifikasi
+        event(new Registered($user));
         Auth::login($user);
-
-        return view('admin.auth.verify-email.notification-email', ['email' => $user->email]);
-    }
-
-    public function checking(Request $request) {
-        $credentials = $request->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-
-            if (!$user->hasVerifiedEmail()) {
-                Auth::logout();
-                return redirect()->route('gagal-login')->withErrors(['email_verified_at' => 'Anda belum melakukan verifikasi email']);
-            }
-
-            return redirect()->route('profile');
-        }
-
-        return back()->withErrors(['email' => 'The provided credentials are incorrect.']);
+        return view('admin.auth.verify-email.notification-email', ['email' => $user['email']]);
     }
 
     public function login(){
         return view('admin.auth.login');
     }
 
-    public function gagalLogin(){
-        return view('admin.auth.verify-email.not-confirm-email');
+    public function checking(Request $request){
+        if(Auth::attempt($request->only('email','password'))){
+            return redirect()->route('profile');
+        }
+        return back();
     }
 
     public function resetPassword(){

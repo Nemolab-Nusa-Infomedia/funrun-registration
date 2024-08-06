@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use PDF;
+use TCPDF;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
 
 class CertificateController extends Controller
 {
@@ -20,32 +19,30 @@ class CertificateController extends Controller
 
     public function generate($name)
 {
-        // Atur opsi untuk Dompdf
-        $options = new Options();
-        $options->set('defaultFont', 'Helvetica');
+        $dompdf = new Dompdf();
 
-        // Buat instance Dompdf dengan opsi
-        $dompdf = new Dompdf($options);
+    // Setel opsi
+    $options = new Options();
+    $options->set('isHtml5ParserEnabled', true);
+    $options->set('isPhpEnabled', true);
+    $dompdf->setOptions($options);
 
-        // Ambil data untuk dikirim ke view
-        $data = [
-            'name' => $name
-        ];
+    // Muat HTML konten
+    $html = view('admin.registration.certificate.index', [
+        'name' => $name // Data yang akan dikirim ke view
+    ])->render();
+    
+    // Muat HTML ke Dompdf
+    $dompdf->loadHtml($html);
 
-        // Render view menjadi HTML
-        $html = View::make('admin.registration.certificate.index', $data)->render();
+    // Set ukuran kertas dan orientasi
+    $dompdf->setPaper('A4', 'landscape');
 
-        // Load HTML ke Dompdf
-        $dompdf->loadHtml($html);
+    // Render PDF
+    $dompdf->render();
 
-        // (Opsional) Atur ukuran dan orientasi kertas
-        $dompdf->setPaper('A4', 'landscape');
-
-        // Render PDF
-        $dompdf->render();
-
-        // Stream PDF ke browser
-        return $dompdf->stream('certificate.pdf');
+    // Output PDF (untuk download)
+    return $dompdf->stream('document.pdf', ['Attachment' => 0]);
     }
 
 

@@ -56,7 +56,7 @@
         </p>
         <div class="instructions">
             <p><strong>Pengambilan GoodieBag:</strong> 5 Oktober 2024</p>
-            <p><strong>Hari Acara:</strong> 6 Oktober 20244</p>
+            <p><strong>Hari Acara:</strong> 6 Oktober 2024</p>
             <p><strong>Tempat:</strong> Alun-alun Purwokerto</p>
         </div>
         <div class="instructions">

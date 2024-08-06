@@ -31,9 +31,6 @@ Route::post('/reset-password-nd', [AdminController::class, 'updatePasswordnd'])-
 // ===== End Auth Web ===== //
 Route::get('/get-user', [AdminController::class, 'getusers'])->name('getusers');
 
-Route::get('/preview-certificate', [CertificateController::class, 'previewCertificate'])->name('preview-certificate');
-Route::get('/certificate', [CertificateController::class, 'certificate'])->name('certificate');
-Route::get('/certificate/{name}', [CertificateController::class, 'generate'])->name('generate-certificate');
 
 // ===== Akses Admin ===== //
 Route::middleware(['adminAccess'])->group(function () {
@@ -42,6 +39,10 @@ Route::middleware(['adminAccess'])->group(function () {
     Route::post('/verify-qr', [AdminController::class, 'verifyQrCode']);
     Route::get('/hasil-scan/{id}', [RegistrationController::class, 'hasilScan'])->name('hasil-scan');
     Route::get('/peserta', [PesertaController::class, 'indexPeserta'])->name('peserta');
+
+    Route::get('/undian-doorprize', [UndianController::class, 'index'])->name('undian-doorprize');
+    Route::post('/undian-doorprize', [UndianController::class, 'PemenangUndian'])->name('mulai-undi');
+    Route::post('/undian-doorprize-hangus', [UndianController::class, 'HangusUndian'])->name('hangus-undi');
 });
 // ===== End Akses Admin ===== //
 
@@ -55,14 +56,15 @@ Route::middleware(['authall'])->group(function () {
     Route::get('/logout', [RegistrationController::class, 'logout'])->name('logout');
     Route::post('/create-account', [RegistrationController::class, 'register'])->name('register');
     Route::post('/paymentHandler', [RegistrationController::class, 'paymentHandler'])->name('paymentHandler');
-
-    // Get Data Region
-
+    
     // Notification Pembayaran
     Route::get('/pembayaran-berhasil', [RegistrationController::class, 'pembayaranBerhasil'])->name('pembayaran-berhasil');
     Route::get('/pembayaran-gagal', [RegistrationController::class, 'pembayaranGagal'])->name('pembayaran-gagal');
     Route::get('/payment/retry', [RegistrationController::class, 'retryingPayment'])->name('payment.retrying');
-
+    
+    Route::get('/preview-certificate/{name}', [CertificateController::class, 'previewCertificate'])->name('preview-certificate');
+    Route::get('/certificate', [CertificateController::class, 'certificate'])->name('certificate');
+    Route::get('/certificate/{name}', [CertificateController::class, 'generate'])->name('generate-certificate');
 });
 
 // ===== Email =====
@@ -90,8 +92,3 @@ Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-
-
-Route::get('/undian-doorprize', [UndianController::class, 'index'])->name('undian-doorprize');
-Route::post('/undian-doorprize', [UndianController::class, 'PemenangUndian'])->name('mulai-undi');
-Route::post('/undian-doorprize-hangus', [UndianController::class, 'HangusUndian'])->name('hangus-undi');

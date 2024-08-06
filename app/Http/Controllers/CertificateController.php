@@ -5,44 +5,43 @@ namespace App\Http\Controllers;
 use TCPDF;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use App\Models\User;
+use Dompdf\Adapter\CPDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class CertificateController extends Controller
 {
-    public function previewCertificate(){
-        return view('admin.registration.preview-certificate.index');
+    public function previewCertificate($name){
+        return view('admin.registration.preview-certificate.index',[
+            'name' => $name
+        ]);
     }
 
     public function certificate(){
         return view('admin.registration.certificate.index');
     }
 
-    public function generate($name)
-{
-        $dompdf = new Dompdf();
+    public function generate($name){
+        $options = new Options();
+        $options->set('enabled', true);
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+        $options->set('isFontSubsettingEnabled', false);
+        $options->set('pdfBackend', 'CPDF');
+        $options->set('isRemoteEnabled', true);
 
-    // Setel opsi
-    $options = new Options();
-    $options->set('isHtml5ParserEnabled', true);
-    $options->set('isPhpEnabled', true);
-    $dompdf->setOptions($options);
+        $dompdf = new Dompdf($options);
 
-    // Muat HTML konten
-    $html = view('admin.registration.certificate.index', [
-        'name' => $name // Data yang akan dikirim ke view
-    ])->render();
-    
-    // Muat HTML ke Dompdf
-    $dompdf->loadHtml($html);
+        $html = View::make('admin.registration.certificate.index', ['name' => $name])->render();
 
-    // Set ukuran kertas dan orientasi
-    $dompdf->setPaper('A4', 'landscape');
+        $dompdf->loadHtml($html);
 
-    // Render PDF
-    $dompdf->render();
+        $dompdf->setPaper('A4', 'landscape');
 
-    // Output PDF (untuk download)
-    return $dompdf->stream('document.pdf', ['Attachment' => 0]);
+        $dompdf->render();
+
+        return $dompdf->stream('certificate.pdf');
     }
 
 

@@ -21,6 +21,11 @@
     <div class="container d-flex justify-content-center align-items-center notif-verifyEmail">
         <div class="box mt-3 p-3">
             <div class="row mx-auto">
+                @if (session('message'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('message') }}
+                    </div>
+                @endif
                 <h3 class="fw-bold text-c1 text-center mb-3">KONFIRMASI EMAIL PENDAFTARAN</h3>
 
                 <img src="{{ asset('assets/registration/img/email-notification.png') }}" class="mx-auto mb-3" style="width: 500px" alt="">

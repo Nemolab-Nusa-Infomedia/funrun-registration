@@ -18,7 +18,7 @@
             background-color: rgba(0, 0, 0, 0.7);
             color: #fff;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 8px;
             font-weight: bold;
             z-index: 10;
         }

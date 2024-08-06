@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Middleware\AdminAccess;
+use App\Http\Middleware\AuthCheckAll;
+use App\Http\Middleware\DisableCache;
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\SuperAdminAccess;
+use App\Http\Middleware\CheckEmailVerificationLink;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
@@ -16,7 +19,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'adminAccess' => AdminAccess::class,
-            'superAdminAccess' => SuperAdminAccess::class,
+            'authall' => AuthCheckAll::class,
+            'disableCache' => DisableCache::class,
+            'checkVerifyLinkExpired' => CheckEmailVerificationLink::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

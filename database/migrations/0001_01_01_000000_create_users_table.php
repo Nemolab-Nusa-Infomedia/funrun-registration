@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('domisili')->nullable();
             $table->string('kabupaten')->nullable();
             $table->string('kecamatan')->nullable();
+            $table->string('kodeunik')->nullable();
             $table->string('desa')->nullable();
             $table->string('phone')->nullable();
             $table->string('size')->nullable();
@@ -37,11 +38,12 @@ return new class extends Migration
             $table->string('goldar')->nullable();
             $table->string('r_penyakit')->nullable();
             $table->string('kode_pay')->nullable();
-            $table->enum('status', ['settlement','pending'])->default('pending');
+            $table->enum('status', ['settlement','pending','failed','expired'])->default('pending');
             $table->timestamp('verification_admin', precision: 0)->nullable();
             $table->timestamp('waktu_pembayaran')->nullable();
-            $table->string('total')->nullable();
+            $table->decimal('total', 12, 2)->nullable();
             $table->string('by_admin')->nullable();
+            $table->boolean('is_hangus')->default(false);
             $table->timestamps();
         });
 

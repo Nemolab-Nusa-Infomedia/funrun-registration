@@ -47,6 +47,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'by_admin',
         'waktu_pembayaran',
         'total',
+        'kodeunik',
+        'kodeunik',
+        'is_hangus'
     ];
 
     /**

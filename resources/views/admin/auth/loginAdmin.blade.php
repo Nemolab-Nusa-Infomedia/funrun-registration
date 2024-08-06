@@ -1,16 +1,16 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login Admin FunRun Rotary</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Peserta FunRun</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ secure_asset('assets/registration/css/auth/main.css') }}">
-    <link rel="stylesheet" href="{{ secure_asset('assets/loading/css/main.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
-    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/admin/css/auth/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/loading/css/main.css') }}">
+
+    <script src="https://kit.fontawesome.com/0a267e6f70.js" crossorigin="anonymous"></script>
 </head>
-  <body>
+<body>
     <div id="loading-container">
         <div class="loader">
           <img src="{{ asset('assets/registration/img/loading/sepatu1.png') }}" alt="Loading" class="shoe">
@@ -18,52 +18,53 @@
           <img src="{{ asset('assets/registration/img/loading/sepatu3.png') }}" alt="Loading" class="shoe">
         </div>
     </div>
-    <div class="container-fluid funrun-registration">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 col-md-12">
-                    <h3 class="text-center fw-bold mt-5 mb-5">Login Admin Event FunRun Rotary <br> Purwokerto 2024</h3>
-                    <div class="row col-12 col-md-8 mx-auto">
-                        <form action="{{ route('cek-admin') }}" method="post">
-                            @csrf
-                            <div class="card p-0 mb-3 gradient-background kaca">
-                                <div class="card-header" style="background: transparent; border: none; z-index: 2">
-                                    <h3 class="text-dark text-center fw-bold mt-3 mb-3">Login</h3>
-                                    <span class="border-bottom border-dark border-3 rounded-2" style="width: 120px"></span>
-                                </div>
-                                <div class="card-body p-0" style="z-index: 2">
-                                    <div class="row col-12 col-md-12 mx-auto">
-                                        <div class="col-12 col-md-12">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">Email</label>
-                                                <input type="email" class="form-control" name="email" placeholder="masukan email anda">
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-12">
-                                            <div class="mb-3 position-relative">
-                                                <label for="password" class="form-label">Password</label>
-                                                <input type="password" class="form-control" id="password" name="password" placeholder="masukan password">
-                                                <i class="eye-icon ri-eye-line" id="togglePassword" onclick="togglePassword()"></i>
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 text-center">
-                                            <button type="submit" class="btn btn-submit rounded-5 text-dark fw-bold border-1 border">Submit</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+    <div class="container-fluid">
+        <div class="row p-3 mx-auto">
+            <div class="col-12 col-md-7 d-md-block p-0 bg-auth">
+                <div class="bg-image" style="background-image: url('{{ asset('assets/admin/img/auth/auth-bg.png') }}'); border-radius: 15px;"></div>
+            </div>
+
+            <div class="col-12 col-md-5 login-form-container box">
+                <div class="login-form">
+                    <h2 class="text-center fw-bold" style="font-size: 25px;">Login</h2>
+                    <p class="text-center">Selamat datang panitia FunRun</p>
+                    <!-- form user -->
+                    <form action="{{ route('cek-admin') }}" method="POST" class="mt-5">
+                        @csrf
+                        <div class="form-group text-center mb-5 border-bottom border-light-subtle position-relative">
+                            <label for="email" class="mb-2 fw-bold">Masukkan Email</label>
+                            <input type="email" class="form-control" name="email" placeholder="masukkan email anda" required>
+                        </div>
+                        <div class="form-group text-center mb-2 border-bottom border-light-subtle position-relative">
+                            <label for="password" class="mb-2 fw-bold">Masukan Kata Sandi</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="masukan kata sandi" required>
+                            <i class="fas fa-eye" id="togglePassword" style="position: absolute; right: 10px; top: 70%; transform: translateY(-50%); cursor: pointer; font-size: 18px; z-index: 99;"></i>
+                        </div>
+                        <div class="d-flex justify-content-between gap-2">
+                            <a href="https://funrun.rotarypurwokerto.id/" class="btn btn-outline-c6 py-2">Kembali</a>
+                            <button type="submit" class="btn btn-c1 text-white py-2">Masuk</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="{{ secure_asset('assets/registration/js/auth/main.js') }}"></script>
-    <script src="{{ secure_asset('assets/loading/js/main.js') }}"></script>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <script src="{{ asset('assets/loading/js/main.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </body>
+
+    <script>
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            var passwordField = document.getElementById('password');
+            var type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            var icon = this;
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+        });
+    </script>
+</body>
 </html>

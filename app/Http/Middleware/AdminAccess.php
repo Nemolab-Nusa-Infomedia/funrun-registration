@@ -16,7 +16,7 @@ class AdminAccess
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::guard('admin')->user()->type == 'admin' || Auth::guard('admin')->user()->type == 'superadmin') {
+        if (Auth::guard('admin')->check() && (Auth::guard('admin')->user()->type == 'admin')) {
             return $next($request);
         }
         return back();

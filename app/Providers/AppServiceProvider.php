@@ -28,8 +28,6 @@ class AppServiceProvider extends ServiceProvider
                 'url' => $url,
                 'email' => $notifiable->email
             ]);
-            // ->line('Klik Tombol Dibawah Ini Untuk Verifikasi')
-            // ->action('Verifikasi Email', $url);
     });
     }
 }

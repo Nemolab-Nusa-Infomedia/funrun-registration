@@ -28,10 +28,10 @@
                             window.location.href = '/pembayaran-berhasil';
                         },
                         onPending: function(result) {
-                            window.location.href = '/pembayaran-gagal';
+                            window.location.href = '/pembayaran-gagal?transaction_id={{ $transactionId }}';
                         },
                         onError: function(result) {
-                            window.location.href = '/pembayaran-gagal';
+                            window.location.href = '/pembayaran-gagal?transaction_id={{ $transactionId }}';
                         },
                         onClose: function(){
                             window.location.href = '/form';

@@ -8,6 +8,33 @@
     <link rel="stylesheet" href="{{ asset('assets/registration/css/preview-certificate/main.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{{ asset('assets/loading/css/main.css') }}">
+
+    <style>
+        #loading {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+    .spinner {
+        border: 4px solid rgba(0,0,0,0.1);
+        border-radius: 50%;
+        border-top: 4px solid #fff;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    </style>
 </head>
   <body>
     <div id="loading-container">
@@ -16,6 +43,11 @@
           <img src="{{ asset('assets/registration/img/loading/sepatu2.png') }}" alt="Loading" class="shoe">
           <img src="{{ asset('assets/registration/img/loading/sepatu3.png') }}" alt="Loading" class="shoe">
         </div>
+    </div>
+
+    <div id="loading" style="display: none;">
+        <div class="spinner"></div>
+        <p>Sertificate sedang di proses mohon tunggu hingga prosesnya selesai.....</p>
     </div>
 
     <div class="container d-flex justify-content-center align-items-center rounded-5">
@@ -63,5 +95,19 @@
             });
         });
     </script> --}}
+
+    <script>
+        document.getElementById('btnSertifikat').addEventListener('click', function(event) {
+            event.preventDefault(); // Mencegah tindakan default link
+
+            // Tampilkan animasi loading
+            document.getElementById('loading').style.display = 'flex';
+
+            // Unduh sertifikat setelah animasi loading tampil
+            setTimeout(() => {
+                window.location.href = this.href;
+            }, 100); // Delay kecil untuk memastikan animasi loading terlihat
+        });
+    </script>
   </body>
 </html>

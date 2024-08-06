@@ -21,6 +21,7 @@ Route::post('/validation-email', [RegistrationController::class, 'emailValidatio
 Route::get('/login', [RegistrationController::class, 'login'])->name('login');
 Route::post('/check', [RegistrationController::class, 'checking'])->name('check');
 Route::get('/reset-password', [RegistrationController::class, 'resetPassword'])->name('reset-password');
+Route::get('/gagal-login', [RegistrationController::class, 'gagalLogin'])->name('gagal-login');
 Route::get('/login-admin', [AdminController::class, 'adminLogin'])->name('admin-login');
 Route::post('/cek-admin', [AdminController::class, 'adminCek'])->name('cek-admin');
 Route::get('/logout-admin', [AdminController::class, 'adminLogout'])->name('admin-logout');

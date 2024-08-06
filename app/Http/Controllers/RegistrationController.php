@@ -254,10 +254,23 @@ class RegistrationController extends Controller
     }
 
     public function checking(Request $request){
-        if(Auth::attempt($request->only('email','password'))){
+        if(Auth::attempt($request->only('email', 'password'))){
+            $user = Auth::user();
+
+            // Cek apakah kolom gender sudah terisi
+            if(empty($user->email_verified_at)){
+                Auth::logout();  // Logout pengguna jika gender belum terisi
+                return redirect()->route('gagal-login')->withErrors(['email_verified_at' => 'Anda belum melakukan verifikasi email']);
+            }
+
             return redirect()->route('profile');
         }
-        return back();
+
+        return back()->withErrors(['email' => 'The provided credentials are incorrect.']);
+    }
+
+    public function gagalLogin(){
+        return view('admin.auth.verify-email.not-confirm-email');
     }
 
     public function resetPassword(){

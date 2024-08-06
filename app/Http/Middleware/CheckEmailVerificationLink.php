@@ -20,7 +20,6 @@ class CheckEmailVerificationLink
             // Redirect to expired verification link route
             return redirect()->route('failed-verify-email');
         }
-
         return $next($request);
     }
 }

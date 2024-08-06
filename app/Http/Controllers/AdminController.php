@@ -42,7 +42,7 @@ class AdminController extends Controller
         if (Auth::guard('admin')->attempt($request->only('email', 'password'))) {
             return redirect()->route('profile');
         }
-        return back();
+        return redirect()->route('admin-login');
     }
 
     public function resetPassword(){

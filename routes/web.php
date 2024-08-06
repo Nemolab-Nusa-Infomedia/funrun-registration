@@ -57,12 +57,12 @@ Route::middleware(['authall'])->group(function () {
     Route::get('/logout', [RegistrationController::class, 'logout'])->name('logout');
     Route::post('/create-account', [RegistrationController::class, 'register'])->name('register');
     Route::post('/paymentHandler', [RegistrationController::class, 'paymentHandler'])->name('paymentHandler');
-    
+
     // Notification Pembayaran
     Route::get('/pembayaran-berhasil', [RegistrationController::class, 'pembayaranBerhasil'])->name('pembayaran-berhasil');
     Route::get('/pembayaran-gagal', [RegistrationController::class, 'pembayaranGagal'])->name('pembayaran-gagal');
     Route::get('/payment/retry', [RegistrationController::class, 'retryingPayment'])->name('payment.retrying');
-    
+
     Route::get('/preview-certificate/{name}', [CertificateController::class, 'previewCertificate'])->name('preview-certificate');
     Route::get('/certificate', [CertificateController::class, 'certificate'])->name('certificate');
     Route::get('/certificate/{name}', [CertificateController::class, 'generate'])->name('generate-certificate');

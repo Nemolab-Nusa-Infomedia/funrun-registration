@@ -224,42 +224,41 @@ class RegistrationController extends Controller
         return view('admin.auth.register');
     }
 
-    public function emailValidation(Request $request){
+    public function emailValidation(Request $request) {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:users',
             'phone' => 'required|unique:users,phone',
             'password' => 'required|min:8'
-        ],
-        [
+        ], [
             'email.unique' => 'Email sudah terdaftar silahkan login saja',
             'phone.unique' => 'Nomor telepon sudah terdaftar',
             'password.min' => 'Password harus minimal 8 karakter'
         ]);
 
         if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput();
+            return redirect()->back()->withErrors($validator)->withInput();
         }
+
         $user = User::create([
             'email' => $request->input('email'),
             'phone' => $request->input('phone'),
             'password' => Hash::make($request->input('password'))
         ]);
-        event(new Registered($user));
+
+        event(new Registered($user)); // Mengirim email verifikasi
         Auth::login($user);
-        return view('admin.auth.verify-email.notification-email', ['email' => $user['email']]);
+
+        return view('admin.auth.verify-email.notification-email', ['email' => $user->email]);
     }
 
-    public function login(){
-        return view('admin.auth.login');
-    }
+    public function checking(Request $request) {
+        $credentials = $request->only('email', 'password');
 
-    public function checking(Request $request){
-        if(Auth::attempt($request->only('email', 'password'))){
+        if (Auth::attempt($credentials)) {
             $user = Auth::user();
 
-            // Cek apakah kolom gender sudah terisi
-            if(empty($user->email_verified_at)){
-                Auth::logout();  // Logout pengguna jika gender belum terisi
+            if (!$user->hasVerifiedEmail()) {
+                Auth::logout();
                 return redirect()->route('gagal-login')->withErrors(['email_verified_at' => 'Anda belum melakukan verifikasi email']);
             }
 
@@ -267,6 +266,10 @@ class RegistrationController extends Controller
         }
 
         return back()->withErrors(['email' => 'The provided credentials are incorrect.']);
+    }
+
+    public function login(){
+        return view('admin.auth.login');
     }
 
     public function gagalLogin(){

@@ -198,7 +198,7 @@
                         <div class="col-12 col-md-12">
                             <div class="mb-3">
                                 <label for="payment_type" class="form-label">Pilih Metode Pembayaran</label>
-                                <select class="form-select @error('payment_type') is-invalid @enderror" id="payment_type" name="payment_type" style="display: none;" required>
+                                <select class="form-select @error('payment_type') is-invalid @enderror" id="payment_type" name="payment_type" style="display: none;">
                                     <option value="" selected>--- Pilih Pembayaran ---</option>
                                     <option value="gopay" data-img-src="{{ asset('assets/registration/img/metode-pembayaran/gopay.png') }}">GoPay</option>
                                     <option value="shopeepay" data-img-src="{{ asset('assets/registration/img/metode-pembayaran/shopeepay.jpg') }}">ShopeePay</option>
@@ -232,7 +232,14 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-outline-dark rounded-5 text-dark fw-bold border-1 border" data-bs-dismiss="modal" aria-label="Close">Batal</button>
-                                    <button type="submit" class="btn btn-submit rounded-5 text-dark fw-bold border-1 border">Bayar</button>
+                                    <button type="submit" class="btn btn-submit rounded-5 text-dark fw-bold border-1 border" id="submitButton">Bayar</button>
+                                </div>
+                                <!-- Loading Spinner -->
+                                <div class="modal-body text-center d-none" id="loadingSpinner">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                    <p class="mt-2">Data sedang diproses mohon tunggu dan jangan meninggalkan halaman ini hingga proses selesai.....</p>
                                 </div>
                             </div>
                         </div>
@@ -246,6 +253,11 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="{{ asset('assets/loading/js/main.js') }}"></script>
+    <script>
+        document.getElementById('submitButton').addEventListener('click', function () {
+            document.getElementById('loadingSpinner').classList.remove('d-none');
+        });
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const select = document.getElementById('payment_type');

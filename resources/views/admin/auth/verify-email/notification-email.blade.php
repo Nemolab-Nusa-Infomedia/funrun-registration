@@ -30,7 +30,7 @@
 
                 <img src="{{ asset('assets/registration/img/email-notification.png') }}" class="mx-auto mb-3" style="width: 500px" alt="">
 
-                <p class="text-center">email verifikasi anda telah dikirimkan ke email anda, silahka klik tautan pada email anda untuk melakukan verisfikasi email.</p>
+                <p class="text-center">email verifikasi anda telah dikirimkan ke email anda, silahkan klik tautan pada email anda untuk melakukan verisfikasi email.</p>
 
                 <div class="row mx-auto">
                     <form action="{{ route('verification.send') }}" method="post">

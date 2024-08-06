@@ -31,7 +31,7 @@
     <div class="d-flex justify-content-center mt-4">
         {{-- <a href="{{ route('generate-certificate', ['name'=>$name]) }}" id="btnSertifikat" class="btn btn-primary py-2 px-4">Download Certificate</a> --}}
         {{-- <a href="#" id="btnSertifikat" class="btn btn-primary py-2 px-4">Download Certificate</a> --}}
-        <a href="{{ route('generate-certificate', ['name' => $row->name ]) }}" class="btn btn-primary py-2 px-4">Download Certificate</a>
+        <a href="{{ route('generate-certificate', ['name' => $name ]) }}" class="btn btn-primary py-2 px-4">Download Certificate</a>
     </div>
 
     <script src="{{ asset('assets/loading/js/main.js') }}"></script>

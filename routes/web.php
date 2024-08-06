@@ -52,7 +52,7 @@ Route::middleware(['adminAccess'])->group(function () {
 
 Route::middleware(['authall'])->group(function () {
     Route::get('/form', [RegistrationController::class, 'indexForm'])->name('form');
-    Route::get('/profile', [ProfileController::class, 'indexProfile'])->name('profile')->middleware(['auth', 'verified']);
+    Route::get('/profile', [ProfileController::class, 'indexProfile'])->name('profile')->middleware(['auth']);
     // Logout Peserta
     Route::get('/logout', [RegistrationController::class, 'logout'])->name('logout');
     Route::post('/create-account', [RegistrationController::class, 'register'])->name('register');

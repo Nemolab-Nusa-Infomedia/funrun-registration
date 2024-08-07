@@ -52,7 +52,8 @@ Route::middleware(['adminAccess'])->group(function () {
 
 Route::middleware(['authall'])->group(function () {
     Route::get('/form', [RegistrationController::class, 'indexForm'])->name('form');
-    Route::get('/profile', [ProfileController::class, 'indexProfile'])->name('profile')->middleware(['auth', 'verified']);
+    Route::get('/profile', [ProfileController::class, 'indexProfile'])->name('profile')->middleware(['verified_user']);
+
     // Logout Peserta
     Route::get('/logout', [RegistrationController::class, 'logout'])->name('logout');
     Route::post('/create-account', [RegistrationController::class, 'register'])->name('register');
@@ -66,6 +67,8 @@ Route::middleware(['authall'])->group(function () {
     Route::get('/preview-certificate/{name}', [CertificateController::class, 'previewCertificate'])->name('preview-certificate');
     Route::get('/certificate', [CertificateController::class, 'certificate'])->name('certificate');
     Route::get('/certificate/{name}', [CertificateController::class, 'generate'])->name('generate-certificate');
+
+    Route::get('/fail-verify', [RegistrationController::class, 'failVerify']);
 });
 
 // ===== Email =====

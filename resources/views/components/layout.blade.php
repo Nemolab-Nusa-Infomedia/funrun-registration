@@ -9,14 +9,14 @@
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
     <!-- Nucleo Icons -->
-    <link href="{{ asset('assets/admin/css/nucleo-icons.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/admin/css/nucleo-svg.css') }}" rel="stylesheet" />
+    <link href="{{ url('assets/admin/css/nucleo-icons.css') }}" rel="stylesheet" />
+    <link href="{{ url('assets/admin/css/nucleo-svg.css') }}" rel="stylesheet" />
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
     <!-- CSS Files -->
-    <link id="pagestyle" href="{{ secure_asset('assets/admin/css/material-dashboard.css?v=3.1.0') }}" rel="stylesheet" />
+    <link id="pagestyle" href="{{ url('assets/admin/css/material-dashboard.css?v=3.1.0') }}" rel="stylesheet" />
     {{-- <link rel="stylesheet" href="{{ asset('assets/admin/css/dataTables.bootstrap5.css') }}"> --}}
     {{-- <link rel="stylesheet" href="{{ asset('assets/admin/css/bootstrap.min.css') }}"> --}}
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheetv" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> --}}
@@ -30,15 +30,15 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     {{-- loading --}}
-    <link rel="stylesheet" href="{{ secure_asset('assets/loading/css/main.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/loading/css/main.css') }}">
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
     <div id="loading-container">
         <div class="loader">
-          <img src="{{ secure_asset('assets/registration/img/loading/sepatu1.png') }}" alt="Loading" class="shoe">
-          <img src="{{ secure_asset('assets/registration/img/loading/sepatu2.png') }}" alt="Loading" class="shoe">
-          <img src="{{ secure_asset('assets/registration/img/loading/sepatu3.png') }}" alt="Loading" class="shoe">
+          <img src="{{ url('assets/registration/img/loading/sepatu1.png') }}" alt="Loading" class="shoe">
+          <img src="{{ url('assets/registration/img/loading/sepatu2.png') }}" alt="Loading" class="shoe">
+          <img src="{{ url('assets/registration/img/loading/sepatu3.png') }}" alt="Loading" class="shoe">
         </div>
     </div>
   @include('components.sidebar')
@@ -62,7 +62,7 @@
   <script src="{{ asset('assets/admin/js/plugins/chartjs.min.js') }}"></script>
 
   {{-- loading --}}
-  <script src="{{ secure_asset('assets/loading/js/main.js') }}"></script>
+  <script src="{{ url('assets/loading/js/main.js') }}"></script>
 
   <script>
     function subMenuCourses() {

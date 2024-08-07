@@ -6,6 +6,7 @@ use App\Http\Middleware\DisableCache;
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\SuperAdminAccess;
 use App\Http\Middleware\CheckEmailVerificationLink;
+use App\Http\Middleware\VerifiedUser;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
@@ -22,6 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'authall' => AuthCheckAll::class,
             'disableCache' => DisableCache::class,
             'checkVerifyLinkExpired' => CheckEmailVerificationLink::class,
+            'verified_user' => VerifiedUser::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

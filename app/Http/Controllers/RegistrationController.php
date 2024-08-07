@@ -24,6 +24,10 @@ class RegistrationController extends Controller
         return view('admin.registration.index');
     }
 
+    public function failVerify(){
+        return view('admin.auth.verify-email.not-confirm-email');
+    }
+
     // Create users and get snap token for payment
     public function register(Request $request){
         $validator = Validator::make($request->all(), [
@@ -124,6 +128,7 @@ class RegistrationController extends Controller
         $snapToken = Snap::getSnapToken($params);
         return view('admin.registration.payment', ['snapToken' => $snapToken, 'transactionId' => $transaction->id]);
     }
+
 
     // Payment handler
     public function paymentHandler(Request $request){

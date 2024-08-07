@@ -38,7 +38,7 @@
                         <span class="text-secondary fw-bold mb-3">Data diri</span>
                         <div class="col-12 col-md-4">
                             <div class="mb-3">
-                                <label for="" class="form-label fw-bold">Nama Lengkap</label>
+                                <label for="" class="form-label fw-bold">Nama Lengkap *</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Nama lengkap" aria-label="">
                                 @error('name')
                                     <span class="invalid-feedback">{{ $message }}</span>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-6 col-md-4">
                             <div class="mb-3">
-                                <label for="" class="form-label">Jenis Kelamin</label>
+                                <label for="" class="form-label">Jenis Kelamin *</label>
                                 <select id="inputState" class="form-select @error('gender') is-invalid @enderror" name="gender">
                                     <option selected>--- Pilih jenis kelamin ---</option>
                                     <option value="Laki-laki">Laki-laki</option>
@@ -60,7 +60,7 @@
                         </div>
                         <div class="col-6 col-md-4">
                             <div class="mb-3">
-                                <label for="" class="form-label">Usia</label>
+                                <label for="" class="form-label">Usia *</label>
                                 <input type="text" class="form-control @error('age') is-invalid @enderror" name="age" placeholder="Usia">
                                 @error('age')
                                     <span class="invalid-feedback">{{ $message }}</span>
@@ -69,7 +69,7 @@
                         </div>
                         <div class="col-12" id="komunitasDiv">
                             <div class="mb-3">
-                                <label for="komunitas" class="form-label">Komunitas / Individu</label>
+                                <label for="komunitas" class="form-label">Komunitas / Individu *</label>
                                 <select id="komunitas" name="community" class="form-control" onchange="toggleNamaKomunitas()">
                                     <option selected>Pilih</option>
                                     <option value="Komunitas">Komunitas</option>
@@ -79,7 +79,7 @@
                         </div>
                         <div class="col-12 col-md-6" id="namaKomunitasContainer" style="display: none;">
                             <div class="mb-3">
-                                <label for="namaKomunitas">Nama Komunitas</label>
+                                <label for="namaKomunitas">Nama Komunitas *</label>
                                 <input type="text" id="namaKomunitas" name="name_community" class="form-control mt-2" placeholder="nama komunitas">
                             </div>
                         </div>
@@ -87,7 +87,7 @@
                         <span class="text-secondary fw-bold mb-3">Domisili</span>
                         <div class="col-12 col-md-3">
                             <div class="mb-3">
-                                <label for="inputDesa" class="form-label">Desa</label>
+                                <label for="inputDesa" class="form-label">Desa *</label>
                                 <input type="text" class="form-control @error('desa') is-invalid @enderror" name="desa" id="inputDesa">
                                 @error('desa')
                                     <span class="invalid-feedback">{{ $message }}</span>
@@ -96,7 +96,7 @@
                         </div>
                         <div class="col-12 col-md-3">
                             <div class="mb-3">
-                                <label for="inputKecamatan" class="form-label">Kecamatan</label>
+                                <label for="inputKecamatan" class="form-label">Kecamatan *</label>
                                 <input type="text" class="form-control @error('kecamatan') is-invalid @enderror" name="kecamatan" id="inputKecamatan">
                                 @error('kecamatan')
                                     <span class="invalid-feedback">{{ $message }}</span>
@@ -105,7 +105,7 @@
                         </div>
                         <div class="col-12 col-md-3">
                             <div class="mb-3">
-                                <label for="inputKab" class="form-label">Kabupaten</label>
+                                <label for="inputKab" class="form-label">Kabupaten *</label>
                                 <input type="text" class="form-control @error('kabupaten') is-invalid @enderror" name="kabupaten" id="inputKab">
                                 @error('kabupaten')
                                     <span class="invalid-feedback">{{ $message }}</span>
@@ -114,7 +114,7 @@
                         </div>
                         <div class="col-12 col-md-3">
                             <div class="mb-3">
-                                <label for="inputProv" class="form-label">Provinsi</label>
+                                <label for="inputProv" class="form-label">Provinsi *</label>
                                 <input type="text" class="form-control @error('domisili') is-invalid @enderror" name="domisili" id="inputProv">
                                 @error('domisili')
                                     <span class="invalid-feedback">{{ $message }}</span>
@@ -124,7 +124,7 @@
                         <span class="text-secondary fw-bold mb-3">Informasi Pribadi</span>
                         <div class="col-12 col-md-4">
                             <div class="mb-3">
-                                <label for="" class="form-label">Size Jersey</label>
+                                <label for="" class="form-label">Size Jersey *</label>
                                 <select id="inputState" class="form-select @error('size') is-invalid @enderror" name="size">
                                     <option selected>Pilih size jersey</option>
                                     <option value="S">S</option>
@@ -141,7 +141,7 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="mb-3">
-                                <label for="" class="form-label">Golongan Darah</label>
+                                <label for="" class="form-label">Golongan Darah *</label>
                                 <select id="" class="form-select @error('goldar') is-invalid @enderror" name="goldar">
                                     <option selected>Pilih golongan darah</option>
                                     <option value="A+">A+</option>
@@ -160,7 +160,7 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="mb-3">
-                                <label for="" class="form-label">Riwayat Penyakit</label>
+                                <label for="" class="form-label">Riwayat Penyakit *</label>
                                 <input type="text" class="form-control @error('r_penyakit') is-invalid @enderror" name="r_penyakit" placeholder="riwayat penyakit">
                                 @error('r_penyakit')
                                     <span class="invalid-feedback">{{ $message }}</span>
@@ -171,7 +171,7 @@
                         <span class="text-secondary fw-bold mb-3">Kontak Darurat</span>
                         <div class="col-12 col-md-4">
                             <div class="mb-3">
-                                <label for="" class="form-label">Nama Kontak darurat</label>
+                                <label for="" class="form-label">Nama Kontak darurat *</label>
                                 <input type="text" class="form-control @error('contact_urgent') is-invalid @enderror" name="contant_urgent" placeholder="nama kontak darurat">
                                 @error('contact_urgent')
                                     <span class="invalid-feedback">{{ $message }}</span>
@@ -180,7 +180,7 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="mb-3">
-                                <label for="" class="form-label">Nomor Kontak Darurat</label>
+                                <label for="" class="form-label">Nomor Kontak Darurat *</label>
                                 <input type="text" class="form-control @error('phone_urgent') is-invalid @enderror" name="phone_urgent" placeholder="nomor kontak darurat">
                                 @error('phone_urgent')
                                     <span class="invalid-feedback">{{ $message }}</span>
@@ -189,7 +189,7 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="mb-3">
-                                <label for="" class="form-label">Hubungan Dengan Kontak Darurat</label>
+                                <label for="" class="form-label">Hubungan Dengan Kontak Darurat *</label>
                                 <input type="text" class="form-control" name="relation_urgent" placeholder="hubungan dengan kontak darurat">
                             </div>
                         </div>
@@ -197,7 +197,7 @@
                         <span class="text-secondary fw-bold mb-3 mt-3">Transaksi Pembayaran</span>
                         <div class="col-12 col-md-12">
                             <div class="mb-3">
-                                <label for="payment_type" class="form-label">Pilih Metode Pembayaran</label>
+                                <label for="payment_type" class="form-label">Pilih Metode Pembayaran *</label>
                                 <select class="form-select @error('payment_type') is-invalid @enderror" id="payment_type" name="payment_type" style="display: none;">
                                     <option value="" selected>--- Pilih Pembayaran ---</option>
                                     <option value="gopay" data-img-src="{{ asset('assets/registration/img/metode-pembayaran/gopay.png') }}">GoPay</option>

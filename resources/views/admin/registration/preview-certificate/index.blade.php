@@ -66,7 +66,7 @@
     <script src="{{ asset('assets/loading/js/main.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-    {{-- <script>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Waktu target dalam WIB (6 Oktober 2024 jam 07:00 pagi WIB)
             const targetDateWIB = new Date('2024-10-06T07:00:00+07:00'); // +07:00 adalah offset untuk WIB
@@ -92,7 +92,7 @@
                 }
             });
         });
-    </script> --}}
+    </script>
 
     <script>
         document.getElementById('btnSertifikat').addEventListener('click', function(e) {

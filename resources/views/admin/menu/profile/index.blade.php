@@ -138,7 +138,7 @@
     }
 </script>
 
-{{-- <script>
+<script>
     document.addEventListener('DOMContentLoaded', function() {
         // Waktu target dalam WIB (6 Oktober 2024 jam 07:00 pagi WIB)
         const targetDateWIB = new Date('2024-10-06T07:00:00+07:00'); // +07:00 adalah offset untuk WIB
@@ -164,5 +164,5 @@
             }
         });
     });
-</script> --}}
+</script>
 @endsection

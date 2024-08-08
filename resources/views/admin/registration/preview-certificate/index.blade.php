@@ -60,7 +60,6 @@
     </div>
     <div class="d-flex justify-content-center mt-4">
         <a href="{{ route('generate-certificate', ['name'=>$name]) }}" id="btnSertifikat" class="btn btn-primary py-2 px-4" download>Download Certificate</a>
-        {{-- <a href="#" id="btnSertifikat" class="btn btn-primary py-2 px-4">Download Certificate</a> --}}
     </div>
 
     <script src="{{ asset('assets/loading/js/main.js') }}"></script>
@@ -71,67 +70,58 @@
             // Waktu target dalam WIB (6 Oktober 2024 jam 07:00 pagi WIB)
             const targetDateWIB = new Date('2024-10-06T07:00:00+07:00'); // +07:00 adalah offset untuk WIB
 
-            // Waktu saat ini dalam WIB
-            const now = new Date();
-            const localTimeOffset = now.getTimezoneOffset() * 60000; // Offset waktu lokal dalam ms
-            const WIBOffset = 7 * 60 * 60 * 1000; // Offset WIB dalam ms
-            const localNowWIB = new Date(now.getTime() + localTimeOffset + WIBOffset);
-
             // Mendapatkan tombol sertifikat
             const btnSertifikat = document.getElementById('btnSertifikat');
 
-            // Memeriksa apakah waktu saat ini sudah melewati waktu target
-            btnSertifikat.addEventListener('click', function(event) {
+            btnSertifikat.addEventListener('click', function(e) {
+                // Waktu saat ini dalam WIB
+                const now = new Date();
+                const localTimeOffset = now.getTimezoneOffset() * 60000; // Offset waktu lokal dalam ms
+                const WIBOffset = 7 * 60 * 60 * 1000; // Offset WIB dalam ms
+                const localNowWIB = new Date(now.getTime() + localTimeOffset + WIBOffset);
+
                 if (localNowWIB < targetDateWIB) {
-                    event.preventDefault(); // Mencegah aksi klik
-                    alert('Sertifikat belum bisa di Download, Sertificate dapat di download pada tanggal 6 Oktober 2024 jam 07:00 WIB.'); // Pesan peringatan
+                    e.preventDefault(); // Mencegah aksi klik
+                    alert('Sertifikat belum bisa di Download, Sertifikat dapat di-download pada tanggal 6 Oktober 2024 jam 07:00 WIB.'); // Pesan peringatan
                 } else {
-                    // Lakukan aksi yang diinginkan jika waktu sudah melewati target
-                    // Misalnya, arahkan ke halaman sertifikat
-                    window.location.href = 'URL_KE_SERTIFIKAT';
+                    // Tampilkan overlay dan animasi loading
+                    document.getElementById('overlay').classList.add('active');
+
+                    // Cegah link untuk segera berpindah
+                    e.preventDefault();
+
+                    // Mulai download menggunakan fetch
+                    fetch(this.href)
+                        .then(response => {
+                            if (response.ok) {
+                                // Buat objek blob dari response
+                                return response.blob();
+                            }
+                            throw new Error('Network response was not ok.');
+                        })
+                        .then(blob => {
+                            // Buat URL untuk blob
+                            const url = window.URL.createObjectURL(blob);
+
+                            // Buat elemen a dan klik untuk download
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = 'certificate.pdf'; // Sesuaikan nama file jika perlu
+                            document.body.appendChild(a);
+                            a.click();
+                            a.remove();
+
+                            // Sembunyikan overlay
+                            document.getElementById('overlay').classList.remove('active');
+                        })
+                        .catch(error => {
+                            console.error('There was a problem with the fetch operation:', error);
+
+                            // Sembunyikan overlay jika terjadi error
+                            document.getElementById('overlay').classList.remove('active');
+                        });
                 }
             });
-        });
-    </script>
-
-    <script>
-        document.getElementById('btnSertifikat').addEventListener('click', function(e) {
-            // Tampilkan overlay dan animasi loading
-            document.getElementById('overlay').classList.add('active');
-
-            // Cegah link untuk segera berpindah
-            e.preventDefault();
-
-            // Mulai download menggunakan fetch
-            fetch(this.href)
-                .then(response => {
-                    if (response.ok) {
-                        // Buat objek blob dari response
-                        return response.blob();
-                    }
-                    throw new Error('Network response was not ok.');
-                })
-                .then(blob => {
-                    // Buat URL untuk blob
-                    const url = window.URL.createObjectURL(blob);
-
-                    // Buat elemen a dan klik untuk download
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'certificate.pdf'; // Sesuaikan nama file jika perlu
-                    document.body.appendChild(a);
-                    a.click();
-                    a.remove();
-
-                    // Sembunyikan overlay
-                    document.getElementById('overlay').classList.remove('active');
-                })
-                .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-
-                    // Sembunyikan overlay jika terjadi error
-                    document.getElementById('overlay').classList.remove('active');
-                });
         });
     </script>
   </body>

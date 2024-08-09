@@ -11,8 +11,34 @@
         </style>
 
         <style>
+            :root{
+                --color-bg: #fbf7f7;
+                --color-c1: #FCA61F;
+                --color-c2: #F36527;
+                --color-c3: #0C70B5;
+                --color-c4: #15ABB9;
+                --color-c5: #FFFFFF;
+                --color-c6: #000000;
+                --color-c7: #F5F7F8;
+                --color-c8: #7D6B4D;
+            }
+
             body {
                 font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            }
+
+            .btn-c1{
+                background-color: var(--color-c1) !important;
+                font-size: 12px;
+                border: none !important;
+                border-radius: 10px;
+            }
+
+            .error-notification {
+                display: flex;
+                justify-content: center; /* Untuk perataan horizontal */
+                align-items: center;     /* Untuk perataan vertikal */
+                height: 100vh;           /* Mengisi tinggi viewport untuk vertikal center */
             }
         </style>
             <link rel="stylesheet" href="{{ asset('assets/admin/css/bootstrap.min.css') }}">
@@ -29,14 +55,13 @@
               <img src="{{ asset('assets/registration/img/loading/sepatu3.png') }}" alt="Loading" class="shoe">
             </div>
         </div>
-        <div class="container d-flex justify-content-center align-items-center">
+        <div class="container d-flex justify-content-center align-items-center error-notification">
             <div class="box mt-3 p-3">
                 <div class="row mx-auto">
+                    <h3 class="fw-bold text-c1 text-center mb-5">@yield('message')</h3>
 
-                    <img src="{{ asset('assets/registration/img/error.png') }}" class="mx-auto mb-3" style="width: 500px" alt="">
-                    <h3 class="fw-bold text-c1 text-center mb-3">@yield('message')</h3>
-
-                    <button class="btn btn-primary" onclick="window.history.back();">Kembali</button>
+                    <img src="{{ asset('assets/registration/img/page-expired.png') }}" class="mx-auto mb-3" style="width: 500px" alt="">
+                    <button class="btn btn-c1" onclick="window.history.back();">Kembali</button>
                 </div>
             </div>
         </div>

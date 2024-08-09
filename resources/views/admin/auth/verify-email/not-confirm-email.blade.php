@@ -23,7 +23,7 @@
             <div class="row mx-auto">
                 <h3 class="fw-bold text-c1 text-center mb-3">LOGIN GAGAL</h3>
 
-                <img src="{{ asset('assets/registration/img/email-notification.png') }}" class="mx-auto mb-3" style="width: 500px" alt="">
+                <img src="{{ asset('assets/registration/img/login-gagal.png') }}" class="mx-auto mb-3" style="width: 500px" alt="">
 
                 <p class="text-center">anda belum melakukan konfirmasi  email, silahkan buka email anda dan konfirmasi email terlebih dahulu</p>
 

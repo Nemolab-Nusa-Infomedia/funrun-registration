@@ -319,7 +319,7 @@
             $("#inputDesa").autocomplete({
                 source: function(request, response) {
                     $.ajax({
-                        url: "https://base-wilayah.lumbungdata.id/api/get-desa",
+                        url: "https://base-wilayah.hugostudio.id/api/v1/get-desa",
                         dataType: "json",
                         data: {
                             term: request.term

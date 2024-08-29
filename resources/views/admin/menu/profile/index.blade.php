@@ -140,8 +140,8 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Waktu target dalam WIB (6 Oktober 2024 jam 07:00 pagi WIB)
-        const targetDateWIB = new Date('2024-10-06T07:00:00+07:00'); // +07:00 adalah offset untuk WIB
+        // Waktu target dalam WIB (3 November 2024 jam 07:00 pagi WIB)
+        const targetDateWIB = new Date('2024-11-03T07:00:00+07:00'); // +07:00 adalah offset untuk WIB
 
         // Waktu saat ini dalam WIB
         const now = new Date();
@@ -156,7 +156,7 @@
         btnSertifikat.addEventListener('click', function(event) {
             if (localNowWIB < targetDateWIB) {
                 event.preventDefault(); // Mencegah aksi klik
-                alert('Sertifikat belum bisa di Dibuka, Sertificate dapat di buka pada tanggal 6 Oktober 2024 jam 07:00 WIB.'); // Pesan peringatan
+                alert('Sertifikat belum bisa dibuka, Sertifikat dapat dibuka pada tanggal 3 November 2024 jam 07:00 WIB.'); // Pesan peringatan
             } else {
                 // Lakukan aksi yang diinginkan jika waktu sudah melewati target
                 // Misalnya, arahkan ke halaman sertifikat

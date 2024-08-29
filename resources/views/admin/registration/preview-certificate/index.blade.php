@@ -67,8 +67,8 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Waktu target dalam WIB (6 Oktober 2024 jam 07:00 pagi WIB)
-            const targetDateWIB = new Date('2024-10-06T07:00:00+07:00'); // +07:00 adalah offset untuk WIB
+            // Waktu target dalam WIB (3 November 2024 jam 07:00 pagi WIB)
+            const targetDateWIB = new Date('2024-11-03T07:00:00+07:00'); // +07:00 adalah offset untuk WIB
 
             // Mendapatkan tombol sertifikat
             const btnSertifikat = document.getElementById('btnSertifikat');
@@ -82,7 +82,7 @@
 
                 if (localNowWIB < targetDateWIB) {
                     e.preventDefault(); // Mencegah aksi klik
-                    alert('Sertifikat belum bisa di Download, Sertifikat dapat di-download pada tanggal 6 Oktober 2024 jam 07:00 WIB.'); // Pesan peringatan
+                    alert('Sertifikat belum bisa di Download, Sertifikat dapat di-download pada tanggal 3 November 2024 jam 07:00 WIB.'); // Pesan peringatan
                 } else {
                     // Tampilkan overlay dan animasi loading
                     document.getElementById('overlay').classList.add('active');

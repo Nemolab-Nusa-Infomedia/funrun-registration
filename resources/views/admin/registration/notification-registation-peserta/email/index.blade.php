@@ -52,16 +52,16 @@
             Anda telah berhasil mendaftar pada FunRun Rotary 2024 dengan pembayaran menggunakan {{ $user->payment_type }}. Terima kasih atas pembayaran Anda. Ini adalah konfirmasi Anda untuk FunRun Rotary Purwokerto 2024.
         </p>
         <p class="highlight">
-            Tunjukkan email ini pada saat registrasi ulang di event FunRun dan siapkan kartu Identitas (KTP/KIA/PASPOR) untuk pengambilan GoodieBag Anda
+            Tunjukkan email ini pada saat registrasi ulang di event FunRun dan siapkan kartu Identitas untuk pengambilan GoodieBag Anda
         </p>
         <div class="instructions">
-            <p><strong>Pengambilan GoodieBag:</strong> 5 Oktober 2024</p>
-            <p><strong>Hari Acara:</strong> 6 Oktober 2024</p>
+            <p><strong>Pengambilan GoodieBag:</strong> 2 November 2024</p>
+            <p><strong>Hari Acara:</strong> 3 November 2024</p>
             <p><strong>Tempat:</strong> Alun-alun Purwokerto</p>
         </div>
         <div class="instructions">
             <h2>Registrasi Ulang acara</h2>
-            <p>1. Peserta FunRun melakukan registrasi ulang pada 1 hari sebelum acara atau 5 Oktober 2024</p>
+            <p>1. Peserta FunRun melakukan registrasi ulang pada 1 hari sebelum acara atau 2 November 2024</p>
             <p>2. Peserta memperlihatkan email konfirmasi kepada panitia dengan menunjukan barcode yang di kirim ke email pendaftar</p>
             <p>3. Peserta FunRun dapat mengambil GoodieBag setelah berhasil melakukan verifikasi</p>
         </div>
